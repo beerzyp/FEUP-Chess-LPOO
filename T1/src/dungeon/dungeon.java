@@ -9,8 +9,8 @@ public class dungeon {
 	static int gameover;
 	
 	public static void main(String[] args)
-	{
-		Vector<Vector<char[]>> a1= new Vector<Vector<char[]>>();
+	{//private GameMap map;
+		
 		char[][] matrix=
 			{
 				{'X','X','X','X','X','X','X','X','X','X'},
