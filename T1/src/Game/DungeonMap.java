@@ -3,7 +3,7 @@ package Game;
 public class DungeonMap implements GameMap {
 private char[][] matrix={
 		{'X','X','X','X','X','X','X','X','X','X'},
-		{'X','H',' ',' ','I',' ','X',' ','G','X'},
+		{'X',' ',' ',' ','I',' ','X',' ',' ','X'},
 		{'X','X','X',' ','X','X','X',' ',' ','X'},
 		{'X',' ','I',' ','I',' ','X',' ',' ','X'},
 		{'X','X','X',' ','X','X','X',' ',' ','X'},
@@ -11,7 +11,7 @@ private char[][] matrix={
 		{'I', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
 		{'X', 'X', 'X', ' ', 'X', 'X', 'X', 'X', ' ', 'X'},
 		{'X', ' ', 'I', ' ', 'I', ' ', 'X', 'k', ' ', 'X'},
-		{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'},
+		{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}
 	};
 
 @Override
@@ -26,18 +26,17 @@ public GameMap nextMap() {
 
 @Override
 public boolean moveTo(int x, int y) {
-	//gamelogic(x, y);	
+	
+	if(this.matrix[x][y] == ' ')
+		return true;
+	else if(this.matrix[x][y] == 'k')
+		return true;
+	else if(this.matrix[x][y] == 'S')
+		return true;
+	
 	return false;
 }
 
-@Override
-public void printmap() {
-	for(int i=0;i<this.matrix.length;i++)
-	{
-		System.out.println(matrix[i]);
-	}
-	
-}
 }
 
 
