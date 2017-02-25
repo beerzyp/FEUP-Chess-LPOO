@@ -1,7 +1,7 @@
 package Game;
 
 public interface GameMap {
-	
+
 void printmap();
 char[][] getMap();
 GameMap nextMap();

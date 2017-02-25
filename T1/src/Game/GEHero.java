@@ -1,5 +1,6 @@
 package Game;
 
-public class GEHero {
+public class GEHero extends GameElements {
 
+public GEHero(){};
 }
