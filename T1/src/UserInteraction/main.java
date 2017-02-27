@@ -11,25 +11,40 @@ public class main {
 	public static void main(String[] args)
 	{
 	GameMap dungeon = new DungeonMap();
-	GameElements Guard = new GEGuard(9,2,'G');
-	GameElements Hero = new GEHero(2,2,'H');
+	GameElements Guard = new GEGuard(1,8,'G');
+	GameElements Hero = new GEHero(1,1,'H');
 
 	
 	GameLogic logic = new GameLogic(dungeon);
-	
+	for(int i =0; i < 10; i++)
+	{
+		System.out.println(logic.setGame()[i]);
+	}
 	
 	logic.addGameElements(Hero);
 	logic.addGameElements(Guard);
-	logic.setGame();
+	for(int i =0; i < 10; i++)
+	{
+		System.out.println(logic.setGame()[i]);
+	}
 	
 	//começo do jogo
 	
-	if(logic.getMap().moveTo(3, 2))
+	if(logic.getMap().moveTo(1, 2))
 	{
-		logic.testKey(3, 2);
-		Hero.setx(3);
+		//logic.testKey(1, 2);
+		Hero.setx(1);
 		Hero.sety(2);
-		System.out.print(logic.setGame());
+		for(int i =0; i < 10; i++)
+		{
+			System.out.println(logic.setGame()[i]);
+		}
+		
+		for(int i =0; i < 10; i++)
+		{
+			System.out.println(logic.getMap().getMap()[i]);
+		}
+		
 	}
 	
 	
