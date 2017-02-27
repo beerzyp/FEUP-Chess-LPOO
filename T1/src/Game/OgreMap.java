@@ -1,7 +1,7 @@
 package Game;
 
 public class OgreMap implements GameMap, Cloneable {
-	OgreMap(){};
+	public OgreMap(){};
 	private char[][] matrix={
 			{'X','X','X','X','X','X','X','X','X'},
 			{'I',' ',' ',' ',' ',' ',' ','k','X'},
@@ -10,7 +10,6 @@ public class OgreMap implements GameMap, Cloneable {
 			{'X',' ',' ',' ',' ',' ',' ',' ','X'},
 			{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
 			{'X', ' ', ' ', ' ', ' ', ' ',' ',' ', 'X'},
-			{'X', ' ', ' ', ' ', ' ', ' ',' ',' ','X'},
 			{'X', ' ', ' ', ' ', ' ', ' ',' ',' ','X'},
 			{'X', 'X', 'X', 'X', 'X', 'X','X','X','X'},
 		};
