@@ -1,9 +1,9 @@
 package Game;
 
 public class GEHero extends GameElements {
-public char symbol = 'H';
-public GEHero(int x, int y)
+public GEHero(int x, int y, char symbol)
 {
+	this.symbol = symbol;
 	this.x = x;
 	this.y = y;
 };

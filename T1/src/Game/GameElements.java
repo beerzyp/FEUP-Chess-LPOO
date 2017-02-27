@@ -3,6 +3,7 @@ package Game;
 public class GameElements {
 	protected int x;
 	protected int y;
+	protected char symbol;
 	
 	public int getx()
 	{
@@ -22,4 +23,6 @@ public class GameElements {
 	{
 		this.y = y;
 	}
+	
+	public char getSymbol(){return this.symbol;}
 }

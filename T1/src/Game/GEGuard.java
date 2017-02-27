@@ -1,9 +1,9 @@
 package Game;
 
 public class GEGuard extends GameElements {
-	public char symbol = 'G';
-	public GEGuard(int x, int y)
+	public GEGuard(int x, int y, char symbol)
 	{
+		this.symbol = symbol;
 		this.x = x;
 		this.y = y;
 	};
