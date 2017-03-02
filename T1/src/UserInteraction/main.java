@@ -49,10 +49,10 @@ public class main {
 		logic.cleanActualMap(); // limpa o mapa clonado
 		
 		//jogada numero 2
-		logic.testKey(1, 7); //testa primeiro a key para nao sobrepor o hero
-		Hero.setx(1); // joga com o hero
-		Hero.sety(7); // joga com o hero
-		
+//		logic.testKey(1, 7); //testa primeiro a key para nao sobrepor o hero
+//		Hero.setx(1); // joga com o hero
+//		Hero.sety(7); // joga com o hero
+
 		Ogre.move(logic.getActualMap()); //move o ogre random com a sua arma
 		Ogre2.move(logic.getActualMap());
 		

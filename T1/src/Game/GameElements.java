@@ -4,10 +4,17 @@ public abstract class GameElements {
 	private int x;
 	private int y;
 	private char symbol;
-	private char weapon = '*';
+	private char weapon ='*';
+	private boolean stun=false;
+	private int stunfor=0;
 	private int weaponx;
 	private int weapony;
 	private boolean haveWeapon;
+
+	public int getStunfor(){return this.stunfor;}
+	public boolean isStun(){return this.stun;}
+	public void setStun(){this.stun=true;}
+	public void setStunfor(int time){this.stunfor=time;}
 	
 	public void setHaveWeapon(boolean bool){this.haveWeapon=bool;}
 	public boolean getHaveWeapon(){return this.haveWeapon;}
@@ -47,6 +54,7 @@ public abstract class GameElements {
 	}
 	
 	public char getSymbol(){return this.symbol;}
+	
 	
 	
 }

@@ -15,12 +15,15 @@ public class GEOgre extends GameElements {
 			return true;
 		else if(map[x][y] == 'k')
 			return true;
-		else if(map[x][y] == 'S')
+		else if(map[x][y] == 'A')
 			return true;
 		else if(map[x][y] == 'H')
 			return true;
 		else if(map[x][y] == '*')
 			return true;
+		else if(map[x][y] == 'K')
+			return true;
+		
 		
 		return false;
 	}
@@ -34,7 +37,8 @@ public class GEOgre extends GameElements {
 		newX = randomGenerator.nextInt(map.length-2)+1;
 		newY = randomGenerator.nextInt(map.length-2)+1;
 		}
-		
+		newX=1;
+		newY=6;
 		this.setx(newX);
 		this.sety(newY);
 		map[newX][newY] = this.getSymbol();
