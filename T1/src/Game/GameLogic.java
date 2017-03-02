@@ -31,16 +31,26 @@ public class GameLogic implements Cloneable {
 	public boolean getKey(){return this.key;}
 	
 	public char[][]getActualMap(){return this.ActualMap;}
-	public char[][] setGame(){
-		char[][] MapClone = CopyCharMatrix(this.ActualMap); 
-		
+	public void cleanActualMap(){
+		if(this.key){
+			this.ActualMap = CopyCharMatrix(this.map.getMap()); 
+			this.changeMapKey();
+		}
+		else
+			this.ActualMap = CopyCharMatrix(this.map.getMap()); 
+	}
+	
+	public char[][] setGame(){		
 		
 		for(int i = 0; i < this.elements.size(); i++)
 		{
-			MapClone[this.elements.get(i).getx()][this.elements.get(i).gety()] = this.elements.get(i).getSymbol();
+			this.ActualMap[this.elements.get(i).getx()][this.elements.get(i).gety()] = this.elements.get(i).getSymbol();
+			if(this.elements.get(i).getHaveWeapon())
+				this.ActualMap[this.elements.get(i).getWeaponX()][this.elements.get(i).getWeaponY()] = this.elements.get(i).getWeapon();
+
 		}
 		
-		return MapClone;
+		return this.ActualMap;
 	}
 	
 	public static char[][] CopyCharMatrix(char[][] input) {
@@ -56,22 +66,31 @@ public class GameLogic implements Cloneable {
 	    return result;
 	}
 
+	
+	public void changeMapKey(){
+		for(int i=0;i<this.ActualMap.length;i++)
+		{
+			for(int k=0;k<this.ActualMap[i].length;k++)
+			{
+				if(this.ActualMap[i][k] == 'k')
+				{
+					this.ActualMap[i][k]=' ';
+				}
+				
+				if(this.ActualMap[i][k] == 'I')
+				{
+					this.ActualMap[i][k]='S';
+				}
+			}
+		}
+	}
 	public boolean testKey(int x, int y)
 	{
 		if(this.ActualMap[x][y] == 'k')
 		{
 			this.setKey(true);
 			this.ActualMap[x][y] = ' ';
-			for(int i=0;i<this.ActualMap.length;i++)
-			{
-				for(int k=0;k<this.ActualMap[i].length;k++)
-				{
-					if(this.ActualMap[i][k] == 'I')
-					{
-						this.ActualMap[i][k]='S';
-					}
-				}
-			}
+			this.changeMapKey();
 			return true;
 		}
 		

@@ -3,8 +3,9 @@ package Game;
 public class GEGuard extends GameElements {
 	public GEGuard(int x, int y, char symbol)
 	{
-		this.symbol = symbol;
-		this.x = x;
-		this.y = y;
+		super(x, y, symbol, false);
+
 	};
+	
+	public void move(char[][] map){};
 }

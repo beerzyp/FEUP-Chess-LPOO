@@ -15,13 +15,7 @@ public class OgreMap implements GameMap, Cloneable {
 		};
 
 	@Override public OgreMap clone() {
-	    try {
-	        final OgreMap result = (OgreMap) super.clone();
-	        // copy fields that need to be copied here!
-	        return result;
-	    } catch (final CloneNotSupportedException ex) {
-	        throw new AssertionError();
-	    }
+		return new OgreMap();
 	}
 	
 	@Override
