@@ -19,6 +19,8 @@ public class GEOgre extends GameElements {
 			return true;
 		else if(map[x][y] == 'H')
 			return true;
+		else if(map[x][y] == '*')
+			return true;
 		
 		return false;
 	}

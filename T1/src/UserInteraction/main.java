@@ -17,6 +17,7 @@ public class main {
 
 	GameElements Guard = new GEGuard(2,3,'G');
 	GameElements Ogre = new GEOgre(2,4,'O', 2, 4);
+	GameElements Ogre2 = new GEOgre(2,4,'O', 2, 4);
 	GameElements Hero = new GEHero(1,1,'H');
 
 	
@@ -24,6 +25,7 @@ public class main {
 	
 	logic.addGameElements(Hero);
 	logic.addGameElements(Ogre);
+	logic.addGameElements(Ogre2);
 	
 	
 	//começo do jogo
@@ -37,6 +39,7 @@ public class main {
 		Hero.sety(1); // joga com o hero
 		
 		Ogre.move(logic.getActualMap()); //move o ogre random com a sua arma
+		Ogre2.move(logic.getActualMap());
 		
 		for(int i =0; i < logic.getActualMap().length; i++) //pinta o jogo
 		{
@@ -51,6 +54,7 @@ public class main {
 		Hero.sety(7); // joga com o hero
 		
 		Ogre.move(logic.getActualMap()); //move o ogre random com a sua arma
+		Ogre2.move(logic.getActualMap());
 		
 		for(int i =0; i < logic.getActualMap().length; i++) //pinta o jogo
 		{
@@ -65,6 +69,7 @@ public class main {
 		Hero.setx(2);
 		Hero.sety(2);
 		Ogre.move(logic.getActualMap());
+		Ogre2.move(logic.getActualMap()); //move o ogre random com a sua arma
 		for(int i =0; i < logic.getActualMap().length; i++)
 		{
 			System.out.println(logic.setGame()[i]);
