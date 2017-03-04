@@ -117,81 +117,63 @@ public class GameLogic implements Cloneable {
 			}
 		}
 	}
+	public double distancePoints(double x1,double y1, double x2,double y2)
+	{
+		return Math.sqrt(Math.abs(x2-x1)*Math.abs(x2-x1)+Math.abs(y2-y1)*Math.abs(y2-y1));
+	}
 	public void colisoes(GameElements g1)
 	{
-		if(g1.getSymbol() =='H' || g1.getSymbol() =='A' || g1.getSymbol()=='K')//hero, se morrer
+		double a1=1;
+		if(g1.getSymbol() =='H' || g1.getSymbol() =='A' || g1.getSymbol()=='K')//se g1 for o Hero
 		{
 			for(int i=0;i<this.elements.size();i++)
 			{
-				if(this.elements.get(i).getHaveWeapon())
+				
+				if(this.elements.get(i).getHaveWeapon()) //o elemento é Ogre
 				{
 				
-					if(this.elements.get(i).getWeaponX()==g1.getx() && this.elements.get(i).gety()==g1.gety())
+					if(this.elements.get(i).getWeaponX()==g1.getx() && this.elements.get(i).gety()==g1.gety())//arma do
 					{
 						this.gameover=true;
+						break;
+					
 					}
 					
 					else if(g1.getSymbol()=='A' ||g1.getSymbol()=='K')
 					{
-						if(this.elements.get(i).getx()+1==g1.getx() && this.elements.get(i).gety()==g1.gety())
-						{
-							this.elements.get(i).setStun();
-							this.elements.get(i).setStunfor(2);
-						}
-						else if(this.elements.get(i).getx()-1==g1.getx() && this.elements.get(i).gety()==g1.gety())
-						{
-							this.elements.get(i).setStun();
-							this.elements.get(i).setStunfor(2);
-						}
-						else if(this.elements.get(i).getx()==g1.getx() && this.elements.get(i).gety()+1==g1.gety())
-						{
-							this.elements.get(i).setStun();
-							this.elements.get(i).setStunfor(2);
-						}
-						else if(this.elements.get(i).getx()==g1.getx() && this.elements.get(i).gety()-1==g1.gety())
+						if(distancePoints(this.elements.get(i).getx(),this.elements.get(i).gety(),g1.getx(),g1.gety()) <=a1)
 						{
 							this.elements.get(i).setStun();
 							this.elements.get(i).setStunfor(2);
 						}
 						
-					}
-					
+						
+					}				
 				}
-				else if(this.elements.get(i).getSymbol()=='G')
+				
+				
+				else if(this.elements.get(i).getSymbol()=='G')//Guardas
 				{
-					if(this.elements.get(i).getx()+1==g1.getx() && this.elements.get(i).gety()==g1.gety())
+					if(distancePoints(this.elements.get(i).getx(),this.elements.get(i).gety(),g1.getx(),g1.gety()) <=a1)
 					{
 						this.gameover=true;
-					}
-					else if(this.elements.get(i).getx()-1==g1.getx() && this.elements.get(i).gety()==g1.gety())
-					{
-						this.gameover=true;
-					}
-					else if(this.elements.get(i).getx()==g1.getx() && this.elements.get(i).gety()+1==g1.gety())
-					{
-						this.gameover=true;
-					}
-					else if(this.elements.get(i).getx()==g1.getx() && this.elements.get(i).gety()-1==g1.gety())
-					{
-						this.gameover=true;
+						break;
 					}
 					
 				}
-			}
+			}	
 		}
-		
-		else if(g1.getHaveWeapon()) //se for um ogre
+		else if(g1.getHaveWeapon()) //se g1 for um ogre
 		{
 			if(g1.getWeaponX() == this.keyx && g1.getWeaponY()==this.keyy)
 			{
-				if(!this.key)
+				if(!this.key)//se a key ainda estiver no mapa
 				{
 				this.ActualMap[this.keyx][this.keyy]='$';
 				}
 			}
 			
 		}
-		else{}
 	}
 	public void setkeySymb(char newsymb){this.keySymb=newsymb;}
 }

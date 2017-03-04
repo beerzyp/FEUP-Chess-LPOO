@@ -7,13 +7,14 @@ public abstract class GameElements {
 	private char weapon ='*';
 	private boolean stun=false;
 	private int stunfor=0;
+	private char stunned='8';
 	private int weaponx;
 	private int weapony;
 	private boolean haveWeapon;
 
 	public int getStunfor(){return this.stunfor;}
 	public boolean isStun(){return this.stun;}
-	public void setStun(){this.stun=true;}
+	public void setStun(){this.stun=true; this.symbol=this.stunned; }
 	public void setStunfor(int time){this.stunfor=time;}
 	
 	public void setHaveWeapon(boolean bool){this.haveWeapon=bool;}
@@ -54,6 +55,7 @@ public abstract class GameElements {
 	}
 	
 	public char getSymbol(){return this.symbol;}
+	
 	
 	
 	

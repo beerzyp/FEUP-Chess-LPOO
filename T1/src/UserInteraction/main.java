@@ -50,31 +50,34 @@ public class main {
 		
 		//jogada numero 2
 //		logic.testKey(1, 7); //testa primeiro a key para nao sobrepor o hero
-//		Hero.setx(1); // joga com o hero
-//		Hero.sety(7); // joga com o hero
-
+		Hero.setx(3); // joga com o hero
+		Hero.sety(4); // joga com o hero
 		Ogre.move(logic.getActualMap()); //move o ogre random com a sua arma
 		Ogre2.move(logic.getActualMap());
+		if(logic.getGameOver()==true)
+		{System.out.println("Game over");}
+	
 		
 		for(int i =0; i < logic.getActualMap().length; i++) //pinta o jogo
-		{
+		{   
+            
 			System.out.println(logic.setGame()[i]);
 		}
 		
 		logic.cleanActualMap(); // limpa o mapa clonado
-		
-		//jogada numero 3 (repete tudo igual)
-		logic.testKey(2, 2);
-		logic.testKey(2, 2);
-		Hero.setx(2);
-		Hero.sety(2);
-		Ogre.move(logic.getActualMap());
-		Ogre2.move(logic.getActualMap()); //move o ogre random com a sua arma
-		for(int i =0; i < logic.getActualMap().length; i++)
-		{
-			System.out.println(logic.setGame()[i]);
-		}
-		
+		if(logic.getGameOver()==true){System.out.println("Game over"); }
+//		//jogada numero 3 (repete tudo igual)
+//		logic.testKey(2, 2);
+//		logic.testKey(2, 2);
+//		Hero.setx(2);
+//		Hero.sety(2);
+//		Ogre.move(logic.getActualMap());
+//		Ogre2.move(logic.getActualMap()); //move o ogre random com a sua arma
+//		for(int i =0; i < logic.getActualMap().length; i++)
+//		{
+//			System.out.println(logic.setGame()[i]);
+//		}
+//		
 	}
 	
 	

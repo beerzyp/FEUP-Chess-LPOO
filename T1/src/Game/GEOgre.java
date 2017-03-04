@@ -37,8 +37,8 @@ public class GEOgre extends GameElements {
 		newX = randomGenerator.nextInt(map.length-2)+1;
 		newY = randomGenerator.nextInt(map.length-2)+1;
 		}
-		newX=1;
-		newY=6;
+		newX=3;
+		newY=3;
 		this.setx(newX);
 		this.sety(newY);
 		map[newX][newY] = this.getSymbol();
