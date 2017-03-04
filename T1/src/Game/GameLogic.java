@@ -152,7 +152,7 @@ public class GameLogic implements Cloneable {
 				}
 				
 				
-				else if(this.elements.get(i).getSymbol()=='G')//Guardas
+				else if(this.elements.get(i).getSymbol()=='G' &&)//Guardas
 				{
 					if(distancePoints(this.elements.get(i).getx(),this.elements.get(i).gety(),g1.getx(),g1.gety()) <=a1)
 					{
