@@ -2,6 +2,9 @@ package UserInteraction;
 
 import Game.DungeonMap;
 import Game.GEGuard;
+import Game.GEGuardDrunken;
+import Game.GEGuardRookie;
+import Game.GEGuardSuspicious;
 import Game.GEHero;
 import Game.GEOgre;
 import Game.GameElements;
@@ -15,57 +18,72 @@ public class main {
 	GameMap dungeon = new DungeonMap();
 	GameMap ogremap = new OgreMap();
 
-	GameElements Guard = new GEGuard(2,3,'G');
+	GameElements GuardR = new GEGuardRookie(2,3,'G');
+	GameElements GuardD = new GEGuardDrunken(2,3,'G');
+	GameElements GuardS = new GEGuardSuspicious(2,3,'G');
 	GameElements Ogre = new GEOgre(2,4,'O', 2, 4);
 	GameElements Ogre2 = new GEOgre(2,4,'O', 2, 4);
 	GameElements Hero = new GEHero(1,1,'H');
-
+    
 	
 	GameLogic logic = new GameLogic(ogremap);
-	
-	logic.addGameElements(Hero);
-	logic.addGameElements(Ogre);
-	logic.addGameElements(Ogre2);
+	logic.addGameElements(GuardR);
+//	logic.addGameElements(Hero);
+//	logic.addGameElements(Ogre);
+//	logic.addGameElements(Ogre2);
 	
 	
 	//começo do jogo
 	
-	
-	if(logic.getMap().moveTo(1, 1))
+	GuardR.setx(2);
+	GuardR.sety(2);
+	for(int i =0; i < logic.getActualMap().length; i++) //pinta o jogo
 	{
-		//jogada numero 1
-		logic.testKey(1, 1); //testa primeiro a key para nao sobrepor o hero (nesta posicao ainda nao apanhou a chave)
-		Hero.setx(1); // joga com o hero
-		Hero.sety(1); // joga com o hero
-		
-		Ogre.move(logic.getActualMap()); //move o ogre random com a sua arma
-		Ogre2.move(logic.getActualMap());
-		
-		for(int i =0; i < logic.getActualMap().length; i++) //pinta o jogo
-		{
-			System.out.println(logic.setGame()[i]); //MUITO IMPORTANTE, so existe um save do jogo para o tabuleiro nesta funcao setGame()
-		}
-		
-		logic.cleanActualMap(); // limpa o mapa clonado
-		
-		//jogada numero 2
-//		logic.testKey(1, 7); //testa primeiro a key para nao sobrepor o hero
-		Hero.setx(3); // joga com o hero
-		Hero.sety(4); // joga com o hero
-		Ogre.move(logic.getActualMap()); //move o ogre random com a sua arma
-		Ogre2.move(logic.getActualMap());
-		if(logic.getGameOver()==true)
-		{System.out.println("Game over");}
+		System.out.println(logic.setGame()[i]); //MUITO IMPORTANTE, so existe um save do jogo para o tabuleiro nesta funcao setGame()
+	}
+	logic.cleanActualMap();
+	GuardR.move(logic.getActualMap());
+	for(int i =0; i < logic.getActualMap().length; i++) //pinta o jogo
+	{
+		System.out.println(logic.setGame()[i]); //MUITO IMPORTANTE, so existe um save do jogo para o tabuleiro nesta funcao setGame()
+	}
 	
-		
-		for(int i =0; i < logic.getActualMap().length; i++) //pinta o jogo
-		{   
-            
-			System.out.println(logic.setGame()[i]);
-		}
-		
-		logic.cleanActualMap(); // limpa o mapa clonado
-		if(logic.getGameOver()==true){System.out.println("Game over"); }
+	
+//	if(logic.getMap().moveTo(1, 1))
+//	{
+//		//jogada numero 1
+//		logic.testKey(1, 1); //testa primeiro a key para nao sobrepor o hero (nesta posicao ainda nao apanhou a chave)
+//		Hero.setx(1); // joga com o hero
+//		Hero.sety(1); // joga com o hero
+//		
+//		Ogre.move(logic.getActualMap()); //move o ogre random com a sua arma
+//		Ogre2.move(logic.getActualMap());
+//		
+//		for(int i =0; i < logic.getActualMap().length; i++) //pinta o jogo
+//		{
+//			System.out.println(logic.setGame()[i]); //MUITO IMPORTANTE, so existe um save do jogo para o tabuleiro nesta funcao setGame()
+//		}
+//		
+//		logic.cleanActualMap(); // limpa o mapa clonado
+//		
+//		//jogada numero 2
+////		logic.testKey(1, 7); //testa primeiro a key para nao sobrepor o hero
+//		Hero.setx(3); // joga com o hero
+//		Hero.sety(4); // joga com o hero
+//		Ogre.move(logic.getActualMap()); //move o ogre random com a sua arma
+//		Ogre2.move(logic.getActualMap());
+//		if(logic.getGameOver()==true)
+//		{System.out.println("Game over");}
+//	
+//		
+//		for(int i =0; i < logic.getActualMap().length; i++) //pinta o jogo
+//		{   
+//            
+//			System.out.println(logic.setGame()[i]);
+//		}
+//		
+//		logic.cleanActualMap(); // limpa o mapa clonado
+//		if(logic.getGameOver()==true){System.out.println("Game over"); }
 //		//jogada numero 3 (repete tudo igual)
 //		logic.testKey(2, 2);
 //		logic.testKey(2, 2);
@@ -78,9 +96,9 @@ public class main {
 //			System.out.println(logic.setGame()[i]);
 //		}
 //		
+//	}
+	
 	}
 	
-	
-	}
 
 }
