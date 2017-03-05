@@ -145,15 +145,15 @@ public class Levels {
 			
 			logic.cleanActualMap();
 			
-			logic.testKey(moveHasd(c, Hero).get(0), moveHasd(c, Hero).get(1));
+			logic.pickKey(moveHasd(c, Hero).get(0), moveHasd(c, Hero).get(1));
 			Hero.setx(moveHasd(c, Hero).get(0));
 			Hero.sety(moveHasd(c, Hero).get(1));
 			
 			if(!Ogre.isStun())
-			Ogre.move(logic.getActualMap());
+				Ogre.move(logic.getActualMap());
 			
 			if(!Ogre2.isStun())
-			Ogre2.move(logic.getActualMap());
+				Ogre2.move(logic.getActualMap());
 			
 			logic.setGame();
 			printboard(logic);

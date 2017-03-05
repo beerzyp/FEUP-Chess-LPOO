@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class GameLogic implements Cloneable {
 	
-	public GameLogic(GameMap map, boolean k)
+	public GameLogic(GameMap map)
 	{
 		this.map = map;
 		this.gameover = false;
@@ -12,7 +12,7 @@ public class GameLogic implements Cloneable {
 		this.ActualMap = map.clone().getMap();
 		setkeypos();
 		this.gamewin = false;
-		this.OgreKey = k;
+		OgreKey = false;
 	};
 	
 	private boolean gameover;
@@ -23,8 +23,8 @@ public class GameLogic implements Cloneable {
 	private int keyx;
 	private int keyy;
 	private char keySymb;
-	private boolean gamewin;
 	private boolean OgreKey;
+	private boolean gamewin;
 	
 	public void setGameWin(boolean win){this.gamewin=win;}
 	public boolean getGameWin(){return this.gamewin;}
@@ -45,9 +45,11 @@ public class GameLogic implements Cloneable {
 	public char[][]getActualMap(){return this.ActualMap;}
 	public void cleanActualMap(){
 		if(this.key){
-			this.ActualMap = CopyCharMatrix(this.map.getMap()); 
-			if(this.OgreKey == false)
-			this.changeMapKey();
+			this.ActualMap = CopyCharMatrix(this.map.getMap());
+			if(!this.OgreKey)
+				this.changeMapKey();
+			else
+				changeMapOgreKey();
 		}
 		else
 			this.ActualMap = CopyCharMatrix(this.map.getMap()); 
@@ -103,6 +105,19 @@ public class GameLogic implements Cloneable {
 			}
 		}
 	}
+	public void changeMapOgreKey(){
+		for(int i=0;i<this.ActualMap.length;i++)
+		{
+			for(int k=0;k<this.ActualMap[i].length;k++)
+			{
+				if(this.ActualMap[i][k] == 'k')
+				{
+					this.ActualMap[i][k]=' ';
+				}
+			}
+		}
+	}
+	
 	public boolean testKey(int x, int y)
 	{
 		if(this.ActualMap[x][y] == 'k')
@@ -115,18 +130,6 @@ public class GameLogic implements Cloneable {
 		
 		return false;
 	}
-	
-	public boolean pickKey(int x, int y){
-		if(this.ActualMap[x][y] == 'k')
-		{
-			this.setKey(true);
-			this.ActualMap[x][y] = ' ';
-			return true;
-		}
-		
-		return false;
-	}
-	
 	public void setkeypos()
 	{
 		for(int i=0;i<this.ActualMap.length;i++)
@@ -187,9 +190,12 @@ public class GameLogic implements Cloneable {
 				
 				if(g1.getSymbol() =='H' || g1.getSymbol() =='A' || g1.getSymbol()=='K')
 				{
-					if(distancePoints(1,0,g1.getx(),g1.gety()) <= a1)
+					if(this.key)
 					{
-						changeMapKey();
+						if(distancePoints(1,0,g1.getx(),g1.gety()) <= a1)
+						{
+							changeMapKey();
+						}
 					}
 				}
 			}	
@@ -207,4 +213,16 @@ public class GameLogic implements Cloneable {
 		}
 	}
 	public void setkeySymb(char newsymb){this.keySymb=newsymb;}
+	
+	public boolean pickKey(int x, int y){
+		if(this.ActualMap[x][y] == 'k')
+		{
+			this.setKey(true);
+			this.ActualMap[x][y] = ' ';
+			this.OgreKey = true;
+			return true;
+		}
+		
+		return false;
+	}
 }
