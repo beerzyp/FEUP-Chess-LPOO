@@ -77,6 +77,7 @@ public abstract class GameElements {
 	}
 	
 	public char getSymbol(){return this.symbol;}
+	public void setSymbol(char symb){this.symbol = symb;}
 	
 	
 	

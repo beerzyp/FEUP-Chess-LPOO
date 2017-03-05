@@ -1,17 +1,31 @@
 package Game;
 
+import java.util.ArrayList;
 import java.util.Random;
 
-public class GEGuardRookie extends GameElements {
-	public GEGuardRookie(int x, int y, char symbol)
-	{
-		super(x, y, symbol, false);
-
-	};
+public class GEGuardRookie extends GEGuard {
 	
+   
 
-	public void move(char[][] map){
+	public void move(char[][] map)
+	{  
+		if(it != this.getCaminho().size()-1)
+		{
+			it++;
+			Pair a = this.getCaminho().get(it);
+			this.setx(a.getx());
+			this.sety(a.gety());
+		}
+		else
+		{
+			it=0;
+		}
 		
 	}
-	
+	public GEGuardRookie(int x,int y)
+	{
+		super(x,y,'G');
+		
+
+	};
 }

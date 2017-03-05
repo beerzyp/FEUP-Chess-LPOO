@@ -64,15 +64,21 @@ public class Levels {
 		System.out.println("Level 1:Dungeon");
 		
 		GameMap dungeon = new DungeonMap();
-		GameElements Guard = new GEGuard(2,7,'G');
+		GameElements Guard = new GEGuardRookie(1,8);
+		GameElements Guard2 = new GEGuardSuspicious(1,8);
+		GameElements Guard3 = new GEGuardDrunken(1,8);
+	
 		GameElements Hero = new GEHero(1,1,'H');
 		
 		GameLogic logic = new GameLogic(dungeon);
 		logic.addGameElements(Hero);
 		logic.addGameElements(Guard);
+		logic.addGameElements(Guard2);
+		logic.addGameElements(Guard3);
 		
 		logic.setGame();
 		printboard(logic);
+		//Guard.move(logic.getActualMap());
 		
 		while(logic.getGameOver()==false || logic.getGameWin())
 		{	
@@ -94,6 +100,9 @@ public class Levels {
 			logic.testKey(moveHasd(c, Hero).get(0), moveHasd(c, Hero).get(1));
 			Hero.setx(moveHasd(c, Hero).get(0));
 			Hero.sety(moveHasd(c, Hero).get(1));
+			Guard.move(logic.getActualMap());
+			Guard2.move(logic.getActualMap());
+			Guard3.move(logic.getActualMap());
 			
 			logic.setGame();
 			printboard(logic);

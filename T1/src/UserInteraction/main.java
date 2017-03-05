@@ -17,7 +17,10 @@ public class main {
 	{
 		Levels level = new Levels();
 		
-		level.level2();
+		level.level1();
+		
+		/*GEGuard teste =  new GEGuardDrunken(1,2);
+		GameElements teste2 = teste;*/
 		
 	/*GameMap dungeon = new DungeonMap();
 	GameMap ogremap = new OgreMap();
