@@ -4,14 +4,15 @@ import java.util.ArrayList;
 
 public class GameLogic implements Cloneable {
 	
-	public GameLogic(GameMap map)
+	public GameLogic(GameMap map, boolean k)
 	{
 		this.map = map;
 		this.gameover = false;
 		this.key = false;
 		this.ActualMap = map.clone().getMap();
 		setkeypos();
-		
+		this.gamewin = false;
+		this.OgreKey = k;
 	};
 	
 	private boolean gameover;
@@ -22,6 +23,12 @@ public class GameLogic implements Cloneable {
 	private int keyx;
 	private int keyy;
 	private char keySymb;
+	private boolean gamewin;
+	private boolean OgreKey;
+	
+	public void setGameWin(boolean win){this.gamewin=win;}
+	public boolean getGameWin(){return this.gamewin;}
+
 	
 	public void setMap(GameMap m){this.map=m;}
 	public GameMap getMap(){return this.map;}
@@ -39,6 +46,7 @@ public class GameLogic implements Cloneable {
 	public void cleanActualMap(){
 		if(this.key){
 			this.ActualMap = CopyCharMatrix(this.map.getMap()); 
+			if(this.OgreKey == false)
 			this.changeMapKey();
 		}
 		else
@@ -107,6 +115,18 @@ public class GameLogic implements Cloneable {
 		
 		return false;
 	}
+	
+	public boolean pickKey(int x, int y){
+		if(this.ActualMap[x][y] == 'k')
+		{
+			this.setKey(true);
+			this.ActualMap[x][y] = ' ';
+			return true;
+		}
+		
+		return false;
+	}
+	
 	public void setkeypos()
 	{
 		for(int i=0;i<this.ActualMap.length;i++)
@@ -134,7 +154,7 @@ public class GameLogic implements Cloneable {
 			for(int i=0;i<this.elements.size();i++)
 			{
 				
-				if(this.elements.get(i).getHaveWeapon()) //o elemento é Ogre
+				if(this.elements.get(i).getHaveWeapon()) //o elemento ï¿½ Ogre
 				{
 				
 					//if(this.elements.get(i).getWeaponX()==g1.getx() && this.elements.get(i).gety()==g1.gety())//arma do
@@ -163,6 +183,14 @@ public class GameLogic implements Cloneable {
 						break;
 					}
 					
+				}
+				
+				if(g1.getSymbol() =='H' || g1.getSymbol() =='A' || g1.getSymbol()=='K')
+				{
+					if(distancePoints(1,0,g1.getx(),g1.gety()) <= a1)
+					{
+						changeMapKey();
+					}
 				}
 			}	
 		}

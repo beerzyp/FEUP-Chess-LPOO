@@ -7,5 +7,7 @@ public GEHero(int x, int y, char symbol)
 
 };
 
-public void move(char[][] map){};
+public void move(char[][] map){
+	
+};
 }

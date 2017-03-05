@@ -15,7 +15,11 @@ import Game.OgreMap;
 public class main {
 	public static void main(String[] args)
 	{
-	GameMap dungeon = new DungeonMap();
+		Levels level = new Levels();
+		
+		level.level2();
+		
+	/*GameMap dungeon = new DungeonMap();
 	GameMap ogremap = new OgreMap();
 
 	GameElements GuardR = new GEGuardRookie(2,3,'G');
@@ -95,7 +99,7 @@ public class main {
 		System.out.println(logic.getActualMap()[i]); //MUITO IMPORTANTE, so existe um save do jogo para o tabuleiro nesta funcao setGame()
 	}
 	
-	
+	*/
 	
 	//começo do jogo
 //	
