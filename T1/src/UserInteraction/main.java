@@ -22,32 +22,96 @@ public class main {
 	GameElements GuardD = new GEGuardDrunken(2,3,'G');
 	GameElements GuardS = new GEGuardSuspicious(2,3,'G');
 	GameElements Ogre = new GEOgre(2,4,'O', 2, 4);
-	GameElements Ogre2 = new GEOgre(2,4,'O', 2, 4);
+
 	GameElements Hero = new GEHero(1,1,'H');
     
 	
 	GameLogic logic = new GameLogic(ogremap);
 	logic.addGameElements(GuardR);
-//	logic.addGameElements(Hero);
-//	logic.addGameElements(Ogre);
-//	logic.addGameElements(Ogre2);
+	logic.addGameElements(Hero);
+	logic.addGameElements(Ogre);
+	
+
+	
+	
+	
+	//jogada numero 1
+	logic.testKey(1, 1); //testa primeiro a key para nao sobrepor o hero (nesta posicao ainda nao apanhou a chave)
+	Hero.setx(1); // joga com o hero
+	Hero.sety(1); // joga com o hero
+	
+	Ogre.move(logic.getActualMap()); //move o ogre random com a sua arma
+	logic.setGame();
+	
+	for(int i =0; i < logic.getActualMap().length; i++) //pinta o jogo
+	{
+		System.out.println(logic.getActualMap()[i]); //MUITO IMPORTANTE, so existe um save do jogo para o tabuleiro nesta funcao setGame()
+	}
+	
+	logic.cleanActualMap(); // limpa o mapa clonado
+	Hero.setx(3); // joga com o hero
+	Hero.sety(4); // joga com o hero
+	Ogre.move(logic.getActualMap()); //move o ogre random com a sua arma
+
+
+
+	
+	logic.setGame();
+	for(int i =0; i < logic.getActualMap().length; i++) //pinta o jogo
+	{
+		System.out.println(logic.getActualMap()[i]); //MUITO IMPORTANTE, so existe um save do jogo para o tabuleiro nesta funcao setGame()
+	}
+	if(logic.getGameOver()==true)
+	{System.out.println("Game over");}
+	
+	
+	logic.cleanActualMap(); // limpa o mapa clonado
+
+	
+	logic.testKey(1, 1); //testa primeiro a key para nao sobrepor o hero (nesta posicao ainda nao apanhou a chave)
+	Hero.setx(1); // joga com o hero
+	Hero.sety(1); // joga com o hero
+	
+	Ogre.move(logic.getActualMap()); //move o ogre random com a sua arma
+	
+	logic.setGame();
+	for(int i =0; i < logic.getActualMap().length; i++) //pinta o jogo
+	{
+		System.out.println(logic.getActualMap()[i]); //MUITO IMPORTANTE, so existe um save do jogo para o tabuleiro nesta funcao setGame()
+	}
+	
+	logic.cleanActualMap(); // limpa o mapa clonado
+
+	
+	logic.testKey(1, 1); //testa primeiro a key para nao sobrepor o hero (nesta posicao ainda nao apanhou a chave)
+	Hero.setx(1); // joga com o hero
+	Hero.sety(1); // joga com o hero
+	
+	Ogre.move(logic.getActualMap()); //move o ogre random com a sua arma
+    logic.setGame();
+	
+	for(int i =0; i < logic.getActualMap().length; i++) //pinta o jogo
+	{
+		System.out.println(logic.getActualMap()[i]); //MUITO IMPORTANTE, so existe um save do jogo para o tabuleiro nesta funcao setGame()
+	}
+	
 	
 	
 	//começo do jogo
-	
-	GuardR.setx(2);
-	GuardR.sety(2);
-	for(int i =0; i < logic.getActualMap().length; i++) //pinta o jogo
-	{
-		System.out.println(logic.setGame()[i]); //MUITO IMPORTANTE, so existe um save do jogo para o tabuleiro nesta funcao setGame()
-	}
-	logic.cleanActualMap();
-	GuardR.move(logic.getActualMap());
-	for(int i =0; i < logic.getActualMap().length; i++) //pinta o jogo
-	{
-		System.out.println(logic.setGame()[i]); //MUITO IMPORTANTE, so existe um save do jogo para o tabuleiro nesta funcao setGame()
-	}
-	
+//	
+//	GuardR.setx(2);
+//	GuardR.sety(2);
+//	for(int i =0; i < logic.getActualMap().length; i++) //pinta o jogo
+//	{
+//		System.out.println(logic.setGame()[i]); //MUITO IMPORTANTE, so existe um save do jogo para o tabuleiro nesta funcao setGame()
+//	}
+//	logic.cleanActualMap();
+//	GuardR.move(logic.getActualMap());
+//	for(int i =0; i < logic.getActualMap().length; i++) //pinta o jogo
+//	{
+//		System.out.println(logic.setGame()[i]); //MUITO IMPORTANTE, so existe um save do jogo para o tabuleiro nesta funcao setGame()
+//	}
+//	
 	
 //	if(logic.getMap().moveTo(1, 1))
 //	{

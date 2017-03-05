@@ -4,18 +4,33 @@ public abstract class GameElements {
 	private int x;
 	private int y;
 	private char symbol;
-	private char weapon ='*';
-	private boolean stun=false;
-	private int stunfor=0;
+	
+	private boolean stun; //atributo que verifica se este elemento está stunned
+	private int stunfor;
 	private char stunned='8';
+	
+	private boolean haveWeapon; //atributo que verifica se este elemento tem uma arma
+	private char weapon ='*';
 	private int weaponx;
 	private int weapony;
-	private boolean haveWeapon;
 
 	public int getStunfor(){return this.stunfor;}
 	public boolean isStun(){return this.stun;}
-	public void setStun(){this.stun=true; this.symbol=this.stunned; }
-	public void setStunfor(int time){this.stunfor=time;}
+	public char getStunnedSymbol(){return this.stunned;}
+	public void setStunned(){this.stun=true;}
+	public int decStunTime()
+	{
+		if(this.stunfor == 0)
+		{   System.out.println(this.stunfor);
+			this.stun=false; 
+			this.stunfor = 2;
+			return 0;
+		}
+
+			this.stunfor--; 
+			return -1;
+
+	}
 	
 	public void setHaveWeapon(boolean bool){this.haveWeapon=bool;}
 	public boolean getHaveWeapon(){return this.haveWeapon;}
@@ -31,6 +46,8 @@ public abstract class GameElements {
 		y = yPos;
 		symbol = symbolChar;
 		haveWeapon = bweapon;
+		this.stunfor = 2;
+		this.stun = false;
 	}
 	
 	public abstract void move(char[][] map);

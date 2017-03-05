@@ -45,7 +45,7 @@ public class GameLogic implements Cloneable {
 			this.ActualMap = CopyCharMatrix(this.map.getMap()); 
 	}
 	
-	public char[][] setGame(){		
+	public void setGame(){		
 		for(int i = 0; i < this.elements.size(); i++)
 		{
 			
@@ -53,10 +53,15 @@ public class GameLogic implements Cloneable {
 			if(this.elements.get(i).getHaveWeapon())
 				this.ActualMap[this.elements.get(i).getWeaponX()][this.elements.get(i).getWeaponY()] = this.elements.get(i).getWeapon();
 			colisoes(this.elements.get(i));
+			if(this.elements.get(i).isStun())
+			{
+				this.ActualMap[this.elements.get(i).getx()][this.elements.get(i).gety()] = this.elements.get(i).getStunnedSymbol();
+				if(this.elements.get(i).decStunTime()==0)
+				{
+					this.ActualMap[this.elements.get(i).getx()][this.elements.get(i).gety()] = this.elements.get(i).getSymbol();
+				}
+			}
 		}
-		
-		
-		return this.ActualMap;
 	}
 	
 	public static char[][] CopyCharMatrix(char[][] input) {
@@ -132,19 +137,17 @@ public class GameLogic implements Cloneable {
 				if(this.elements.get(i).getHaveWeapon()) //o elemento é Ogre
 				{
 				
-					if(this.elements.get(i).getWeaponX()==g1.getx() && this.elements.get(i).gety()==g1.gety())//arma do
+					//if(this.elements.get(i).getWeaponX()==g1.getx() && this.elements.get(i).gety()==g1.gety())//arma do
+					if(Math.floor(distancePoints(this.elements.get(i).getWeaponX(),this.elements.get(i).getWeaponY(),g1.getx(),g1.gety())) == 0)
 					{
 						this.gameover=true;
-						break;
 					
 					}
-					
-					else if(g1.getSymbol()=='A' ||g1.getSymbol()=='K')
+					else if(g1.getSymbol()=='H' ||g1.getSymbol()=='K')
 					{
 						if(distancePoints(this.elements.get(i).getx(),this.elements.get(i).gety(),g1.getx(),g1.gety()) <=a1)
 						{
-							this.elements.get(i).setStun();
-							this.elements.get(i).setStunfor(2);
+							this.elements.get(i).setStunned();
 						}
 						
 						
@@ -152,7 +155,7 @@ public class GameLogic implements Cloneable {
 				}
 				
 				
-				else if(this.elements.get(i).getSymbol()=='G' &&)//Guardas
+				else if(this.elements.get(i).getSymbol()=='D' || this.elements.get(i).getSymbol()=='R' || this.elements.get(i).getSymbol()=='S')//Guardas
 				{
 					if(distancePoints(this.elements.get(i).getx(),this.elements.get(i).gety(),g1.getx(),g1.gety()) <=a1)
 					{
