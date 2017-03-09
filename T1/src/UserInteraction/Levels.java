@@ -135,6 +135,7 @@ public class Levels {
 		logic.addGameElements(Hero);
 		logic.addGameElements(Ogre);
 		logic.addGameElements(Ogre2);
+		logic.setLevel2();
 
 		Ogre.move(logic.getActualMap());
 		Ogre2.move(logic.getActualMap());

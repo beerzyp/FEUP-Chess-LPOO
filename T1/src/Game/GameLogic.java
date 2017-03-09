@@ -13,6 +13,8 @@ public class GameLogic implements Cloneable {
 		setkeypos();
 		this.gamewin = false;
 		OgreKey = false;
+		this.level2 = false;
+		this.weaponBool = false;
 	};
 	
 	private boolean gameover;
@@ -25,6 +27,13 @@ public class GameLogic implements Cloneable {
 	private char keySymb;
 	private boolean OgreKey;
 	private boolean gamewin;
+	private boolean level2;
+	private int weaponX = 2;
+	private int weaponY = 1;
+	private char weaponSymbol='w';
+	private boolean weaponBool;
+	
+	public void setLevel2(){this.level2=true;}
 	
 	public void setGameWin(boolean win){this.gamewin=win;}
 	public boolean getGameWin(){return this.gamewin;}
@@ -53,6 +62,11 @@ public class GameLogic implements Cloneable {
 		}
 		else
 			this.ActualMap = CopyCharMatrix(this.map.getMap()); 
+		
+		if(level2)
+			if(!weaponBool)
+				this.ActualMap[this.weaponX][this.weaponY] = this.weaponSymbol;
+
 	}
 	
 	public void setGame(){		
@@ -123,6 +137,7 @@ public class GameLogic implements Cloneable {
 		if(this.ActualMap[x][y] == 'k')
 		{
 			this.setKey(true);
+			this.OgreKey = true;
 			this.ActualMap[x][y] = ' ';
 			this.changeMapKey();
 			return true;
@@ -153,22 +168,8 @@ public class GameLogic implements Cloneable {
 		for(int j=0; j < this.ActualMap.length; j++){
 			for(int k=0; k < this.ActualMap[j].length; k++){
 				if(this.ActualMap[j][k] == 'S'){
-					System.out.print("H->");
-					System.out.print("(");
-					System.out.print(g1.getx());
-					System.out.print(",");
-					System.out.print(g1.gety());
-					System.out.print(")\n");
-					System.out.print("S->");
-					System.out.print("(");
-					System.out.print(j);
-					System.out.print(",");
-					System.out.print(k);
-					System.out.print(")\n\n");
-
 					if(Math.floor(this.distancePoints(g1.getx(), g1.gety(), j, k)) == 0)
 					{
-						System.out.print("win");
 						this.gamewin = true;
 					}}
 			}}}
@@ -183,8 +184,17 @@ public class GameLogic implements Cloneable {
 		double a1=1;
 		if(g1.getSymbol() =='H' || g1.getSymbol() =='A' || g1.getSymbol()=='K')//se g1 for o Hero
 		{
-		
+			if(Math.floor(this.distancePoints(weaponX, weaponY, g1.getx(), g1.gety())) == 0)
+			{
+				g1.setSymbol('A');
+				this.weaponBool = true;
+			}
 			
+			if(Math.floor(this.distancePoints(keyx, keyy, g1.getx(), g1.gety())) == 0)
+			{
+				if(level2)
+				g1.setSymbol('K');
+			}
 			
 			for(int i=0;i<this.elements.size();i++)
 			{

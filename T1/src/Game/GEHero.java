@@ -14,6 +14,8 @@ public boolean moveTo(char[][] map, int x, int y){
 		return true;
 	else if(map[x][y] == 'S')
 		return true;
+	else if(map[x][y] == 'w')
+		return true;
 	
 	return false;
 }
