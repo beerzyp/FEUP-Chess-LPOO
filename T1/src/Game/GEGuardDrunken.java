@@ -26,7 +26,15 @@ public class GEGuardDrunken extends GEGuard {
 			    {
 			    	if(!this.direction)
 			    	{
-			    		it++;
+			    		if(it != this.getCaminho().size()-1)
+			    		{
+			    			it++;
+			    		}
+			    		else
+			    		{
+			    			it=0;
+			    		}
+			    		
 				    	Pair a = this.getCaminho().get(it);
 						this.setx(a.getx());
 						this.sety(a.gety());

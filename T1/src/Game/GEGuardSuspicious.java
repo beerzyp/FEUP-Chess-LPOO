@@ -32,6 +32,7 @@ public class GEGuardSuspicious extends GEGuard {
 				}
 				else
 				it--;
+		    	
 		    	Pair a = this.getCaminho().get(it);
 				this.setx(a.getx());
 				this.sety(a.gety());

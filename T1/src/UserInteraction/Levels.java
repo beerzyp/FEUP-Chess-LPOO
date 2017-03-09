@@ -26,7 +26,7 @@ public class Levels {
 	{
 		for(int i =0; i < l.getActualMap().length; i++) //pinta o jogo
 		{
-			System.out.println(l.getActualMap()[i]); //MUITO IMPORTANTE, so existe um save do jogo para o tabuleiro nesta funcao setGame()
+			System.out.println(l.getActualMap()[i]); 
 		}
 	}
 	
@@ -58,7 +58,7 @@ public class Levels {
 		return a;
 	}
 	
-	public void level1()
+	public int level1()
 	{
 		//Level one
 		System.out.println("Level 1:Dungeon");
@@ -80,7 +80,7 @@ public class Levels {
 		printboard(logic);
 		//Guard.move(logic.getActualMap());
 		
-		while(logic.getGameOver()==false || logic.getGameWin())
+		while(logic.getGameOver()==false && logic.getGameWin()==false)
 		{	
 			System.out.println("Faça a jogada e toque enter (w,a,s,d):");
 			Scanner s = new Scanner(System.in);
@@ -88,7 +88,7 @@ public class Levels {
 			
 			System.out.println(c);
 			
-			while(!logic.getMap().moveTo(moveHasd(c, Hero).get(0), moveHasd(c, Hero).get(1)))
+			while(!((GEHero) Hero).moveTo(logic.getActualMap(),moveHasd(c, Hero).get(0), moveHasd(c, Hero).get(1)))
 			{
 				System.out.println("Fa�a a jogada e toque enter:");
 				s = new Scanner(System.in);
@@ -110,17 +110,21 @@ public class Levels {
 			
 		if(logic.getGameWin()) //next level
 		{
-			
+			System.out.println("Congratulations! You won level 1!");
+			return 0;
+		}
+		else if(logic.getGameOver() == true){
+			System.out.println("Game Over! Try Again!");
+			return 1;
 		}
 		
-	
-	
+		return -1;
 	}
 
-	public void level2()
+	public int level2()
 	{
 		//Level one
-		System.out.println("Level 1:Ogre");
+		System.out.println("Level 2:Ogre");
 		
 		GameMap dungeon = new OgreMap();
 		GameElements Ogre = new GEOgre(2,4,'O', 2, 4);
@@ -137,15 +141,16 @@ public class Levels {
 		logic.setGame();
 		printboard(logic);
 		
-		while(logic.getGameOver()==false || logic.getGameWin())
+		while(logic.getGameOver()==false && logic.getGameWin()==false)
 		{	
+			logic.setGame();
 			System.out.println("Faça a jogada e toque enter (w,a,s,d):");
 			Scanner s = new Scanner(System.in);
 			char c = s.next().charAt(0);
 			
 			System.out.println(c);
 			
-			while(!logic.getMap().moveTo(moveHasd(c, Hero).get(0), moveHasd(c, Hero).get(1)))
+			while(!((GEHero) Hero).moveTo(logic.getActualMap(),moveHasd(c, Hero).get(0), moveHasd(c, Hero).get(1)))
 			{
 				System.out.println("Fa�a a jogada e toque enter:");
 				s = new Scanner(System.in);
@@ -170,11 +175,16 @@ public class Levels {
 			
 		if(logic.getGameWin()) //next level
 		{
-			
+			System.out.println("Congratulations! You won level 2!");
+			return 0;
+		}
+		else if(logic.getGameOver() == true){
+			System.out.println("Game Over! Try Again!");
+			return 1;
 		}
 		
-	
-	
+		return -1;
+		
 	}
 
 

@@ -46,7 +46,7 @@ public class GameLogic implements Cloneable {
 	public void cleanActualMap(){
 		if(this.key){
 			this.ActualMap = CopyCharMatrix(this.map.getMap());
-			if(!this.OgreKey)
+			if(this.OgreKey)
 				this.changeMapKey();
 			else
 				changeMapOgreKey();
@@ -58,7 +58,7 @@ public class GameLogic implements Cloneable {
 	public void setGame(){		
 		for(int i = 0; i < this.elements.size(); i++)
 		{
-			
+			this.testWin(this.elements.get(i));
 			this.ActualMap[this.elements.get(i).getx()][this.elements.get(i).gety()] = this.elements.get(i).getSymbol();
 			if(this.elements.get(i).getHaveWeapon())
 				this.ActualMap[this.elements.get(i).getWeaponX()][this.elements.get(i).getWeaponY()] = this.elements.get(i).getWeapon();
@@ -145,6 +145,35 @@ public class GameLogic implements Cloneable {
 			}
 		}
 	}
+	
+	public void testWin(GameElements g1){
+		
+		if(g1.getSymbol() =='H' || g1.getSymbol() =='A' || g1.getSymbol()=='K')//se g1 for o Hero
+		{
+		for(int j=0; j < this.ActualMap.length; j++){
+			for(int k=0; k < this.ActualMap[j].length; k++){
+				if(this.ActualMap[j][k] == 'S'){
+					System.out.print("H->");
+					System.out.print("(");
+					System.out.print(g1.getx());
+					System.out.print(",");
+					System.out.print(g1.gety());
+					System.out.print(")\n");
+					System.out.print("S->");
+					System.out.print("(");
+					System.out.print(j);
+					System.out.print(",");
+					System.out.print(k);
+					System.out.print(")\n\n");
+
+					if(Math.floor(this.distancePoints(g1.getx(), g1.gety(), j, k)) == 0)
+					{
+						System.out.print("win");
+						this.gamewin = true;
+					}}
+			}}}
+	}
+	
 	public double distancePoints(double x1,double y1, double x2,double y2)
 	{
 		return Math.sqrt(Math.abs(x2-x1)*Math.abs(x2-x1)+Math.abs(y2-y1)*Math.abs(y2-y1));
@@ -154,6 +183,9 @@ public class GameLogic implements Cloneable {
 		double a1=1;
 		if(g1.getSymbol() =='H' || g1.getSymbol() =='A' || g1.getSymbol()=='K')//se g1 for o Hero
 		{
+		
+			
+			
 			for(int i=0;i<this.elements.size();i++)
 			{
 				
@@ -174,7 +206,8 @@ public class GameLogic implements Cloneable {
 						}
 						
 						
-					}				
+					}
+					
 				}
 				
 				
@@ -195,6 +228,7 @@ public class GameLogic implements Cloneable {
 						if(distancePoints(1,0,g1.getx(),g1.gety()) <= a1)
 						{
 							changeMapKey();
+							this.OgreKey = true;
 						}
 					}
 				}
@@ -219,7 +253,6 @@ public class GameLogic implements Cloneable {
 		{
 			this.setKey(true);
 			this.ActualMap[x][y] = ' ';
-			this.OgreKey = true;
 			return true;
 		}
 		
