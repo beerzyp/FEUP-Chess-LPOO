@@ -17,9 +17,9 @@ public class main {
 	{
 		Levels level = new Levels();
 		
-		//if(level.level1() == 0){
+		if(level.level1() == 0){
 			level.level2();
-		//}
+		}
 		
 		/*GEGuard teste =  new GEGuardDrunken(1,2);
 		GameElements teste2 = teste;*/
