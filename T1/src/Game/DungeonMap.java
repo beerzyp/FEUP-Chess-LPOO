@@ -1,8 +1,8 @@
 package Game;
 
 public class DungeonMap implements GameMap, Cloneable {
-	public DungeonMap(){}
-	
+	public DungeonMap(){};
+	public DungeonMap(char[][] map){};
 private char[][] matrix={
 		{'X','X','X','X','X','X','X','X','X','X'},
 		{'X',' ',' ',' ','I',' ','X',' ',' ','X'},
@@ -15,6 +15,8 @@ private char[][] matrix={
 		{'X', ' ', 'I', ' ', 'I', ' ', 'X', 'k', ' ', 'X'},
 		{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}
 	};
+
+
 
 @Override public DungeonMap clone() {
     return new DungeonMap();

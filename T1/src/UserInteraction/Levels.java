@@ -20,6 +20,18 @@ import Game.OgreMap;
 
 public class Levels {
 	Levels(){}
+	private char[][] dunga={
+			{'X','X','X','X','X','X','X','X','X','X'},
+			{'X',' ',' ',' ','I',' ','X',' ',' ','X'},
+			{'X','X','X',' ','X','X','X',' ',' ','X'},
+			{'X',' ','I',' ','I',' ','X',' ',' ','X'},
+			{'X','X','X',' ','X','X','X',' ',' ','X'},
+			{'I', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+			{'I', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+			{'X', 'X', 'X', ' ', 'X', 'X', 'X', 'X', ' ', 'X'},
+			{'X', ' ', 'I', ' ', 'I', ' ', 'X', 'k', ' ', 'X'},
+			{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}
+		};
 	
 	
 	public void printboard(GameLogic l)
@@ -63,7 +75,7 @@ public class Levels {
 		//Level one
 		System.out.println("Level 1:Dungeon");
 		
-		GameMap dungeon = new DungeonMap();
+		GameMap dungeon = new DungeonMap(this.dunga);
 		GameElements Guard = new GEGuardRookie(1,8);
 		GameElements Guard2 = new GEGuardSuspicious(1,8);
 		GameElements Guard3 = new GEGuardDrunken(1,8);
@@ -87,8 +99,8 @@ public class Levels {
 			char c = s.next().charAt(0);
 			
 			System.out.println(c);
-			
-			while(!((GEHero) Hero).moveTo(logic.getActualMap(),moveHasd(c, Hero).get(0), moveHasd(c, Hero).get(1)))
+			logic.testKey(moveHasd(c, Hero).get(0), moveHasd(c, Hero).get(1));
+			while(!logic.moveHero(c))
 			{
 				System.out.println("Fa�a a jogada e toque enter:");
 				s = new Scanner(System.in);
@@ -97,9 +109,7 @@ public class Levels {
 			
 			logic.cleanActualMap();
 			
-			logic.testKey(moveHasd(c, Hero).get(0), moveHasd(c, Hero).get(1));
-			Hero.setx(moveHasd(c, Hero).get(0));
-			Hero.sety(moveHasd(c, Hero).get(1));
+			
 			Guard.move(logic.getActualMap());
 			Guard2.move(logic.getActualMap());
 			Guard3.move(logic.getActualMap());
@@ -150,8 +160,8 @@ public class Levels {
 			char c = s.next().charAt(0);
 			
 			System.out.println(c);
-			
-			while(!((GEHero) Hero).moveTo(logic.getActualMap(),moveHasd(c, Hero).get(0), moveHasd(c, Hero).get(1)))
+			logic.pickKey(moveHasd(c, Hero).get(0), moveHasd(c, Hero).get(1));
+			while(!logic.moveHero(c))
 			{
 				System.out.println("Fa�a a jogada e toque enter:");
 				s = new Scanner(System.in);
@@ -160,9 +170,8 @@ public class Levels {
 			
 			logic.cleanActualMap();
 			
-			logic.pickKey(moveHasd(c, Hero).get(0), moveHasd(c, Hero).get(1));
-			Hero.setx(moveHasd(c, Hero).get(0));
-			Hero.sety(moveHasd(c, Hero).get(1));
+			
+			
 			
 			if(!Ogre.isStun())
 				Ogre.move(logic.getActualMap());

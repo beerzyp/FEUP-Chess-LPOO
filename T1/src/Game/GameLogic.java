@@ -32,6 +32,65 @@ public class GameLogic implements Cloneable {
 	private int weaponY = 1;
 	private char weaponSymbol='w';
 	private boolean weaponBool;
+	public void printboard()
+	{
+		for(int i =0; i < this.getActualMap().length; i++) //pinta o jogo
+		{
+			System.out.println(this.getActualMap()[i]); 
+		}
+	}
+	public int getHeroPosAtArray()
+	{  int p=0;
+		for(int i=0;i<this.getGameElements().size();i++)
+		{
+			if(this.getGameElements().get(i).getSymbol()=='H' || this.getGameElements().get(i).getSymbol()=='A' || this.getGameElements().get(i).getSymbol()=='K')
+			{
+				p=i;
+			}
+		}
+		return p;
+	}
+	
+	public Pair getHeroPosition()
+	{	 int p=getHeroPosAtArray();
+		
+		return new Pair(this.getGameElements().get(p).getx(),this.getGameElements().get(p).gety());
+	}
+	
+	public boolean moveHero(char direction)
+	{ int p=getHeroPosAtArray();
+	    
+		if(direction == 'w')
+		{	
+			if(((GEHero)this.getGameElements().get(p)).moveTo(ActualMap, this.getGameElements().get(p).getx()- 1, this.getGameElements().get(p).gety()))
+				this.getGameElements().get(p).setx(this.getGameElements().get(p).getx()- 1);
+			else
+				return false;
+				
+		}
+		else if(direction == 's')
+		{	if(((GEHero)this.getGameElements().get(p)).moveTo(ActualMap, this.getGameElements().get(p).getx()+ 1, this.getGameElements().get(p).gety()))
+				this.getGameElements().get(p).setx(this.getGameElements().get(p).getx()+ 1);
+			else 
+				return false;
+			
+		}
+		else if(direction == 'd')
+		{   if(((GEHero)this.getGameElements().get(p)).moveTo(ActualMap, this.getGameElements().get(p).getx(), this.getGameElements().get(p).gety()+1))
+				this.getGameElements().get(p).sety(this.getGameElements().get(p).gety()+ 1);
+			else 
+				return false;
+		}
+		else if(direction == 'a')
+		{ 	if(((GEHero)this.getGameElements().get(p)).moveTo(ActualMap, this.getGameElements().get(p).getx(), this.getGameElements().get(p).gety()-1))
+				this.getGameElements().get(p).sety(this.getGameElements().get(p).gety()-1);
+			else 
+				return false;
+		}
+		
+		return true;
+		
+	}
 	
 	public void setLevel2(){this.level2=true;}
 	
