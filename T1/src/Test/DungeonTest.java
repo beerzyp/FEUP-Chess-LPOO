@@ -25,7 +25,7 @@ public class DungeonTest {
 						 {'X','X','X','X','X'}};
 	
 			
-			
+	//coordenadas não estao representadas nas funcoes por (x,y) mas sim (y,x)
 			
 	GameElements Guard = new GEGuardRookie(1,3);
 	GameElements Hero = new GEHero(1,1,'H');
@@ -61,10 +61,54 @@ public class DungeonTest {
 		assertFalse(logic.getGameOver());
 		logic.moveHero('d');
 		logic.setGame();
-		assertTrue(logic.getGameOver());
-//		assertEquals(logic.)	
-		
+		assertTrue(logic.getGameOver());		
+	}
+	
+	@Test
+	public void  testHeroCantExitDoor()
+	{
+		GameMap dungeon = new DungeonMap(map);
+		GameLogic logic = new GameLogic(dungeon);
+		logic.addGameElements(Hero);
+		logic.addGameElements(Guard);
+		logic.moveHero('s');
+		logic.moveHero('a');
+		logic.setGame();
+		assertEquals(new Pair(2,1) ,logic.getHeroPosition());
+		assertFalse(logic.getGameOver());
+		assertFalse(logic.getGameWin());
+	}
+	
+	@Test
+	public void  testHeroOpenDoors()
+	{
+		GameMap dungeon = new DungeonMap(map);
+		GameLogic logic = new GameLogic(dungeon);
+		logic.addGameElements(Hero);
+		logic.addGameElements(Guard);
+		assertEquals(logic.getActualMap()[2][0], 'I');
+		assertEquals(logic.getActualMap()[3][0], 'I');
+		logic.moveHero('s');
+		logic.moveHero('s');
+		logic.setGame();
+		assertEquals(logic.getActualMap()[2][0], 'S');
+		assertEquals(logic.getActualMap()[3][0], 'S');
 	}
 
+	@Test
+	public void  testHeroWinsLevel1()
+	{
+		GameMap dungeon = new DungeonMap(map);
+		GameLogic logic = new GameLogic(dungeon);
+		logic.addGameElements(Hero);
+		logic.addGameElements(Guard);
+		assertFalse(logic.getGameWin());
+		logic.moveHero('s');
+		logic.moveHero('s');
+		logic.moveHero('a');
+		logic.setGame();
+		assertFalse(logic.getGameOver());
+		assertTrue(logic.getGameWin());
+	}
 
 }

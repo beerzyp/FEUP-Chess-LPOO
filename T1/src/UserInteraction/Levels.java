@@ -20,18 +20,6 @@ import Game.OgreMap;
 
 public class Levels {
 	Levels(){}
-	private char[][] dunga={
-			{'X','X','X','X','X','X','X','X','X','X'},
-			{'X',' ',' ',' ','I',' ','X',' ',' ','X'},
-			{'X','X','X',' ','X','X','X',' ',' ','X'},
-			{'X',' ','I',' ','I',' ','X',' ',' ','X'},
-			{'X','X','X',' ','X','X','X',' ',' ','X'},
-			{'I', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
-			{'I', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
-			{'X', 'X', 'X', ' ', 'X', 'X', 'X', 'X', ' ', 'X'},
-			{'X', ' ', 'I', ' ', 'I', ' ', 'X', 'k', ' ', 'X'},
-			{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}
-		};
 	
 	
 	public void printboard(GameLogic l)
@@ -42,7 +30,7 @@ public class Levels {
 		}
 	}
 	
-	public ArrayList<Integer> moveHasd(char direction, GameElements Hero)
+	/*public ArrayList<Integer> moveHasd(char direction, GameElements Hero)
 	{
 		ArrayList<Integer> a = new ArrayList<Integer>();
 		
@@ -68,14 +56,14 @@ public class Levels {
 		}
 		
 		return a;
-	}
+	}*/
 	
 	public int level1()
 	{
 		//Level one
 		System.out.println("Level 1:Dungeon");
 		
-		GameMap dungeon = new DungeonMap(this.dunga);
+		GameMap dungeon = new DungeonMap();
 		GameElements Guard = new GEGuardRookie(1,8);
 		GameElements Guard2 = new GEGuardSuspicious(1,8);
 		GameElements Guard3 = new GEGuardDrunken(1,8);
@@ -90,7 +78,6 @@ public class Levels {
 		
 		logic.setGame();
 		printboard(logic);
-		//Guard.move(logic.getActualMap());
 		
 		while(logic.getGameOver()==false && logic.getGameWin()==false)
 		{	
@@ -98,8 +85,6 @@ public class Levels {
 			Scanner s = new Scanner(System.in);
 			char c = s.next().charAt(0);
 			
-			System.out.println(c);
-			logic.testKey(moveHasd(c, Hero).get(0), moveHasd(c, Hero).get(1));
 			while(!logic.moveHero(c))
 			{
 				System.out.println("Fa�a a jogada e toque enter:");
@@ -159,8 +144,6 @@ public class Levels {
 			Scanner s = new Scanner(System.in);
 			char c = s.next().charAt(0);
 			
-			System.out.println(c);
-			logic.pickKey(moveHasd(c, Hero).get(0), moveHasd(c, Hero).get(1));
 			while(!logic.moveHero(c))
 			{
 				System.out.println("Fa�a a jogada e toque enter:");
