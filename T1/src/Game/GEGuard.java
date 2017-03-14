@@ -1,7 +1,6 @@
 package Game;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public abstract class GEGuard extends GameElements {
 	

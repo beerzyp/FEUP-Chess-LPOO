@@ -1,6 +1,5 @@
 package Game;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class GEGuardDrunken extends GEGuard {
@@ -60,7 +59,6 @@ public class GEGuardDrunken extends GEGuard {
 		    	
 			    if(bool==0) // acordou
 			    {
-			    	Random randomG = new Random();
 				    int bol = randomGenerator.nextInt(2);
 				    
 			    	this.setSymbol('G');

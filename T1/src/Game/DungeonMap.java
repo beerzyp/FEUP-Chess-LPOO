@@ -10,8 +10,7 @@ public class DungeonMap implements GameMap, Cloneable {
 		matrix = new char[l][];
 		for  (int i = 0 ; i < l ; i++) {
 			matrix[i] = Arrays.copyOf(map[i], map[i].length);
-		}
-		
+		}	
 	};
 	
 	private char[][] matrix={

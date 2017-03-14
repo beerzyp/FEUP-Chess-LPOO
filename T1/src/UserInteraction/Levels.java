@@ -1,13 +1,9 @@
 package UserInteraction;
 
-import java.io.BufferedReader;
 
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import Game.DungeonMap;
-import Game.GEGuard;
 import Game.GEGuardDrunken;
 import Game.GEGuardRookie;
 import Game.GEGuardSuspicious;
@@ -29,34 +25,6 @@ public class Levels {
 			System.out.println(l.getActualMap()[i]); 
 		}
 	}
-	
-	/*public ArrayList<Integer> moveHasd(char direction, GameElements Hero)
-	{
-		ArrayList<Integer> a = new ArrayList<Integer>();
-		
-		if(direction == 'w')
-		{	
-			a.add(Hero.getx() - 1);
-			a.add(Hero.gety());			
-		}
-		else if(direction == 's')
-		{
-			a.add(Hero.getx() + 1);
-			a.add(Hero.gety());
-		}
-		else if(direction == 'd')
-		{
-			a.add(Hero.getx());
-			a.add(Hero.gety() + 1);
-		}
-		else if(direction == 'a')
-		{
-			a.add(Hero.getx());
-			a.add(Hero.gety() - 1);
-		}
-		
-		return a;
-	}*/
 	
 	public int level1()
 	{
@@ -130,7 +98,6 @@ public class Levels {
 		logic.addGameElements(Hero);
 		logic.addGameElements(Ogre);
 		logic.addGameElements(Ogre2);
-		logic.setLevel2();
 
 		Ogre.move(logic.getActualMap());
 		Ogre2.move(logic.getActualMap());

@@ -1,7 +1,5 @@
 package Game;
 
-import java.util.ArrayList;
-import java.util.Random;
 
 public class GEGuardRookie extends GEGuard {
 	

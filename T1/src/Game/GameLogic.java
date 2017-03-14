@@ -10,10 +10,15 @@ public class GameLogic implements Cloneable {
 		this.gameover = false;
 		this.key = false;
 		this.ActualMap = map.clone().getMap();
+		
+		if(map instanceof OgreMap)
+			this.level2 = true;
+		else
+			this.level2 = false;
+		
 		setkeypos();
 		this.gamewin = false;
 		OgreKey = false;
-		this.level2 = false;
 		this.weaponBool = false;
 	};
 	
@@ -24,7 +29,6 @@ public class GameLogic implements Cloneable {
 	private char[][] ActualMap;
 	private int keyx;
 	private int keyy;
-	private char keySymb;
 	private boolean OgreKey;
 	private boolean gamewin;
 	private boolean level2;
@@ -41,7 +45,7 @@ public class GameLogic implements Cloneable {
 		}
 	}
 	
-public int getHeroPosAtArray()
+	public int getHeroPosAtArray()
 	{  int p=0;
 		for(int i=0;i<this.getGameElements().size();i++)
 		{
@@ -137,6 +141,7 @@ public int getHeroPosAtArray()
 		if(this.ActualMap[x][y] == 'k')
 		{
 			this.setKey(true);
+			this.elements.get(getHeroPosAtArray()).setSymbol('K');
 			this.ActualMap[x][y] = ' ';
 			return true;
 		}
@@ -246,7 +251,6 @@ public int getHeroPosAtArray()
 			{
 				if(this.ActualMap[i][j]=='k')
 				{
-					this.keySymb=this.ActualMap[i][j];
 					this.keyx=i;
 					this.keyy=j;
 				}
@@ -328,10 +332,12 @@ public int getHeroPosAtArray()
 				{
 					if(this.key)
 					{
-						if(distancePoints(1,0,g1.getx(),g1.gety()) <= a1)
-						{
-							changeMapKey();
-							this.OgreKey = true;
+						for(int l = 0; l < ((OgreMap) this.map).getDoors().size(); l++){
+							if(distancePoints(((OgreMap) this.map).getDoors().get(l).gety(),((OgreMap) this.map).getDoors().get(l).getx(),g1.getx(),g1.gety()) <= a1)
+							{
+								changeMapKey();
+								this.OgreKey = true;
+							}
 						}
 					}
 				}
@@ -349,6 +355,5 @@ public int getHeroPosAtArray()
 			
 		}
 	}
-	public void setkeySymb(char newsymb){this.keySymb=newsymb;}
 	
 }

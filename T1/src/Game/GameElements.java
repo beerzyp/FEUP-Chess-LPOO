@@ -5,12 +5,9 @@ public abstract class GameElements {
 	private int y;
 	private char symbol;
 	
-	private boolean stun; //atributo que verifica se este elemento está stunned
+	private boolean stun; //atributo que verifica se este elemento estï¿½ stunned
 	private int stunfor;
 	private char stunned='8';
-	
-	private boolean isarmed;
-	private char armed;
 	
 	private boolean haveWeapon; //atributo que verifica se este elemento tem uma arma
 	private char weapon ='*';
@@ -51,8 +48,6 @@ public abstract class GameElements {
 		haveWeapon = bweapon;
 		this.stunfor = 2;
 		this.stun = false;
-		this.isarmed=false;
-		this.armed='A';
 	}
 	
 	public abstract void move(char[][] map);
