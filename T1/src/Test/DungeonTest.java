@@ -27,7 +27,7 @@ public class DungeonTest {
 			
 			
 			
-	GameElements Guard = new GEGuardRookie(3,3);
+	GameElements Guard = new GEGuardRookie(1,3);
 	GameElements Hero = new GEHero(1,1,'H');
 	
 	@Test
@@ -37,10 +37,8 @@ public class DungeonTest {
 		logic.addGameElements(Hero);
 		logic.addGameElements(Guard);
 		assertEquals(new Pair(1,1) ,logic.getHeroPosition());
-		logic.printboard();
 		assertTrue(logic.moveHero('s'));
-		logic.printboard();
-		assertEquals(new Pair(1,2) ,logic.getHeroPosition());
+		assertEquals(new Pair(2,1) ,logic.getHeroPosition());
 	}
 	@Test
 	public void testMoveHeroToWall() {

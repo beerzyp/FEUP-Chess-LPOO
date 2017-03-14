@@ -1,9 +1,20 @@
 package Game;
 
+import java.util.Arrays;
+
 public class DungeonMap implements GameMap, Cloneable {
+	
 	public DungeonMap(){};
-	public DungeonMap(char[][] map){};
-private char[][] matrix={
+	public DungeonMap(char[][] map){
+		int l = map.length;
+		matrix = new char[l][];
+		for  (int i = 0 ; i < l ; i++) {
+			matrix[i] = Arrays.copyOf(map[i], map[i].length);
+		}
+		
+	};
+	
+	private char[][] matrix={
 		{'X','X','X','X','X','X','X','X','X','X'},
 		{'X',' ',' ',' ','I',' ','X',' ',' ','X'},
 		{'X','X','X',' ','X','X','X',' ',' ','X'},
@@ -19,7 +30,8 @@ private char[][] matrix={
 
 
 @Override public DungeonMap clone() {
-    return new DungeonMap();
+    DungeonMap n =  new DungeonMap(matrix);
+    return n;
 }
 
 @Override
