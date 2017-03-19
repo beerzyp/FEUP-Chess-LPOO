@@ -171,6 +171,7 @@ public class GameLogic implements Cloneable {
 	public void setGame(){		
 		for(int i = 0; i < this.elements.size(); i++)
 		{
+
 			this.testWin(this.elements.get(i));
 			this.ActualMap[this.elements.get(i).getx()][this.elements.get(i).gety()] = this.elements.get(i).getSymbol();
 			if(this.elements.get(i).getHaveWeapon())
@@ -268,8 +269,11 @@ public class GameLogic implements Cloneable {
 					if(Math.floor(this.distancePoints(g1.getx(), g1.gety(), j, k)) == 0)
 					{
 						this.gamewin = true;
-					}}
-			}}}
+					}
+					}
+			}
+			}
+		}
 	}
 	
 	public double distancePoints(double x1,double y1, double x2,double y2)
@@ -288,7 +292,7 @@ public class GameLogic implements Cloneable {
 			}
 			
 			if(Math.floor(this.distancePoints(keyx, keyy, g1.getx(), g1.gety())) == 0)
-			{
+			{	this.gamewin=true;
 				if(level2)
 				g1.setSymbol('K');
 			}
@@ -330,7 +334,8 @@ public class GameLogic implements Cloneable {
 				
 				if(g1.getSymbol() =='H' || g1.getSymbol() =='A' || g1.getSymbol()=='K')
 				{
-					if(this.key)
+					if(level2)
+					{if(this.key)
 					{
 						for(int l = 0; l < ((OgreMap) this.map).getDoors().size(); l++){
 							if(distancePoints(((OgreMap) this.map).getDoors().get(l).gety(),((OgreMap) this.map).getDoors().get(l).getx(),g1.getx(),g1.gety()) <= a1)
@@ -339,7 +344,7 @@ public class GameLogic implements Cloneable {
 								this.OgreKey = true;
 							}
 						}
-					}
+					}}
 				}
 			}	
 		}
