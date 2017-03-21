@@ -8,7 +8,7 @@ public class OgreMap implements GameMap, Cloneable {
 		for  (int i = 0 ; i < matrix.length ; i++) {
 			for  (int j = 0 ; j < matrix[i].length ; j++) {
 				if(matrix[i][j] == 'I'){
-					this.doors.add(new Pair(i,j));
+					this.doors.add(new Pair(i,j)); 
 				}
 			}
 		}
@@ -56,9 +56,9 @@ public class OgreMap implements GameMap, Cloneable {
 	}
 
 
-	public GameMap nextMap() {
-		return null;
-	}
+//	public GameMap nextMap() {
+//		return null;
+//	}
 
 
 	public boolean moveTo(int x, int y) {

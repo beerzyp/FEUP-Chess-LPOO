@@ -38,10 +38,10 @@ public char[][] getMap() {
 	return this.matrix;
 }
 
-
-public GameMap nextMap() {
-	return new OgreMap();
-}
+//
+//public GameMap nextMap() {
+//	return new OgreMap();
+//}
 
 
 public boolean moveTo(int x, int y) {
@@ -52,8 +52,9 @@ public boolean moveTo(int x, int y) {
 		return true;
 	else if(this.matrix[x][y] == 'S')
 		return true;
+	else
+		return false;
 	
-	return false;
 }
 
 }

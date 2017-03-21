@@ -1,5 +1,6 @@
 package Game;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class GEGuardSuspicious extends GEGuard {
@@ -7,6 +8,10 @@ public class GEGuardSuspicious extends GEGuard {
 	{
 		super(x, y,'G');
 
+	};
+	public GEGuardSuspicious(int x, int y, char symbol,ArrayList<Pair> a)
+	{	
+		super(x, y, 'G',a);
 	};
 	
 

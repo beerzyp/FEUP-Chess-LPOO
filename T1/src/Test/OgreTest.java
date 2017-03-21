@@ -37,8 +37,8 @@ public class OgreTest {
 		logic.moveHero('d');		
 		assertFalse(logic.getGameOver());
 		logic.setGame();
-
 		assertTrue(logic.getGameOver());
+		Ogre.move(map); 
 	}
 	
 	@Test
@@ -116,4 +116,32 @@ public class OgreTest {
 		assertTrue(logic.getGameWin());		
 	}
 	
+	@Test(timeout=1000)
+	public void testSomeRandomBehaviour()
+	{
+		GameMap ogremap = new OgreMap(map);
+		GameLogic logic = new GameLogic(ogremap);
+		GameElements Ogre1 = new GEOgre(1,3,'O', 1, 2);
+		logic.addGameElements(Hero);
+		logic.addGameElements(Ogre1);
+		boolean OgreupSwordup=false,OgreupSwordright=false,OgreupSwordleft=false,OgreupSworddown=false,OgrerigthSwordup=false,OgrerigthSwordright=false,OgrerigthSwordleft=false,OgrerigthSworddown=false,OgreleftSwordup=false,OgreleftSwordright=false,OgreleftSwordleft=false,OgreleftSworddown=false,OgredownSwordup=false,OgredownSwordright=false,OgredownSwordleft=false,OgredownSworddown=false;
+		int xatual;
+		int yatual;
+		while(OgreupSwordup!=true || OgreupSwordright!=true || OgreupSwordleft!=true || OgreupSworddown!=true || 
+		OgrerigthSwordup!=true || OgrerigthSwordright!=true || OgrerigthSwordleft!=true || 
+		OgrerigthSworddown!=true || OgreleftSwordup!=true || OgreleftSwordright!=true || 
+		OgreleftSwordleft!=true || OgreleftSworddown!=true || OgredownSwordup!=true || 
+		OgredownSwordright!=true || OgredownSwordleft!=true || OgredownSworddown!=true)
+		{   
+			xatual=Ogre1.getx();
+			yatual=Ogre1.gety();
+			Ogre.move(map);
+//			if(xatual-Ogre1.getx()==-1)
+//			{
+//				OgreupSwordup=true;
+//			}
+			
+			
+		}
+	}
 }
