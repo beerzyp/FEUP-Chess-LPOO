@@ -171,7 +171,6 @@ public class GameLogic implements Cloneable {
 	public void setGame(){		
 		for(int i = 0; i < this.elements.size(); i++)
 		{
-
 			this.testWin(this.elements.get(i));
 			this.ActualMap[this.elements.get(i).getx()][this.elements.get(i).gety()] = this.elements.get(i).getSymbol();
 			if(this.elements.get(i).getHaveWeapon())
@@ -180,10 +179,7 @@ public class GameLogic implements Cloneable {
 			if(this.elements.get(i).isStun())
 			{
 				this.ActualMap[this.elements.get(i).getx()][this.elements.get(i).gety()] = this.elements.get(i).getStunnedSymbol();
-				if(this.elements.get(i).decStunTime()==0)
-				{
-					this.ActualMap[this.elements.get(i).getx()][this.elements.get(i).gety()] = this.elements.get(i).getSymbol();
-				}
+				this.elements.get(i).decStunTime();
 			}
 		}
 	}
@@ -293,8 +289,10 @@ public class GameLogic implements Cloneable {
 			
 			if(Math.floor(this.distancePoints(keyx, keyy, g1.getx(), g1.gety())) == 0)
 			{	
-				if(level2)
+				
+				if(level2){
 				g1.setSymbol('K');
+				}
 			}
 			
 			for(int i=0;i<this.elements.size();i++)

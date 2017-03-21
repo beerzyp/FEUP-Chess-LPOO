@@ -92,15 +92,20 @@ public class Levels {
 		GameMap dungeon = new OgreMap();
 		GameElements Ogre = new GEOgre(2,4,'O', 2, 4);
 		GameElements Ogre2 = new GEOgre(4,7,'O', 4, 7);
+		GameElements Ogre3 = new GEOgre(5,3,'O', 5, 4);
+
 		GameElements Hero = new GEHero(1,1,'H');
 		
 		GameLogic logic = new GameLogic(dungeon);
 		logic.addGameElements(Hero);
 		logic.addGameElements(Ogre);
-		//logic.addGameElements(Ogre2);
+		logic.addGameElements(Ogre2);
+		logic.addGameElements(Ogre3);
 
 		Ogre.move(logic.getActualMap());
 		Ogre2.move(logic.getActualMap());
+		Ogre3.move(logic.getActualMap());
+
 		logic.setGame();
 		printboard(logic);
 		
@@ -120,13 +125,17 @@ public class Levels {
 			
 			logic.cleanActualMap();
 			
-			
+			System.out.print("flag:");
+
+			System.out.print(Ogre.isStun());
 			
 			
 		if(!Ogre.isStun())
 			Ogre.move(logic.getActualMap());			
 		if(!Ogre2.isStun())
 			Ogre2.move(logic.getActualMap());
+		if(!Ogre3.isStun())
+			Ogre3.move(logic.getActualMap());
 			
 			logic.setGame();
 			printboard(logic);
