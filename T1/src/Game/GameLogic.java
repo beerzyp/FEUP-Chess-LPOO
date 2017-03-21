@@ -292,7 +292,7 @@ public class GameLogic implements Cloneable {
 			}
 			
 			if(Math.floor(this.distancePoints(keyx, keyy, g1.getx(), g1.gety())) == 0)
-			{	this.gamewin=true;
+			{	
 				if(level2)
 				g1.setSymbol('K');
 			}

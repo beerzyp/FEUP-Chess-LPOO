@@ -32,15 +32,10 @@ public class GEOgre extends GameElements {
 		Random randomGenerator = new Random();
 		int newX = randomGenerator.nextInt(map.length-2)+1;
 		int newY = randomGenerator.nextInt(map.length-2)+1;
-		
-		while(!testMap(map, newX, newY)){
-		newX = randomGenerator.nextInt(map.length-2)+1;
-		newY = randomGenerator.nextInt(map.length-2)+1;
-		}
 
-		this.setx(newX);
-		this.sety(newY);
-		map[newX][newY] = this.getSymbol();
+		this.setx(3);
+		this.sety(4);
+		map[3][4] = this.getSymbol();
 		
 		newX = this.getx();
 		newY = this.gety();

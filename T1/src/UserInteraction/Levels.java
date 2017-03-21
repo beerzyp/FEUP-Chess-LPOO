@@ -97,7 +97,7 @@ public class Levels {
 		GameLogic logic = new GameLogic(dungeon);
 		logic.addGameElements(Hero);
 		logic.addGameElements(Ogre);
-		logic.addGameElements(Ogre2);
+		//logic.addGameElements(Ogre2);
 
 		Ogre.move(logic.getActualMap());
 		Ogre2.move(logic.getActualMap());
@@ -123,11 +123,10 @@ public class Levels {
 			
 			
 			
-			if(!Ogre.isStun())
-				Ogre.move(logic.getActualMap());
-			
-			if(!Ogre2.isStun())
-				Ogre2.move(logic.getActualMap());
+		if(!Ogre.isStun())
+			Ogre.move(logic.getActualMap());			
+		if(!Ogre2.isStun())
+			Ogre2.move(logic.getActualMap());
 			
 			logic.setGame();
 			printboard(logic);

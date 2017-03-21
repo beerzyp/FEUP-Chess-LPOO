@@ -49,18 +49,18 @@ public class OgreMap implements GameMap, Cloneable {
 	
 	ArrayList<Pair> getDoors(){return this.doors;}
 	
-	@Override
+	
 
 	public char[][] getMap() {
 		return this.matrix;
 	}
 
-	@Override
+
 	public GameMap nextMap() {
 		return null;
 	}
 
-	@Override
+
 	public boolean moveTo(int x, int y) {
 		if(this.matrix[x][y] == ' ')	
 			return true;

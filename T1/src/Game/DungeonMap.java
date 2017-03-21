@@ -33,17 +33,17 @@ public class DungeonMap implements GameMap, Cloneable {
     return n;
 }
 
-@Override
+
 public char[][] getMap() {
 	return this.matrix;
 }
 
-@Override
+
 public GameMap nextMap() {
 	return new OgreMap();
 }
 
-@Override
+
 public boolean moveTo(int x, int y) {
 	
 	if(this.matrix[x][y] == ' ')

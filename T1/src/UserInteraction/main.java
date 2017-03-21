@@ -6,9 +6,9 @@ public class main {
 	{
 		Levels level = new Levels();
 		
-		if(level.level1() == 0){
+		//if(level.level1() == 0){
 			level.level2();
-		}
+		//}
 	
 	}
 	
