@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
  
 public class GEOgre extends GameElements {
+	
     private ArrayList<Pair> caminho = new ArrayList<Pair>();
     int it;
    

@@ -15,6 +15,7 @@ import Game.OgreMap;
 import Game.Pair;
 
 public class OgreTest {
+	
 	char[][] map =		{{'X','X','X','X','X'},
 			             {'X',' ',' ',' ','X'},
 						 {'I',' ',' ',' ','X'},

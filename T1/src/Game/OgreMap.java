@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class OgreMap implements GameMap, Cloneable {
+	
 	public OgreMap(){
 		for  (int i = 0 ; i < matrix.length ; i++) {
 			for  (int j = 0 ; j < matrix[i].length ; j++) {

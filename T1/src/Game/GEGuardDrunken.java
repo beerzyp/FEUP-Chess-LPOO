@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class GEGuardDrunken extends GEGuard {
 	
+	
 	boolean drunk;
 	boolean direction; // false pra frente. true pra tras
 	

@@ -1,6 +1,7 @@
 package Game;
 
 public class Pair {
+	
 	private int x;
 	private int y;
 	

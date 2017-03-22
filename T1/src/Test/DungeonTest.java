@@ -17,6 +17,7 @@ import Game.GameMap;
 import Game.Pair;
 
 public class DungeonTest {
+	
 	char[][] map =		{{'X','X','X','X','X'},
 			             {'X',' ',' ',' ','X'},
 						 {'I',' ',' ',' ','X'},

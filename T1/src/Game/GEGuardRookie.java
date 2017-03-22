@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class GEGuardRookie extends GEGuard {
 	
+	
    
 
 	public void move(char[][] map)

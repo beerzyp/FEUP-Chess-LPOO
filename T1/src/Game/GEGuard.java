@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public abstract class GEGuard extends GameElements {
 	
+	
 	private ArrayList<Pair> caminho = new ArrayList<Pair>();
     int it;
     public ArrayList<Pair> getCaminho()

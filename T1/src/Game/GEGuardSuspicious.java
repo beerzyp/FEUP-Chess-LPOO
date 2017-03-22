@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class GEGuardSuspicious extends GEGuard {
+	
 	public GEGuardSuspicious(int x, int y)
 	{
 		super(x, y,'G');

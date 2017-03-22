@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class GameLogic implements Cloneable {
 	
+	
 	public GameLogic(GameMap map)
 	{
 		this.map = map;

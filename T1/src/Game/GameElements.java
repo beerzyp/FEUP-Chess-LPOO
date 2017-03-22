@@ -1,6 +1,7 @@
 package Game;
 
 public abstract class GameElements {
+	
 	private int x;
 	private int y;
 	private char symbol;
