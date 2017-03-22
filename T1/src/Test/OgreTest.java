@@ -22,6 +22,11 @@ public class OgreTest {
 						 {'I','k',' ',' ','X'},
 						 {'X','X','X','X','X'}};
 	
+	char[][] map2 =		{{'X','X','X','X','X'},
+            {'X',' ',' ',' ','X'},
+			 {'I',' ',' ',' ','X'},
+			 {'I',' ',' ',' ','X'},
+			 {'X','X','X','X','X'}};
 			
 	//coordenadas não estao representadas nas funcoes por (x,y) mas sim (y,x)
 			
@@ -120,28 +125,92 @@ public class OgreTest {
 	@Test(timeout=1000)
 	public void testSomeRandomBehaviour()
 	{
-		GameMap ogremap = new OgreMap(map);
+		GameMap ogremap = new OgreMap(map2);
 		GameLogic logic = new GameLogic(ogremap);
 		GameElements Ogre1 = new GEOgre(1,3,'O', 1, 2);
 		logic.addGameElements(Hero);
 		logic.addGameElements(Ogre1);
+		
+		Ogre1.move(logic.getActualMap());
+		
 		boolean OgreupSwordup=false,OgreupSwordright=false,OgreupSwordleft=false,OgreupSworddown=false,OgrerigthSwordup=false,OgrerigthSwordright=false,OgrerigthSwordleft=false,OgrerigthSworddown=false,OgreleftSwordup=false,OgreleftSwordright=false,OgreleftSwordleft=false,OgreleftSworddown=false,OgredownSwordup=false,OgredownSwordright=false,OgredownSwordleft=false,OgredownSworddown=false;
-		int xatual;
-		int yatual;
-		while(OgreupSwordup!=true || OgreupSwordright!=true || OgreupSwordleft!=true || OgreupSworddown!=true || 
-		OgrerigthSwordup!=true || OgrerigthSwordright!=true || OgrerigthSwordleft!=true || 
-		OgrerigthSworddown!=true || OgreleftSwordup!=true || OgreleftSwordright!=true || 
-		OgreleftSwordleft!=true || OgreleftSworddown!=true || OgredownSwordup!=true || 
-		OgredownSwordright!=true || OgredownSwordleft!=true || OgredownSworddown!=true)
+		int xatual, xwatual;
+		int yatual, ywatual;
+		
+		while(
+				OgreupSwordup!=true || OgreupSwordright!=true || OgreupSwordleft!=true || OgreupSworddown!=true || 
+				OgrerigthSwordup!=true || OgrerigthSwordright!=true || OgrerigthSwordleft!=true || OgrerigthSworddown!=true || 
+				OgreleftSwordup!=true || OgreleftSwordright!=true || OgreleftSwordleft!=true || OgreleftSworddown!=true || 
+				OgredownSwordup!=true || OgredownSwordright!=true || OgredownSwordleft!=true || OgredownSworddown!=true
+			)
 		{   
+			logic.cleanActualMap();
+			
 			xatual=Ogre1.getx();
 			yatual=Ogre1.gety();
-			Ogre.move(map);
-//			if(xatual-Ogre1.getx()==-1)
-//			{
-//				OgreupSwordup=true;
-//			}
 			
+			Ogre1.move(logic.getActualMap());
+			xwatual = Ogre1.getWeaponX();
+			ywatual = Ogre1.getWeaponY();
+			
+			if(xatual-Ogre1.getx()==-1) //ogre anda para direita
+			{
+				if(xwatual - Ogre1.getx() == -1)
+					OgrerigthSwordright = true;
+				else if(xwatual - Ogre1.getx() == 1)
+					OgrerigthSwordleft = true;
+				else if(ywatual - Ogre1.gety() == -1)
+					OgrerigthSwordup = true;
+				else if(ywatual - Ogre1.gety() == 1)
+					OgrerigthSworddown = true;
+			}
+			else if(xatual-Ogre1.getx()==1) //ogre anda para esquerda
+			{
+				if(xwatual - Ogre1.getx() == -1)
+					OgreleftSwordright = true;
+				else if(xwatual - Ogre1.getx() == 1)
+					OgreleftSwordleft = true;
+				else if(ywatual - Ogre1.gety() == -1)
+					OgreleftSwordup = true;
+				else if(ywatual - Ogre1.gety() == 1)
+					OgreleftSworddown = true;
+			}
+			else if(yatual-Ogre1.gety()==-1) //ogre anda para baixo
+			{
+				if(xwatual - Ogre1.getx() == -1)
+					OgredownSwordright = true;
+				else if(xwatual - Ogre1.getx() == 1)
+					OgredownSwordleft = true;
+				else if(ywatual - Ogre1.gety() == -1)
+					OgredownSwordup = true;
+				else if(ywatual - Ogre1.gety() == 1)
+					OgredownSworddown = true;
+			}
+			else if(yatual-Ogre1.gety()==1) //ogre anda para cima
+			{
+				if(xwatual - Ogre1.getx() == -1)
+					OgreupSwordright = true;
+				else if(xwatual - Ogre1.getx() == 1)
+					OgreupSwordleft = true;
+				else if(ywatual - Ogre1.gety() == -1)
+					OgreupSwordup = true;
+				else if(ywatual - Ogre1.gety() == 1)
+					OgreupSworddown = true;
+			}
+			
+			logic.setGame();
+			
+			System.out.print("(");
+			System.out.print(Ogre1.getWeaponX());
+			System.out.print(",");
+			System.out.print(Ogre1.getWeaponY());
+			System.out.print(")");
+
+			
+			logic.printboard();
+			
+			assertEquals(logic.getActualMap()[Ogre1.getx()][Ogre1.gety()], 'O');
+			assertEquals(logic.getActualMap()[Ogre1.getWeaponX()][Ogre1.getWeaponY()], '*');
 			
 		}
 	}
