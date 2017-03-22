@@ -5,13 +5,13 @@ import java.util.Arrays;
 
 public class DungeonMap implements GameMap, Cloneable {
 	
-	public DungeonMap(){};
 	public DungeonMap(char[][] map){
+		if(map!=null){
 		int l = map.length;
 		matrix = new char[l][];
 		for  (int i = 0 ; i < l ; i++) {
 			matrix[i] = Arrays.copyOf(map[i], map[i].length);
-		}	
+		}}
 	};
 	
 	private char[][] matrix={

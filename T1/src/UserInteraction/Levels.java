@@ -1,6 +1,7 @@
 package UserInteraction;
 
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import Game.DungeonMap;
@@ -13,6 +14,7 @@ import Game.GameElements;
 import Game.GameLogic;
 import Game.GameMap;
 import Game.OgreMap;
+import Others.Pair;
 
 public class Levels {
 	
@@ -29,13 +31,41 @@ public class Levels {
 	
 	public int level1()
 	{
+		ArrayList<Pair> caminho = new ArrayList<Pair>();
+		caminho.add(new Pair(8,1));
+		caminho.add(new Pair(7,1));
+		caminho.add(new Pair(7,2));
+		caminho.add(new Pair(7,3));
+		caminho.add(new Pair(7,4));
+		caminho.add(new Pair(7,5));
+		caminho.add(new Pair(6,5));
+		caminho.add(new Pair(5,5));
+		caminho.add(new Pair(4,5));
+		caminho.add(new Pair(3,5));
+		caminho.add(new Pair(2,5));
+		caminho.add(new Pair(1,5));
+		caminho.add(new Pair(1,6));
+		caminho.add(new Pair(2,6));
+		caminho.add(new Pair(3,6));
+		caminho.add(new Pair(4,6));
+		caminho.add(new Pair(5,6));
+		caminho.add(new Pair(6,6));
+		caminho.add(new Pair(7,6));
+		caminho.add(new Pair(8,6));
+		caminho.add(new Pair(8,5));
+		caminho.add(new Pair(8,4));
+		caminho.add(new Pair(8,3));
+		caminho.add(new Pair(8,2));		
+		caminho.add(new Pair(8,1));
+		
+		
 		//Level one
 		System.out.println("Level 1:Dungeon");
 		
-		GameMap dungeon = new DungeonMap();
-		GameElements Guard = new GEGuardRookie(1,8);
-		GameElements Guard2 = new GEGuardSuspicious(1,8);
-		GameElements Guard3 = new GEGuardDrunken(1,8);
+		GameMap dungeon = new DungeonMap(null);
+		GameElements Guard = new GEGuardRookie(1,8, caminho);
+		GameElements Guard2 = new GEGuardSuspicious(1,8, caminho);
+		GameElements Guard3 = new GEGuardDrunken(1,8, caminho);
 	
 		GameElements Hero = new GEHero(1,1,'H');
 		
@@ -90,7 +120,7 @@ public class Levels {
 		//Level one
 		System.out.println("Level 2:Ogre");
 		
-		GameMap dungeon = new OgreMap();
+		GameMap dungeon = new OgreMap(null);
 		GameElements Ogre = new GEOgre(2,4,'O', 2, 4);
 		GameElements Ogre2 = new GEOgre(4,7,'O', 4, 7);
 		GameElements Ogre3 = new GEOgre(5,3,'O', 5, 4);

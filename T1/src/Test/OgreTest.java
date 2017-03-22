@@ -12,7 +12,7 @@ import Game.GameElements;
 import Game.GameLogic;
 import Game.GameMap;
 import Game.OgreMap;
-import Game.Pair;
+import Others.Pair;
 
 public class OgreTest {
 	
@@ -199,15 +199,6 @@ public class OgreTest {
 			}
 			
 			logic.setGame();
-			
-			System.out.print("(");
-			System.out.print(Ogre1.getWeaponX());
-			System.out.print(",");
-			System.out.print(Ogre1.getWeaponY());
-			System.out.print(")");
-
-			
-			logic.printboard();
 			
 			assertEquals(logic.getActualMap()[Ogre1.getx()][Ogre1.gety()], 'O');
 			assertEquals(logic.getActualMap()[Ogre1.getWeaponX()][Ogre1.getWeaponY()], '*');

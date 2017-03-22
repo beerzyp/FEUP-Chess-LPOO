@@ -2,6 +2,8 @@ package Game;
  
 import java.util.ArrayList;
 import java.util.Random;
+
+import Others.Pair;
  
 public class GEOgre extends GameElements {
 	

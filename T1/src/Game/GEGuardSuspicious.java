@@ -3,11 +3,13 @@ package Game;
 import java.util.ArrayList;
 import java.util.Random;
 
+import Others.Pair;
+
 public class GEGuardSuspicious extends GEGuard {
 	
-	public GEGuardSuspicious(int x, int y)
+	public GEGuardSuspicious(int x, int y,ArrayList<Pair> a)
 	{
-		super(x, y,'G');
+		super(x, y,'G', a);
 
 	};
 	public GEGuardSuspicious(int x, int y, char symbol,ArrayList<Pair> a)

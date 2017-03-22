@@ -2,6 +2,8 @@ package Game;
 
 import java.util.ArrayList;
 
+import Others.Pair;
+
 public class GameLogic implements Cloneable {
 	
 	

@@ -3,23 +3,19 @@ package Game;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import Others.Pair;
+
 public class OgreMap implements GameMap, Cloneable {
 	
-	public OgreMap(){
-		for  (int i = 0 ; i < matrix.length ; i++) {
-			for  (int j = 0 ; j < matrix[i].length ; j++) {
-				if(matrix[i][j] == 'I'){
-					this.doors.add(new Pair(i,j)); 
-				}
-			}
-		}
-	};
+ 
 	public OgreMap(char[][] map) {
+		
+		if(map != null){
 		int l = map.length;
 		matrix = new char[l][];
 		for  (int i = 0 ; i < l ; i++) {
 			matrix[i] = Arrays.copyOf(map[i], map[i].length);
-		}
+		}}
 		
 		for  (int i = 0 ; i < matrix.length ; i++) {
 			for  (int j = 0 ; j < matrix[i].length ; j++) {

@@ -3,6 +3,8 @@ package Game;
 import java.util.ArrayList;
 import java.util.Random;
 
+import Others.Pair;
+
 public class GEGuardDrunken extends GEGuard {
 	
 	
@@ -87,15 +89,13 @@ public class GEGuardDrunken extends GEGuard {
 		}
 	}
 	
-	public GEGuardDrunken(int x,int y)
-	{
-		super(x,y,'G');
+	
+	public boolean getDrunk(){return this.drunk;};
+	
+	public GEGuardDrunken(int x, int y,ArrayList<Pair> a)
+	{	 
+		super(x, y, 'G',a);
 		this.drunk = false;
 		this.direction=false;
-
-	};
-	public GEGuardDrunken(int x, int y, char symbol,ArrayList<Pair> a)
-	{	
-		super(x, y, 'G',a);
 	};
 }

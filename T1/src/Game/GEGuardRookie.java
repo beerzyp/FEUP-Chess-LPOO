@@ -2,6 +2,8 @@ package Game;
 
 import java.util.ArrayList;
 
+import Others.Pair;
+
 
 public class GEGuardRookie extends GEGuard {
 	
@@ -23,12 +25,13 @@ public class GEGuardRookie extends GEGuard {
 		}
 		
 	}
-	public GEGuardRookie(int x,int y)
+	public GEGuardRookie(int x,int y, ArrayList<Pair> a)
 	{
-		super(x,y,'G');
+		super(x,y,'G', a);
 		
 
 	};
+
 	public GEGuardRookie(int x, int y, char symbol,ArrayList<Pair> a)
 	{	
 		super(x, y,'G',a);
