@@ -75,7 +75,17 @@ public class Levels {
 		
 		
 	}
-	
+	public void MoveHero(char pos)
+	{	logic.cleanActualMap();
+		logic.moveHero(pos);
+		logic.setGame();
+		logic.printboard();
+		
+	}
+	public void setGame()
+	{
+		logic.setGame();
+	}
 	public enum Movimento
 	{
 	upKey,leftKey,rightKey,downKey

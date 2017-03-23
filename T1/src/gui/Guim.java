@@ -41,10 +41,10 @@ public class Guim {
 	private JFrame frame;
 	private JTextField textField;
 	
-	private int upKey = KeyEvent.VK_W;
-	private int leftKey = KeyEvent.VK_A;
-	private int rightKey = KeyEvent.VK_D;
-	private int downKey = KeyEvent.VK_S;
+	private JButton btnD;
+	private JButton btnA;
+	private JButton btnW;
+	private JButton btnS;
 	
 	private String guard_type;
 	private JTextArea newtext;
@@ -127,27 +127,60 @@ public class Guim {
 		btnNewGame.setBounds(332, 112, 117, 25);
 		frame.getContentPane().add(btnNewGame);
 		
-		JButton btnNewButton = new JButton("W");
-		btnNewButton.setFont(new Font("Courier 10 Pitch", Font.BOLD, 11));
-		btnNewButton.setBounds(358, 218, 41, 22);
-		frame.getContentPane().add(btnNewButton);
+		JButton btnW = new JButton("W");
+		btnW.setFont(new Font("Courier 10 Pitch", Font.BOLD, 11));
+		btnW.setBounds(358, 218, 41, 22);
+		frame.getContentPane().add(btnW);
+		btnW.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent a)
+			{
+				level.MoveHero('d');
+				
+			}
+		});
+		
 
 		
 		JButton btnA = new JButton("A");
 		btnA.setFont(new Font("Courier 10 Pitch", Font.BOLD, 11));
 		btnA.setBounds(334, 252, 41, 22);
 		frame.getContentPane().add(btnA);
+		btnA.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent a)
+			{
+				level.MoveHero('d');
+				
+			}
+		});
 
 		
 		JButton btnD = new JButton("D");
 		btnD.setFont(new Font("Courier 10 Pitch", Font.BOLD, 11));
 		btnD.setBounds(387, 252, 41, 22);
 		frame.getContentPane().add(btnD);
+		btnD.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent a)
+			{
+				level.MoveHero('d');
+				printBoard();
+			}
+		});
 		
 		JButton btnS = new JButton("S");
 		btnS.setFont(new Font("Courier 10 Pitch", Font.BOLD, 11));
 		btnS.setBounds(358, 287, 41, 22);
 		frame.getContentPane().add(btnS);
+		btnS.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent a)
+			{
+				level.MoveHero('d');
+				
+			}
+		});
 		
 		JButton btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() 
@@ -172,6 +205,7 @@ public class Guim {
 
 }
 
+	protected void printBoard(){}
 	protected void caralho() {
 		
 		level.Initializel1(this.guard_type);
