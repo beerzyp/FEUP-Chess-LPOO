@@ -1,6 +1,7 @@
 package UserInteraction;
 
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,14 +18,81 @@ import Game.OgreMap;
 import Others.Pair;
 
 public class Levels {
+	GameLogic logic;
+	public GameElements Guard,Hero;
 	
-	Levels(){}
+	public Levels(){}
+	public void Initializel1(String typeGuard)
+	{
+		ArrayList<Pair> caminho = new ArrayList<Pair>();
+		caminho.add(new Pair(8,1));
+		caminho.add(new Pair(7,1));
+		caminho.add(new Pair(7,2));
+		caminho.add(new Pair(7,3));
+		caminho.add(new Pair(7,4));
+		caminho.add(new Pair(7,5));
+		caminho.add(new Pair(6,5));
+		caminho.add(new Pair(5,5));
+		caminho.add(new Pair(4,5));
+		caminho.add(new Pair(3,5));
+		caminho.add(new Pair(2,5));
+		caminho.add(new Pair(1,5));
+		caminho.add(new Pair(1,6));
+		caminho.add(new Pair(2,6));
+		caminho.add(new Pair(3,6));
+		caminho.add(new Pair(4,6));
+		caminho.add(new Pair(5,6));
+		caminho.add(new Pair(6,6));
+		caminho.add(new Pair(7,6));
+		caminho.add(new Pair(8,6));
+		caminho.add(new Pair(8,5));
+		caminho.add(new Pair(8,4));
+		caminho.add(new Pair(8,3));
+		caminho.add(new Pair(8,2));		
+		caminho.add(new Pair(8,1));
+		GameMap dungeon = new DungeonMap(null);
+		logic= new GameLogic(dungeon);
+		Hero= new GEHero(1,1,'H');
+		if(typeGuard=="Suspicious")
+		{
+			
+			Guard = new GEGuardSuspicious(1,8, caminho);
+			
+		}
+		else if(typeGuard=="Rookie")
+		{
+			Guard = new GEGuardRookie(1,8, caminho);
+		}
+		else if(typeGuard=="Drunken")
+		{
+			Guard = new GEGuardDrunken(1,8, caminho);
+		}
+		else{return;}
+		logic.addGameElements(Hero);
+		logic.addGameElements(Guard);
+		logic.setGame();
+		
+		
+		
+	}
 	
-	
+	public enum Movimento
+	{
+	upKey,leftKey,rightKey,downKey
+	}
+	public String returnboard()
+	{	
+	  String a1 = new String();
+	  for(int i =0; i < logic.getActualMap().length; i++) //pinta o jogo
+		{ 
+		  a1+= new String(logic.getActualMap()[i])+ '\n';
+		}
+	  return a1;
+	}
 	public void printboard(GameLogic l)
 	{
 		for(int i =0; i < l.getActualMap().length; i++) //pinta o jogo
-		{
+		{ 
 			System.out.println(l.getActualMap()[i]); 
 		}
 	}

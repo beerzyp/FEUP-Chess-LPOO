@@ -9,7 +9,7 @@ public class main {
 		
 		if(level.level1() == 0){
 			level.level2();
-		}
+		} 
 	
 	}
 	

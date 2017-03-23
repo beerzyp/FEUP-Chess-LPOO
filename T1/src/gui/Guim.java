@@ -14,13 +14,30 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 
+import UserInteraction.Levels;
+import Game.DungeonMap;
+import Game.GEGuardDrunken;
+import Game.GEGuardRookie;
+import Game.GEGuardSuspicious;
+import Game.GEHero;
+import Game.GameElements;
+import Game.GameLogic;
+import Game.GameMap;
+import Game.OgreMap;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 
 public class Guim {
 
+    private Levels level = new Levels();
 	private JFrame frame;
 	private JTextField textField;
 	
@@ -28,11 +45,16 @@ public class Guim {
 	private int leftKey = KeyEvent.VK_A;
 	private int rightKey = KeyEvent.VK_D;
 	private int downKey = KeyEvent.VK_S;
+	
+	private String guard_type;
+	private JTextArea newtext;
+	
 
 	/**
 	 * Launch the application.
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {		 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -52,6 +74,9 @@ public class Guim {
 		initialize();
 	}
 
+    
+	
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -69,10 +94,11 @@ public class Guim {
 		guardtype.setBounds(32, 43, 200, 22);
 		frame.getContentPane().add(guardtype);
 		
-		JComboBox GuardType = new JComboBox();
-		GuardType.setModel(new DefaultComboBoxModel(new String[] {"Novice", "Rookie", "Suspicious","Drunken"}));
+	    JComboBox GuardType = new JComboBox();
+		GuardType.setModel(new DefaultComboBoxModel(new String[] {"Rookie", "Suspicious","Drunken"}));
 		GuardType.setBounds(191, 39, 248, 22);
 		frame.getContentPane().add(GuardType);
+		this.guard_type = (String)GuardType.getSelectedItem();
 		
 		JLabel lblNumberOfOgres = new JLabel("Number Of Ogres: ");
 		lblNumberOfOgres.setBounds(32, 14, 200, 15);
@@ -84,15 +110,18 @@ public class Guim {
 		textField.setColumns(10);
 		
 		JTextArea textArea = new JTextArea();
+		textArea.setFont(new Font("DejaVu Sans", Font.PLAIN, 15));
 		textArea.setBounds(38, 81, 248, 323);
 		frame.getContentPane().add(textArea);
+		this.newtext=textArea;
+
 		
 		JButton btnNewGame = new JButton("New Game");
 		btnNewGame.addActionListener(new ActionListener() //starts game
-		{
+		{ 
 			public void actionPerformed(ActionEvent a)
 			{
-				UserInteraction.main.main(null);
+				caralho();
 			}
 		});
 		btnNewGame.setBounds(332, 112, 117, 25);
@@ -102,11 +131,13 @@ public class Guim {
 		btnNewButton.setFont(new Font("Courier 10 Pitch", Font.BOLD, 11));
 		btnNewButton.setBounds(358, 218, 41, 22);
 		frame.getContentPane().add(btnNewButton);
+
 		
 		JButton btnA = new JButton("A");
 		btnA.setFont(new Font("Courier 10 Pitch", Font.BOLD, 11));
 		btnA.setBounds(334, 252, 41, 22);
 		frame.getContentPane().add(btnA);
+
 		
 		JButton btnD = new JButton("D");
 		btnD.setFont(new Font("Courier 10 Pitch", Font.BOLD, 11));
@@ -134,19 +165,16 @@ public class Guim {
 		frame.getContentPane().add(label);
 		
 		
-		
-//		JTextArea  = new JTextArea();
-//		mazeArea.setFont(new Font("Courier New", Font.PLAIN, 14));
-//		mazeArea.setEditable(false);
-//		mazeArea.setToolTipText("");
-//		mazeArea.setBounds(42, 171, 263, 266);
-//		frame.getContentPane().add(mazeArea);
-
-		
-
-		
 	
 		
 
+		
+
 }
-	}
+
+	protected void caralho() {
+		
+		level.Initializel1(this.guard_type);
+		this.newtext.setText(level.returnboard());
+	}	
+}
