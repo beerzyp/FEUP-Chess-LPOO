@@ -34,7 +34,7 @@ public class GameLogic implements Cloneable {
 	private int keyy;
 	private boolean OgreKey;
 	private boolean gamewin;
-	private boolean level2;
+	public boolean level2;
 	private int weaponX = 2;
 	private int weaponY = 1;
 	private char weaponSymbol='w';
