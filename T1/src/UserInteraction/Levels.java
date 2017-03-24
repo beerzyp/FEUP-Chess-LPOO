@@ -75,6 +75,10 @@ public class Levels {
 		
 		
 	}
+	public void MoveGuard()
+	{
+		this.Guard.move(logic.getActualMap());
+	}
 	public void MoveHero(char pos)
 	{	logic.cleanActualMap();
 		logic.moveHero(pos);
@@ -82,6 +86,8 @@ public class Levels {
 		logic.printboard();
 		
 	}
+	
+	
 	public void setGame()
 	{
 		logic.setGame();

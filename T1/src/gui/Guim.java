@@ -121,7 +121,7 @@ public class Guim {
 		{ 
 			public void actionPerformed(ActionEvent a)
 			{
-				caralho();
+				initLevel1();
 			}
 		});
 		btnNewGame.setBounds(332, 112, 117, 25);
@@ -135,7 +135,10 @@ public class Guim {
 		{
 			public void actionPerformed(ActionEvent a)
 			{
-				level.MoveHero('d');
+				level.MoveHero('w');
+				level.MoveGuard();
+				printBoard();
+				
 				
 			}
 		});
@@ -150,7 +153,9 @@ public class Guim {
 		{
 			public void actionPerformed(ActionEvent a)
 			{
-				level.MoveHero('d');
+				level.MoveHero('a');
+				level.MoveGuard();
+				printBoard();
 				
 			}
 		});
@@ -163,8 +168,9 @@ public class Guim {
 		btnD.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent a)
-			{
+			{	//if(level1)
 				level.MoveHero('d');
+				level.MoveGuard();
 				printBoard();
 			}
 		});
@@ -177,7 +183,9 @@ public class Guim {
 		{
 			public void actionPerformed(ActionEvent a)
 			{
-				level.MoveHero('d');
+				level.MoveHero('s');
+				level.MoveGuard();
+				printBoard();
 				
 			}
 		});
@@ -205,11 +213,10 @@ public class Guim {
 
 }
 
-	protected void printBoard(){}
-	protected void caralho() {
-		
-		
-		
+	protected void printBoard(){
+		this.newtext.setText(level.returnboard());
+	}
+	protected void initLevel1() {
 		level.Initializel1(this.guard_type);
 		this.newtext.setText(level.returnboard());
 	}	
