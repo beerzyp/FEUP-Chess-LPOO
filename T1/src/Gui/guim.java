@@ -52,6 +52,8 @@ public class guim {
 	private JTextArea newtext;
 	private JComboBox GuardType;
 	private JLabel lblNumberOfOgres;
+	private JButton w,a,s,d;
+	private JLabel label1;
 
 	/**
 	 * Launch the application.
@@ -139,6 +141,8 @@ public class guim {
 				});
 		btnNewButton.setBounds(358, 218, 41, 22);
 		frame.getContentPane().add(btnNewButton);
+		this.w=btnNewButton;
+		
 
 		
 		JButton btnA = new JButton("A");
@@ -152,6 +156,7 @@ public class guim {
 				});
 		btnA.setBounds(334, 252, 41, 22);
 		frame.getContentPane().add(btnA);
+		this.a=btnA;
 
 		
 		JButton btnD = new JButton("D");
@@ -165,6 +170,13 @@ public class guim {
 				});
 		btnD.setBounds(387, 252, 41, 22);
 		frame.getContentPane().add(btnD);
+		this.d=btnD;
+		
+		JLabel label = new JLabel("");
+		label.setBounds(32,451,284,15);
+		label.setFont(new Font ("Courier New",Font.PLAIN,14));
+		frame.getContentPane().add(label);
+		this.label1=label;
 		
 		JButton btnS = new JButton("S");
 		btnS.setFont(new Font("Courier 10 Pitch", Font.BOLD, 11));
@@ -177,6 +189,12 @@ public class guim {
 				});
 		btnS.setBounds(358, 287, 41, 22);
 		frame.getContentPane().add(btnS);
+		this.s=btnS;
+		
+		this.a.setEnabled(false);
+		this.w.setEnabled(false);
+		this.s.setEnabled(false);
+		this.d.setEnabled(false);
 		
 		JButton btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() 
@@ -189,9 +207,9 @@ public class guim {
 		btnExit.setBounds(332, 404, 117, 25);
 		frame.getContentPane().add(btnExit);
 		
-		JLabel label = new JLabel("");
-		label.setBounds(32, 451, 284, 15);
-		frame.getContentPane().add(label);
+		JLabel label1 = new JLabel("");
+		label1.setBounds(35, 415, 284, 15);
+		frame.getContentPane().add(label1);
 		
 		
 	
@@ -203,7 +221,10 @@ public class guim {
 
 	protected void moveHero(char a) {
 		level.cleanMap();
-		level.moveH(a);
+		if(!level.moveH(a))
+		{
+			label1.setText("Invalid move, try again");
+		}
 		level.setGame();
 		
 		if(!level.gameWin())
@@ -213,19 +234,32 @@ public class guim {
 			}
 			else
 			{
-				this.newtext.setText("You lost the Game! Try Again!");
+				this.newtext.setText(level.returnboard());
+				label1.setText("You lost the Game! Try Again!");
+				this.a.setEnabled(false);
+				this.w.setEnabled(false);
+				this.s.setEnabled(false);
+				this.d.setEnabled(false);
 				return;
 			}
 		else
 			if(!level.boolLevel2())
 				initLevel2();
-			else
-				this.newtext.setText("You Won Game! Congratulations!");
-		
+			else{
+				label1.setText("You Won Game! Congratulations!");
+				this.a.setEnabled(false);
+				this.w.setEnabled(false);
+				this.s.setEnabled(false);
+				this.d.setEnabled(false);
+			}
 	}
 
 	private void initLevel2() {    
 		int nOgres = 1;
+		this.a.setEnabled(true);
+		this.w.setEnabled(true);
+		this.s.setEnabled(true);
+		this.d.setEnabled(true);
 		
 		try{
 			Scanner scan = new Scanner(textField.getText());
@@ -251,6 +285,11 @@ public class guim {
 	}
 
 	protected void initLevel1() {
+		label1.setText("Welcome to the dungeon game");
+		this.a.setEnabled(true);
+		this.w.setEnabled(true);
+		this.s.setEnabled(true);
+		this.d.setEnabled(true);
 		this.guard_type = (String)GuardType.getSelectedItem();
 		level.Initializel1(this.guard_type);
 		this.newtext.setText(level.returnboard());

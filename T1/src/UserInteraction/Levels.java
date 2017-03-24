@@ -78,16 +78,17 @@ public class Levels {
 		logic.setGame();
 	}
 	
-	public void moveH(char c){
+	public boolean moveH(char c){
 		if(!logic.moveHero(c))
 		{
-			return;
+			return false;
 		}
 		if(!logic.level2)
 			this.moveG();
 		else{
 			this.moveO();
  		}
+		return true;
 	}
 	
 	private void moveO() {
