@@ -209,6 +209,7 @@ public class Guim {
 	protected void caralho() {
 		
 		
+		
 		level.Initializel1(this.guard_type);
 		this.newtext.setText(level.returnboard());
 	}	
