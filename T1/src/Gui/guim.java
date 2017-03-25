@@ -76,14 +76,14 @@ public class guim{
 	private ImageIcon GuardSleeping = new ImageIcon("res/images/guardsleeping.gif");
 	private ImageIcon Wall = new ImageIcon("res/images/bush.png");
 	private ImageIcon Key = new ImageIcon("res/images/lever.png");
-	private ImageIcon Ogre = new ImageIcon("res/images/ogre.png");
+	private ImageIcon Ogre = new ImageIcon("res/images/ogre.gif");
 	private ImageIcon Floor = new ImageIcon("res/images/floor.png");
-	private ImageIcon Stun = new ImageIcon("res/images/shinchanweapon.gif");
+	private ImageIcon Stun = new ImageIcon("res/images/stun.gif");
 	private ImageIcon Weapon = new ImageIcon("res/images/heroweapon.png");
 	private ImageIcon Dollar = new ImageIcon("res/images/keydestructed.png");
 	private ImageIcon DoorClosed = new ImageIcon("res/images/doorclosed.png");
 	private ImageIcon DoorOpen = new ImageIcon("res/images/dooropened.png");
-	private ImageIcon WeaponOgre = new ImageIcon("res/images/shinchankey.gif");
+	private ImageIcon WeaponOgre = new ImageIcon("res/images/ogreweapon.gif");
 	private ImageIcon HeroArmored = new ImageIcon("res/images/shinchanweapon.gif");
 	private ImageIcon HeroKey = new ImageIcon("res/images/shinchankey.gif");
 	
