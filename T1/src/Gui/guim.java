@@ -79,7 +79,7 @@ public class guim{
 	private ImageIcon Ogre = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/shinchankey.gif");
 	private ImageIcon Floor = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/floor.png");
 	private ImageIcon Stun = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/shinchanweapon.gif");
-	private ImageIcon Weapon = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/lever.png");
+	private ImageIcon Weapon = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/heroweapon.png");
 	private ImageIcon Dollar = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/keydestructed.png");
 	private ImageIcon DoorClosed = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/doorclosed.png");
 	private ImageIcon DoorOpen = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/dooropened.png");
@@ -297,6 +297,7 @@ public class guim{
 	}
 
 	private void initLevel2() {    
+		
 		label1.setText("Level 2: The Ogre ");
 		int nOgres = 1;
 		this.a.setEnabled(true);
@@ -321,6 +322,12 @@ public class guim{
 			nOgres = 5;
 			textField.setText("5");
 		}
+		this.gameArea.removeAll();
+		this.gameArea= new JPanel();
+		this.gameArea.setBounds(42, 81, 248, 323);
+		frame.getContentPane().add(gameArea);
+		this.gameArea.setLayout(new GridLayout(9, 9, 0, 0));
+		
 		
 		level.Initializel2(nOgres);
 		drawImageOnBoard();
@@ -330,10 +337,12 @@ public class guim{
 	
 
 	protected void initLevel1() {
+		
 		this.gameArea= new JPanel();
 		this.gameArea.setBounds(42, 81, 248, 323);
 		frame.getContentPane().add(gameArea);
 		this.gameArea.setLayout(new GridLayout(10, 10, 0, 0));
+		this.gameArea.removeAll();
 		
 		label1.setText("Level 1: The Dungeon");
 		this.a.setEnabled(true);
@@ -348,10 +357,24 @@ public class guim{
 	
 	protected void drawImageOnBoard()
 	{   
-		this.gameArea= new JPanel();
-		this.gameArea.setBounds(42, 81, 248, 323);
-		frame.getContentPane().add(gameArea);
-		this.gameArea.setLayout(new GridLayout(10, 10, 0, 0));
+		
+		
+		if(!level.boolLevel2())
+		{
+			this.gameArea.removeAll();
+			this.gameArea= new JPanel();
+			this.gameArea.setBounds(42, 81, 248, 323);
+			frame.getContentPane().add(gameArea);
+			this.gameArea.setLayout(new GridLayout(10, 10, 0, 0));
+		}
+	else
+		{
+			this.gameArea.removeAll();
+			this.gameArea= new JPanel();
+			this.gameArea.setBounds(42, 81, 248, 323);
+			frame.getContentPane().add(gameArea);
+			this.gameArea.setLayout(new GridLayout(9, 9, 0, 0));
+		}
 		
 		for (int j = 0; j < level.getActualMap().length; j++) {
 			for (int i = 0; i < level.getActualMap()[j].length; i++) {
@@ -388,6 +411,7 @@ public class guim{
 				
 			}
 		}
+		this.gameArea.validate();
 	
 	}
 }
