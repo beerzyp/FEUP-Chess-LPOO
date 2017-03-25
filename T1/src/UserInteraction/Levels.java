@@ -77,7 +77,10 @@ public class Levels {
 		Guard.move(logic.getActualMap());
 		logic.setGame();
 	}
-	
+	public char[][] getActualMap()
+	{
+		return this.logic.getActualMap();
+	}
 	public boolean moveH(char c){
 		if(!logic.moveHero(c))
 		{

@@ -6,11 +6,20 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import java.awt.BorderLayout;
+import java.awt.image.BufferedImage;
 
+import javax.imageio.ImageIO;
+import javax.print.DocFlavor.URL;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import java.awt.Image;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
+
+
+
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 
@@ -29,6 +38,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
@@ -36,12 +46,17 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.GridLayout;
+import javax.swing.UIManager;
 
-public class guim {
+public class guim{
 
     private Levels level = new Levels();
 	private JFrame frame;
 	private JTextField textField;
+	private JPanel gameArea;
 	
 	private int upKey = KeyEvent.VK_W;
 	private int leftKey = KeyEvent.VK_A;
@@ -54,7 +69,24 @@ public class guim {
 	private JLabel lblNumberOfOgres;
 	private JButton w,a,s,d;
 	private JLabel label1;
-
+	private java.awt.Image exit;
+	
+	private ImageIcon Hero = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/shinchan.gif");
+	private ImageIcon Guard = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/shinchankey.gif");
+	private ImageIcon GuardSleeping = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/shinchanweapon.gif");
+	private ImageIcon Wall = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/bush.png");
+	private ImageIcon Key = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/lever.png");
+	private ImageIcon Ogre = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/shinchankey.gif");
+	private ImageIcon Floor = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/floor.png");
+	private ImageIcon Stun = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/shinchanweapon.gif");
+	private ImageIcon Weapon = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/lever.png");
+	private ImageIcon Dollar = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/keydestructed.png");
+	private ImageIcon DoorClosed = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/doorclosed.png");
+	private ImageIcon DoorOpen = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/dooropened.png");
+	private ImageIcon WeaponOgre = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/shinchankey.gif");
+	private ImageIcon HeroArmored = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/shinchanweapon.gif");
+	private ImageIcon HeroKey = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/shinchankey.gif");
+	
 	/**
 	 * Launch the application.
 	 * @throws IOException 
@@ -86,7 +118,7 @@ public class guim {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() 
-	{
+	{  ImageIcon ii;
 		frame = new JFrame();
 		frame.getContentPane().setFont(new Font("Courier New", Font.PLAIN, 12));
 		frame.setBounds(100, 100, 496, 478);
@@ -112,12 +144,6 @@ public class guim {
 		textField.setBounds(172, 12, 114, 19);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
-		
-		JTextArea textArea = new JTextArea();
-		textArea.setFont(new Font("Courier New", Font.PLAIN, 15));
-		textArea.setBounds(38, 81, 248, 323);
-		frame.getContentPane().add(textArea);
-		this.newtext=textArea;
 
 		
 		JButton btnNewGame = new JButton("New Game");
@@ -217,12 +243,20 @@ public class guim {
 		frame.getContentPane().add(label1);
 		
 		
-	
+//		JLabel gif= new JLabel(new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/shinchankey.gif"));
+//		
+//		JPanel panel = new JPanel();
+//		panel.add(gif);
+//		
+//	
+//		panel.setBounds(342, 148, 106, 169);
+//		frame.getContentPane().add(panel);
+//		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-
 		
 
 }
+
 
 	protected void moveHero(char a) {
 		level.cleanMap();
@@ -238,11 +272,11 @@ public class guim {
 		if(!level.gameWin())
 			if(!level.gameOver()){
 				level.setGame();
-				this.newtext.setText(level.returnboard());
+				drawImageOnBoard();
 			}
 			else
 			{
-				this.newtext.setText(level.returnboard());
+				drawImageOnBoard();
 				label1.setText("You lost the Game! Try Again!");
 				this.a.setEnabled(false);
 				this.w.setEnabled(false);
@@ -289,11 +323,18 @@ public class guim {
 		}
 		
 		level.Initializel2(nOgres);
+		drawImageOnBoard();
 		
- 		this.newtext.setText(level.returnboard());		
+ 		
 	}
+	
 
 	protected void initLevel1() {
+		this.gameArea= new JPanel();
+		this.gameArea.setBounds(42, 81, 248, 323);
+		frame.getContentPane().add(gameArea);
+		this.gameArea.setLayout(new GridLayout(10, 10, 0, 0));
+		
 		label1.setText("Level 1: The Dungeon");
 		this.a.setEnabled(true);
 		this.w.setEnabled(true);
@@ -301,6 +342,52 @@ public class guim {
 		this.d.setEnabled(true);
 		this.guard_type = (String)GuardType.getSelectedItem();
 		level.Initializel1(this.guard_type);
-		this.newtext.setText(level.returnboard());
+		drawImageOnBoard();
+		
 	}	
+	
+	protected void drawImageOnBoard()
+	{   
+		this.gameArea= new JPanel();
+		this.gameArea.setBounds(42, 81, 248, 323);
+		frame.getContentPane().add(gameArea);
+		this.gameArea.setLayout(new GridLayout(10, 10, 0, 0));
+		
+		for (int j = 0; j < level.getActualMap().length; j++) {
+			for (int i = 0; i < level.getActualMap()[j].length; i++) {
+				if (level.getActualMap()[j][i] == 'X')
+					this.gameArea.add(new JLabel(this.Wall));
+				else if (level.getActualMap()[j][i] == ' ')
+					this.gameArea.add(new JLabel(this.Floor));
+				else if (level.getActualMap()[j][i] == 'A') 
+					this.gameArea.add(new JLabel(this.HeroArmored));
+				else if (level.getActualMap()[j][i] == 'H')
+					this.gameArea.add(new JLabel(this.Hero));
+				else if (level.getActualMap()[j][i] == '8')
+					this.gameArea.add(new JLabel(this.Stun));
+				else if (level.getActualMap()[j][i] == 'G') 
+					this.gameArea.add(new JLabel(this.Guard));
+				else if (level.getActualMap()[j][i] == 'g')
+					this.gameArea.add(new JLabel(this.GuardSleeping));
+				else if (level.getActualMap()[j][i] == 'K')
+					this.gameArea.add(new JLabel(this.HeroKey));
+				else if (level.getActualMap()[j][i] == 'k') 
+					this.gameArea.add(new JLabel(this.Key));
+				else if (level.getActualMap()[j][i] == 'O')
+					this.gameArea.add(new JLabel(this.Ogre));
+				else if (level.getActualMap()[j][i] == '*')
+					this.gameArea.add(new JLabel(this.WeaponOgre));
+				else if (level.getActualMap()[j][i] == 'w')
+					this.gameArea.add(new JLabel(this.Weapon));
+				else if (level.getActualMap()[j][i] == '$')
+					this.gameArea.add(new JLabel(this.Dollar));
+				else if (level.getActualMap()[j][i] == 'I')
+					this.gameArea.add(new JLabel(this.DoorClosed));
+				else if (level.getActualMap()[j][i] == 'S')
+					this.gameArea.add(new JLabel(this.DoorOpen));
+				
+			}
+		}
+	
+	}
 }
