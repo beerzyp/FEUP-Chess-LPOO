@@ -73,7 +73,7 @@ public class guim{
 	
 	private ImageIcon Hero = new ImageIcon("res/images/shinchan.gif");
 	private ImageIcon Guard = new ImageIcon("res/images/guard.gif");
-	private ImageIcon GuardSleeping = new ImageIcon("res/images/shinchanweapon.gif");
+	private ImageIcon GuardSleeping = new ImageIcon("res/images/guardsleeping.gif");
 	private ImageIcon Wall = new ImageIcon("res/images/bush.png");
 	private ImageIcon Key = new ImageIcon("res/images/lever.png");
 	private ImageIcon Ogre = new ImageIcon("res/images/ogre.png");
@@ -157,6 +157,11 @@ public class guim{
 		});
 		btnNewGame.setBounds(364, 113, 117, 25);
 		frame.getContentPane().add(btnNewGame);
+		
+		this.gameArea= new JPanel();
+		this.gameArea.setBounds(20, 75, 330, 340);
+		this.gameArea.setLayout(new GridLayout(10, 10, 0, 0));
+		frame.getContentPane().add(gameArea);
 		
 		JButton btnW = new JButton("W");
 		btnW.setEnabled(false);
@@ -305,6 +310,7 @@ public class guim{
 		this.s.setEnabled(true);
 		this.d.setEnabled(true);
 		
+		
 		try{
 			Scanner scan = new Scanner(textField.getText());
 			nOgres = scan.nextInt();
@@ -322,11 +328,10 @@ public class guim{
 			nOgres = 5;
 			textField.setText("5");
 		}
-		this.gameArea.removeAll();
-		this.gameArea= new JPanel();
-		this.gameArea.setBounds(20, 75, 330, 340);
-		frame.getContentPane().add(gameArea);
+
+		this.gameArea.setBounds(20, 75, 310, 320);
 		this.gameArea.setLayout(new GridLayout(9, 9, 0, 0));
+
 		
 		
 		level.Initializel2(nOgres);
@@ -337,12 +342,7 @@ public class guim{
 	
 
 	protected void initLevel1() {
-		
-		this.gameArea= new JPanel();
-		this.gameArea.setBounds(20, 75, 330, 340);
-		frame.getContentPane().add(gameArea);
-		this.gameArea.setLayout(new GridLayout(10, 10, 0, 0));
-		this.gameArea.removeAll();
+
 		
 		label1.setText("Level 1: The Dungeon");
 		this.a.setEnabled(true);
@@ -351,31 +351,18 @@ public class guim{
 		this.d.setEnabled(true);
 		this.guard_type = (String)GuardType.getSelectedItem();
 		level.Initializel1(this.guard_type);
+		
+		this.gameArea.setBounds(20, 75, 330, 340);
+		this.gameArea.setLayout(new GridLayout(10, 10, 0, 0));
+
 		drawImageOnBoard();
 		
 	}	
 	
 	protected void drawImageOnBoard()
 	{   
-		
-		
-		if(!level.boolLevel2())
-		{
-			this.gameArea.removeAll();
-			this.gameArea= new JPanel();
-			this.gameArea.setBounds(20, 75, 330, 340);
-			frame.getContentPane().add(gameArea);
-			this.gameArea.setLayout(new GridLayout(10, 10, 0, 0));
-		}
-	else
-		{
-			this.gameArea.removeAll();
-			this.gameArea= new JPanel();
-			this.gameArea.setBounds(20, 75, 330, 340);
-			frame.getContentPane().add(gameArea);
-			this.gameArea.setLayout(new GridLayout(9, 9, 0, 0));
-		}
-		
+		this.gameArea.removeAll();
+
 		for (int j = 0; j < level.getActualMap().length; j++) {
 			for (int i = 0; i < level.getActualMap()[j].length; i++) {
 				if (level.getActualMap()[j][i] == 'X')
