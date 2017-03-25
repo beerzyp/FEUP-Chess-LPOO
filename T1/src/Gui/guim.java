@@ -71,21 +71,21 @@ public class guim{
 	private JLabel label1;
 	private java.awt.Image exit;
 	
-	private ImageIcon Hero = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/shinchan.gif");
-	private ImageIcon Guard = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/shinchankey.gif");
-	private ImageIcon GuardSleeping = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/shinchanweapon.gif");
-	private ImageIcon Wall = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/bush.png");
-	private ImageIcon Key = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/lever.png");
-	private ImageIcon Ogre = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/shinchankey.gif");
-	private ImageIcon Floor = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/floor.png");
-	private ImageIcon Stun = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/shinchanweapon.gif");
-	private ImageIcon Weapon = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/heroweapon.png");
-	private ImageIcon Dollar = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/keydestructed.png");
-	private ImageIcon DoorClosed = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/doorclosed.png");
-	private ImageIcon DoorOpen = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/dooropened.png");
-	private ImageIcon WeaponOgre = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/shinchankey.gif");
-	private ImageIcon HeroArmored = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/shinchanweapon.gif");
-	private ImageIcon HeroKey = new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/shinchankey.gif");
+	private ImageIcon Hero = new ImageIcon("res/images/shinchan.gif");
+	private ImageIcon Guard = new ImageIcon("res/images/guard.gif");
+	private ImageIcon GuardSleeping = new ImageIcon("res/images/shinchanweapon.gif");
+	private ImageIcon Wall = new ImageIcon("res/images/bush.png");
+	private ImageIcon Key = new ImageIcon("res/images/lever.png");
+	private ImageIcon Ogre = new ImageIcon("res/images/ogre.png");
+	private ImageIcon Floor = new ImageIcon("res/images/floor.png");
+	private ImageIcon Stun = new ImageIcon("res/images/shinchanweapon.gif");
+	private ImageIcon Weapon = new ImageIcon("res/images/heroweapon.png");
+	private ImageIcon Dollar = new ImageIcon("res/images/keydestructed.png");
+	private ImageIcon DoorClosed = new ImageIcon("res/images/doorclosed.png");
+	private ImageIcon DoorOpen = new ImageIcon("res/images/dooropened.png");
+	private ImageIcon WeaponOgre = new ImageIcon("res/images/shinchankey.gif");
+	private ImageIcon HeroArmored = new ImageIcon("res/images/shinchanweapon.gif");
+	private ImageIcon HeroKey = new ImageIcon("res/images/shinchankey.gif");
 	
 	/**
 	 * Launch the application.
@@ -155,7 +155,7 @@ public class guim{
 				initLevel1();
 			}
 		});
-		btnNewGame.setBounds(332, 112, 117, 25);
+		btnNewGame.setBounds(364, 113, 117, 25);
 		frame.getContentPane().add(btnNewGame);
 		
 		JButton btnW = new JButton("W");
@@ -168,7 +168,7 @@ public class guim{
 						moveHero('w');
 					}
 				});
-		btnW.setBounds(358, 218, 41, 22);
+		btnW.setBounds(398, 217, 41, 22);
 		frame.getContentPane().add(btnW);
 		this.w=btnW;
 		
@@ -183,7 +183,7 @@ public class guim{
 						moveHero('a');
 					}
 				});
-		btnA.setBounds(334, 252, 41, 22);
+		btnA.setBounds(364, 251, 41, 22);
 		frame.getContentPane().add(btnA);
 		this.a=btnA;
 
@@ -197,12 +197,12 @@ public class guim{
 						moveHero('d');
 					}
 				});
-		btnD.setBounds(387, 252, 41, 22);
+		btnD.setBounds(432, 251, 41, 22);
 		frame.getContentPane().add(btnD);
 		this.d=btnD;
 		
 		JLabel label = new JLabel("Welcome to the Dungeon Game!");
-		label.setBounds(38,414,284,15);
+		label.setBounds(32,421,284,15);
 		label.setFont(new Font ("Courier New",Font.PLAIN,14));
 		frame.getContentPane().add(label);
 		this.label1=label;
@@ -216,7 +216,7 @@ public class guim{
 						moveHero('s');
 					}
 				});
-		btnS.setBounds(358, 287, 41, 22);
+		btnS.setBounds(398, 285, 41, 22);
 		frame.getContentPane().add(btnS);
 		this.s=btnS;
 		
@@ -234,7 +234,7 @@ public class guim{
 				System.exit(0);
 			}
 		});
-		btnExit.setBounds(332, 404, 117, 25);
+		btnExit.setBounds(364, 418, 117, 25);
 		frame.getContentPane().add(btnExit);
 		
 		JLabel label1 = new JLabel("");
@@ -324,7 +324,7 @@ public class guim{
 		}
 		this.gameArea.removeAll();
 		this.gameArea= new JPanel();
-		this.gameArea.setBounds(42, 81, 248, 323);
+		this.gameArea.setBounds(20, 75, 330, 340);
 		frame.getContentPane().add(gameArea);
 		this.gameArea.setLayout(new GridLayout(9, 9, 0, 0));
 		
@@ -339,7 +339,7 @@ public class guim{
 	protected void initLevel1() {
 		
 		this.gameArea= new JPanel();
-		this.gameArea.setBounds(42, 81, 248, 323);
+		this.gameArea.setBounds(20, 75, 330, 340);
 		frame.getContentPane().add(gameArea);
 		this.gameArea.setLayout(new GridLayout(10, 10, 0, 0));
 		this.gameArea.removeAll();
@@ -363,7 +363,7 @@ public class guim{
 		{
 			this.gameArea.removeAll();
 			this.gameArea= new JPanel();
-			this.gameArea.setBounds(42, 81, 248, 323);
+			this.gameArea.setBounds(20, 75, 330, 340);
 			frame.getContentPane().add(gameArea);
 			this.gameArea.setLayout(new GridLayout(10, 10, 0, 0));
 		}
@@ -371,7 +371,7 @@ public class guim{
 		{
 			this.gameArea.removeAll();
 			this.gameArea= new JPanel();
-			this.gameArea.setBounds(42, 81, 248, 323);
+			this.gameArea.setBounds(20, 75, 330, 340);
 			frame.getContentPane().add(gameArea);
 			this.gameArea.setLayout(new GridLayout(9, 9, 0, 0));
 		}
