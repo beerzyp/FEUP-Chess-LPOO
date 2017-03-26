@@ -416,82 +416,11 @@ public class GameLogic implements Cloneable {
 		double a1=1;
 		if(g1.getSymbol() =='H' || g1.getSymbol() =='A' || g1.getSymbol()=='K')//se g1 for o Hero
 		{
-			if(Math.floor(this.distancePoints(weaponX, weaponY, g1.getx(), g1.gety())) == 0)
-			{
-				g1.setSymbol('A');
-				this.weaponBool = true;
-			}
+			if(Math.floor(this.distancePoints(weaponX, weaponY, g1.getx(), g1.gety())) == 0){g1.setSymbol('A');this.weaponBool = true;}
 			
-			if(Math.floor(this.distancePoints(keyx, keyy, g1.getx(), g1.gety())) == 0)
-			{	
-				
-				if(level2){
-				g1.setSymbol('K');
-				}
-			}
-			
+			if(Math.floor(this.distancePoints(keyx, keyy, g1.getx(), g1.gety())) == 0){	if(level2){g1.setSymbol('K');}}
 			for(int i=0;i<this.elements.size();i++)
-			{
-				
-				if(this.elements.get(i).getHaveWeapon()) //o elemento � Ogre
-				{
-				
-					//if(this.elements.get(i).getWeaponX()==g1.getx() && this.elements.get(i).gety()==g1.gety())//arma do
-					if(Math.floor(distancePoints(this.elements.get(i).getWeaponX(),this.elements.get(i).getWeaponY(),g1.getx(),g1.gety())) == 0)
-					{
-						this.gameover=true;
-					
-					}
-					else if(g1.getSymbol()=='A' ||g1.getSymbol()=='K')
-					{
-						if(distancePoints(this.elements.get(i).getx(),this.elements.get(i).gety(),g1.getx(),g1.gety()) <=a1)
-						{
-							this.elements.get(i).setStunned();
-						}
-						
-						
-					}
-					
-				}
-				
-				
-				else if(this.elements.get(i).getSymbol()=='G')//Guardas
-				{
-					if(distancePoints(this.elements.get(i).getx(),this.elements.get(i).gety(),g1.getx(),g1.gety()) <=a1)
-					{
-						this.gameover=true;
-						break;
-					}
-					
-				}
-				
-				if(g1.getSymbol() =='H' || g1.getSymbol() =='A' || g1.getSymbol()=='K')
-				{
-					if(level2)
-					{if(this.key)
-					{
-						for(int l = 0; l < ((OgreMap) this.map).getDoors().size(); l++){
-							if(distancePoints(((OgreMap) this.map).getDoors().get(l).gety(),((OgreMap) this.map).getDoors().get(l).getx(),g1.getx(),g1.gety()) <= a1)
-							{
-								changeMapKey();
-								this.OgreKey = true;
-							}
-						}
-					}}
-				}
-			}	
-		}
-		else if(g1.getHaveWeapon()) //se g1 for um ogre
-		{
-			if(g1.getWeaponX() == this.keyx && g1.getWeaponY()==this.keyy)
-			{
-				if(!this.key)//se a key ainda estiver no mapa
-				{
-				this.ActualMap[this.keyx][this.keyy]='$';
-				}
-			}
-			
-		}
-	}
-	
-}
+			{if(this.elements.get(i).getHaveWeapon()) //o elemento ï¿½ Ogre
+				{if(Math.floor(distancePoints(this.elements.get(i).getWeaponX(),this.elements.get(i).getWeaponY(),g1.getx(),g1.gety())) == 0){this.gameover=true;}
+					else if(g1.getSymbol()=='A' ||g1.getSymbol()=='K'){if(distancePoints(this.elements.get(i).getx(),this.elements.get(i).gety(),g1.getx(),g1.gety()) <=a1){this.elements.get(i).setStunned();}		}	}					
+				else if(this.elements.get(i).getSymbol()=='G'){if(distancePoints(this.elements.get(i).getx(),this.elements.get(i).gety(),g1.getx(),g1.gety()) <=a1){this.gameover=true;break;}			}if(g1.getSymbol() =='H' || g1.getSymbol() =='A' || g1.getSymbol()=='K'){if(level2){if(this.key){for(int l = 0; l < ((OgreMap) this.map).getDoors().size(); l++){if(distancePoints(((OgreMap) this.map).getDoors().get(l).gety(),((OgreMap) this.map).getDoors().get(l).getx(),g1.getx(),g1.gety()) <= a1){changeMapKey();this.OgreKey = true;}}}}}}	}else if(g1.getHaveWeapon()){if(g1.getWeaponX() == this.keyx && g1.getWeaponY()==this.keyy){if(!this.key){this.ActualMap[this.keyx][this.keyy]='$';}}	}}	}
