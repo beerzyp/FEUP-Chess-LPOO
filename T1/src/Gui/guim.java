@@ -112,177 +112,19 @@ public class guim{
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(boolean t) 
-	{  ImageIcon ii;
-		frame = new JFrame();
-		frame.getContentPane().setFont(new Font("Courier New", Font.PLAIN, 12));
-		frame.setBounds(100, 100, 496, 478);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		
-		
-	
-		if(!t){
-		JLabel guardtype = new JLabel("Personality of Guard: ");
-		guardtype.setVerticalAlignment(SwingConstants.TOP);
-		guardtype.setBounds(32, 43, 200, 22);
-		frame.getContentPane().add(guardtype);
-		
-		
-	    GuardType = new JComboBox(new String[] {"Rookie", "Suspicious","Drunken"});
-		GuardType.setBounds(191, 39, 248, 22);
-		frame.getContentPane().add(GuardType);
-		
-		lblNumberOfOgres = new JLabel("Number Of Ogres: ");
-		lblNumberOfOgres.setBounds(32, 14, 200, 15);
-		frame.getContentPane().add(lblNumberOfOgres);
-		
-		textField = new JTextField();
-		textField.setBounds(172, 12, 114, 19);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
-
-		
-		JButton btnNewGame = new JButton("New Game");
-		btnNewGame.setFont(new Font("Courier New", Font.PLAIN, 12));
-		btnNewGame.addActionListener(new ActionListener() //starts game
-		{ 
-			public void actionPerformed(ActionEvent a)
-			{
-				sprite.requestFocus();
-				sprite.setFocusable(true);
-			
-				initLevel1();
-			}
-		});
-		btnNewGame.setBounds(364, 113, 117, 25);
-		frame.getContentPane().add(btnNewGame);
-		
+	private void initialize(boolean t) {  frame = new JFrame();frame.getContentPane().setFont(new Font("Courier New", Font.PLAIN, 12));frame.setBounds(100, 100, 496, 478);frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);frame.getContentPane().setLayout(null);if(!t){JLabel guardtype = new JLabel("Personality of Guard: ");guardtype.setVerticalAlignment(SwingConstants.TOP);guardtype.setBounds(32, 43, 200, 22);frame.getContentPane().add(guardtype);   GuardType = new JComboBox(new String[] {"Rookie", "Suspicious","Drunken"});GuardType.setBounds(191, 39, 248, 22);frame.getContentPane().add(GuardType);lblNumberOfOgres = new JLabel("Number Of Ogres: ");lblNumberOfOgres.setBounds(32, 14, 200, 15);frame.getContentPane().add(lblNumberOfOgres);	textField = new JTextField();textField.setBounds(172, 12, 114, 19);frame.getContentPane().add(textField);textField.setColumns(10);JButton btnNewGame = new JButton("New Game");btnNewGame.setFont(new Font("Courier New", Font.PLAIN, 12));btnNewGame.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent a){sprite.requestFocus();sprite.setFocusable(true);	initLevel1();}});btnNewGame.setBounds(364, 113, 117, 25);frame.getContentPane().add(btnNewGame);	}sprite= new setSprites(level,this);sprite.setBounds(20, 75, 330, 340);sprite.setLayout(new GridLayout(10, 10, 0, 0));frame.getContentPane().add(sprite);	JButton btnW = new JButton("W");btnW.setEnabled(false);btnW.setFont(new Font("Courier New", Font.PLAIN, 11));btnW.addActionListener(new ActionListener(){ public void actionPerformed(ActionEvent a){moveHero('w');sprite.requestFocus();sprite.setFocusable(true);}});btnW.setBounds(398, 217, 41, 22);frame.getContentPane().add(btnW);this.w=btnW;JButton btnA = new JButton("A");btnA.setFont(new Font("Courier New", Font.PLAIN, 11));btnA.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent a){moveHero('a');sprite.requestFocus();sprite.setFocusable(true);}});btnA.setBounds(364, 251, 41, 22);frame.getContentPane().add(btnA);this.a=btnA;	JButton btnD = new JButton("D");
+	btnD.setFont(new Font("Courier New", Font.PLAIN, 11));btnD.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent a){moveHero('d');sprite.requestFocus();sprite.setFocusable(true);}});btnD.setBounds(432, 251, 41, 22);frame.getContentPane().add(btnD);this.d=btnD;JLabel label = new JLabel("Welcome to the Dungeon Game!");label.setBounds(32,421,284,15);label.setFont(new Font ("Courier New",Font.PLAIN,14));frame.getContentPane().add(label);this.label1=label;JButton btnS = new JButton("S");btnS.setFont(new Font("Courier New", Font.PLAIN, 11));btnS.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent a){moveHero('s');sprite.requestFocus();sprite.setFocusable(true);}});btnS.setBounds(398, 285, 41, 22);frame.getContentPane().add(btnS);this.s=btnS;this.w.setEnabled(false);this.a.setEnabled(false);this.s.setEnabled(false);this.d.setEnabled(false);JButton btnExit = new JButton("Back");btnExit.setFont(new Font("Courier New", Font.PLAIN, 12));btnExit.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent a){EventQueue.invokeLater(new Runnable() {public void run() { try {MainMenu window = new MainMenu();window.frame.setVisible(true);} catch (Exception e) {e.printStackTrace();}}});frame.dispose();
 		}
-		
-		sprite= new setSprites(level,this);
-		sprite.setBounds(20, 75, 330, 340);
-		sprite.setLayout(new GridLayout(10, 10, 0, 0));
-		frame.getContentPane().add(sprite);
-		
-		JButton btnW = new JButton("W");
-		btnW.setEnabled(false);
-		btnW.setFont(new Font("Courier New", Font.PLAIN, 11));
-		btnW.addActionListener(new ActionListener() //starts game
-				{ 
-					public void actionPerformed(ActionEvent a)
-					{
-						moveHero('w');
-						sprite.requestFocus();
-						sprite.setFocusable(true);
-					}
-				});
-		btnW.setBounds(398, 217, 41, 22);
-		frame.getContentPane().add(btnW);
-		this.w=btnW;
-		
-
-		
-		JButton btnA = new JButton("A");
-		btnA.setFont(new Font("Courier New", Font.PLAIN, 11));
-		btnA.addActionListener(new ActionListener() //starts game
-				{ 
-					public void actionPerformed(ActionEvent a)
-					{
-						moveHero('a');
-						sprite.requestFocus();
-						sprite.setFocusable(true);
-					}
-				});
-		btnA.setBounds(364, 251, 41, 22);
-		frame.getContentPane().add(btnA);
-		this.a=btnA;
-
-		
-		JButton btnD = new JButton("D");
-		btnD.setFont(new Font("Courier New", Font.PLAIN, 11));
-		btnD.addActionListener(new ActionListener() //starts game
-				{ 
-					public void actionPerformed(ActionEvent a)
-					{
-						moveHero('d');
-						sprite.requestFocus();
-						sprite.setFocusable(true);
-					}
-				});
-		btnD.setBounds(432, 251, 41, 22);
-		frame.getContentPane().add(btnD);
-		this.d=btnD;
-		
-		JLabel label = new JLabel("Welcome to the Dungeon Game!");
-		label.setBounds(32,421,284,15);
-		label.setFont(new Font ("Courier New",Font.PLAIN,14));
-		frame.getContentPane().add(label);
-		this.label1=label;
-		
-		JButton btnS = new JButton("S");
-		btnS.setFont(new Font("Courier New", Font.PLAIN, 11));
-		btnS.addActionListener(new ActionListener() //starts game
-				{ 
-			
-					public void actionPerformed(ActionEvent a)
-					{
-						moveHero('s');
-						sprite.requestFocus();
-						sprite.setFocusable(true);
-					}
-				});
-		btnS.setBounds(398, 285, 41, 22);
-		frame.getContentPane().add(btnS);
-		this.s=btnS;
-		
-		this.w.setEnabled(false);
-		this.a.setEnabled(false);
-		this.s.setEnabled(false);
-		this.d.setEnabled(false);
-		
-		JButton btnExit = new JButton("Back");
-		btnExit.setFont(new Font("Courier New", Font.PLAIN, 12));
-		btnExit.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent a)
-			{
-				EventQueue.invokeLater(new Runnable() {
-					public void run() { 
-						try {
-							MainMenu window = new MainMenu();
-							window.frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-				
-				frame.dispose();
-			}
-		});
-		btnExit.setBounds(364, 418, 117, 25);
-		frame.getContentPane().add(btnExit);
-		
-		JLabel label1 = new JLabel("");
-		label1.setFont(new Font("Courier New", Font.PLAIN, 15));
-		label1.setBounds(32, 371, 284, 15);
-		frame.getContentPane().add(label1);
-		
-		
-//		JLabel gif= new JLabel(new ImageIcon("Z:/git/LPOO1617_T5G8nobo/T1/res/images/shinchankey.gif"));
-//		
-//		JPanel panel = new JPanel();
-//		panel.add(gif);
-//		
-//	
-//		panel.setBounds(342, 148, 106, 169);
-//		frame.getContentPane().add(panel);
-//		panel.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		
-
+	});
+	btnExit.setBounds(364, 418, 117, 25);
+	frame.getContentPane().add(btnExit);
+	
+	JLabel label1 = new JLabel("");
+	label1.setFont(new Font("Courier New", Font.PLAIN, 15));
+	label1.setBounds(32, 371, 284, 15);
+	frame.getContentPane().add(label1);
 }
+	
 	public boolean getGameOver()
 	{
 		return level.gameOver();
