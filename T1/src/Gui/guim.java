@@ -241,13 +241,24 @@ public class guim{
 		this.s.setEnabled(false);
 		this.d.setEnabled(false);
 		
-		JButton btnExit = new JButton("Exit");
+		JButton btnExit = new JButton("Back");
 		btnExit.setFont(new Font("Courier New", Font.PLAIN, 12));
 		btnExit.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent a)
 			{
-				System.exit(0);
+				EventQueue.invokeLater(new Runnable() {
+					public void run() { 
+						try {
+							MainMenu window = new MainMenu();
+							window.frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				
+				frame.dispose();
 			}
 		});
 		btnExit.setBounds(364, 418, 117, 25);

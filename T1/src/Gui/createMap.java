@@ -55,7 +55,7 @@ import java.awt.Font;
 	public class createMap{
 
 	    private Levels level = new Levels();
-		private JFrame frame;
+		JFrame frame;
 
 		
 		char [][] newMap = {{'X','X','X','X','X','X','X','X','X','X'},
