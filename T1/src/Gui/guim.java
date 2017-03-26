@@ -56,12 +56,10 @@ public class guim{
     private Levels level = new Levels();
 	private JFrame frame;
 	private JTextField textField;
-	private JPanel gameArea;
+
+	private setSprites sprite;
 	
-	private int upKey = KeyEvent.VK_W;
-	private int leftKey = KeyEvent.VK_A;
-	private int rightKey = KeyEvent.VK_D;
-	private int downKey = KeyEvent.VK_S;
+
 	
 	private String guard_type;
 	private JTextArea newtext;
@@ -71,21 +69,7 @@ public class guim{
 	private JLabel label1;
 	private java.awt.Image exit;
 	
-	private ImageIcon Hero = new ImageIcon("res/images/shinchan.gif");
-	private ImageIcon Guard = new ImageIcon("res/images/guard.gif");
-	private ImageIcon GuardSleeping = new ImageIcon("res/images/guardsleeping.gif");
-	private ImageIcon Wall = new ImageIcon("res/images/bush.png");
-	private ImageIcon Key = new ImageIcon("res/images/lever.png");
-	private ImageIcon Ogre = new ImageIcon("res/images/ogre.gif");
-	private ImageIcon Floor = new ImageIcon("res/images/floor.png");
-	private ImageIcon Stun = new ImageIcon("res/images/stun.gif");
-	private ImageIcon Weapon = new ImageIcon("res/images/heroweapon.png");
-	private ImageIcon Dollar = new ImageIcon("res/images/keydestructed.png");
-	private ImageIcon DoorClosed = new ImageIcon("res/images/doorclosed.png");
-	private ImageIcon DoorOpen = new ImageIcon("res/images/dooropened.png");
-	private ImageIcon WeaponOgre = new ImageIcon("res/images/ogreweapon.gif");
-	private ImageIcon HeroArmored = new ImageIcon("res/images/shinchanweapon.gif");
-	private ImageIcon HeroKey = new ImageIcon("res/images/shinchankey.gif");
+	
 	
 	/**
 	 * Launch the application.
@@ -125,6 +109,7 @@ public class guim{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		
 	
 	
 		JLabel guardtype = new JLabel("Personality of Guard: ");
@@ -152,16 +137,17 @@ public class guim{
 		{ 
 			public void actionPerformed(ActionEvent a)
 			{
+				sprite.requestFocus();
 				initLevel1();
 			}
 		});
 		btnNewGame.setBounds(364, 113, 117, 25);
 		frame.getContentPane().add(btnNewGame);
 		
-		this.gameArea= new JPanel();
-		this.gameArea.setBounds(20, 75, 330, 340);
-		this.gameArea.setLayout(new GridLayout(10, 10, 0, 0));
-		frame.getContentPane().add(gameArea);
+		sprite= new setSprites(level);
+		sprite.setBounds(20, 75, 330, 340);
+		sprite.setLayout(new GridLayout(10, 10, 0, 0));
+		frame.getContentPane().add(sprite);
 		
 		JButton btnW = new JButton("W");
 		btnW.setEnabled(false);
@@ -277,11 +263,11 @@ public class guim{
 		if(!level.gameWin())
 			if(!level.gameOver()){
 				level.setGame();
-				drawImageOnBoard();
+				sprite.drawImageOnBoard();
 			}
 			else
 			{
-				drawImageOnBoard();
+				sprite.drawImageOnBoard();
 				label1.setText("You lost the Game! Try Again!");
 				this.a.setEnabled(false);
 				this.w.setEnabled(false);
@@ -329,13 +315,13 @@ public class guim{
 			textField.setText("5");
 		}
 
-		this.gameArea.setBounds(20, 75, 310, 320);
-		this.gameArea.setLayout(new GridLayout(9, 9, 0, 0));
+		sprite.setBounds(20, 75, 310, 320);
+		sprite.setLayout(new GridLayout(9, 9, 0, 0));
 
 		
 		
 		level.Initializel2(nOgres);
-		drawImageOnBoard();
+		sprite.drawImageOnBoard();
 		
  		
 	}
@@ -352,53 +338,36 @@ public class guim{
 		this.guard_type = (String)GuardType.getSelectedItem();
 		level.Initializel1(this.guard_type);
 		
-		this.gameArea.setBounds(20, 75, 330, 340);
-		this.gameArea.setLayout(new GridLayout(10, 10, 0, 0));
+		sprite.setBounds(20, 75, 330, 340);
+		sprite.setLayout(new GridLayout(10, 10, 0, 0));
 
-		drawImageOnBoard();
+		sprite.drawImageOnBoard();
 		
 	}	
 	
-	protected void drawImageOnBoard()
-	{   
-		this.gameArea.removeAll();
-
-		for (int j = 0; j < level.getActualMap().length; j++) {
-			for (int i = 0; i < level.getActualMap()[j].length; i++) {
-				if (level.getActualMap()[j][i] == 'X')
-					this.gameArea.add(new JLabel(this.Wall));
-				else if (level.getActualMap()[j][i] == ' ')
-					this.gameArea.add(new JLabel(this.Floor));
-				else if (level.getActualMap()[j][i] == 'A') 
-					this.gameArea.add(new JLabel(this.HeroArmored));
-				else if (level.getActualMap()[j][i] == 'H')
-					this.gameArea.add(new JLabel(this.Hero));
-				else if (level.getActualMap()[j][i] == '8')
-					this.gameArea.add(new JLabel(this.Stun));
-				else if (level.getActualMap()[j][i] == 'G') 
-					this.gameArea.add(new JLabel(this.Guard));
-				else if (level.getActualMap()[j][i] == 'g')
-					this.gameArea.add(new JLabel(this.GuardSleeping));
-				else if (level.getActualMap()[j][i] == 'K')
-					this.gameArea.add(new JLabel(this.HeroKey));
-				else if (level.getActualMap()[j][i] == 'k') 
-					this.gameArea.add(new JLabel(this.Key));
-				else if (level.getActualMap()[j][i] == 'O')
-					this.gameArea.add(new JLabel(this.Ogre));
-				else if (level.getActualMap()[j][i] == '*')
-					this.gameArea.add(new JLabel(this.WeaponOgre));
-				else if (level.getActualMap()[j][i] == 'w')
-					this.gameArea.add(new JLabel(this.Weapon));
-				else if (level.getActualMap()[j][i] == '$')
-					this.gameArea.add(new JLabel(this.Dollar));
-				else if (level.getActualMap()[j][i] == 'I')
-					this.gameArea.add(new JLabel(this.DoorClosed));
-				else if (level.getActualMap()[j][i] == 'S')
-					this.gameArea.add(new JLabel(this.DoorOpen));
-				
-			}
-		}
-		this.gameArea.validate();
 	
-	}
+	public void keyPressed(KeyEvent e) {
+		System.out.println("qasd");
+		switch(e.getKeyCode()){
+		case KeyEvent.VK_W:
+			System.out.println("asd");
+			break;
+		case KeyEvent.VK_A:
+			break;
+		case KeyEvent.VK_D:
+			break;
+		case KeyEvent.VK_S:
+			break;
+		}
+		
+		}
+
+		
+		public void keyReleased(KeyEvent arg0) {
+		}
+
+		
+		public void keyTyped(KeyEvent arg0) {
+		}
+	
 }
