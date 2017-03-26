@@ -138,6 +138,8 @@ public class guim{
 			public void actionPerformed(ActionEvent a)
 			{
 				sprite.requestFocus();
+				sprite.setFocusable(true);
+			
 				initLevel1();
 			}
 		});
@@ -157,6 +159,8 @@ public class guim{
 					public void actionPerformed(ActionEvent a)
 					{
 						moveHero('w');
+						sprite.requestFocus();
+						sprite.setFocusable(true);
 					}
 				});
 		btnW.setBounds(398, 217, 41, 22);
@@ -172,6 +176,8 @@ public class guim{
 					public void actionPerformed(ActionEvent a)
 					{
 						moveHero('a');
+						sprite.requestFocus();
+						sprite.setFocusable(true);
 					}
 				});
 		btnA.setBounds(364, 251, 41, 22);
@@ -186,6 +192,8 @@ public class guim{
 					public void actionPerformed(ActionEvent a)
 					{
 						moveHero('d');
+						sprite.requestFocus();
+						sprite.setFocusable(true);
 					}
 				});
 		btnD.setBounds(432, 251, 41, 22);
@@ -202,9 +210,12 @@ public class guim{
 		btnS.setFont(new Font("Courier New", Font.PLAIN, 11));
 		btnS.addActionListener(new ActionListener() //starts game
 				{ 
+			
 					public void actionPerformed(ActionEvent a)
 					{
 						moveHero('s');
+						sprite.requestFocus();
+						sprite.setFocusable(true);
 					}
 				});
 		btnS.setBounds(398, 285, 41, 22);
@@ -349,28 +360,6 @@ public class guim{
 	}	
 	
 	
-	public void keyPressed(KeyEvent e) {
-		System.out.println("qasd");
-		switch(e.getKeyCode()){
-		case KeyEvent.VK_W:
-			System.out.println("asd");
-			break;
-		case KeyEvent.VK_A:
-			break;
-		case KeyEvent.VK_D:
-			break;
-		case KeyEvent.VK_S:
-			break;
-		}
-		
-		}
-
-		
-		public void keyReleased(KeyEvent arg0) {
-		}
-
-		
-		public void keyTyped(KeyEvent arg0) {
-		}
+	
 	
 }
