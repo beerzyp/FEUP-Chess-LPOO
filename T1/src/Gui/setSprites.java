@@ -45,9 +45,8 @@ public class setSprites extends JPanel implements KeyListener, MouseListener {
 	private createMap createdMap;
 	private char charSelected = 'O';
 	
-	public setSprites(Levels lvl, createMap cm){addKeyListener(this);
-	setFocusable(true);
-	requestFocus();this.level = lvl; this.createdMap = cm;  this.DIVISOR = 405/10;};
+	public setSprites(Levels lvl, createMap cm){
+	this.level = lvl; this.createdMap = cm;  this.DIVISOR = 405/10;};
 	
 	private Levels level;
 	public setSprites(Levels lvl, guim gui)

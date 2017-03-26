@@ -17,6 +17,7 @@ import Game.GameElements;
 import Game.GameLogic;
 import Game.GameMap;
 import Game.OgreMap;
+import Gui.setSprites;
 import Others.Pair;
 
 public class Levels {
@@ -328,11 +329,46 @@ public class Levels {
 	public void InitializeNewMap(char[][] newMap, Pair pair) {
 		GameMap dungeon = new DungeonMap(newMap);
 	
-		GameElements Hero = new GEHero(pair.getx(),pair.gety(),'H');
+		//GameElements Hero = new GEHero(pair.getx(),pair.gety(),'H');
 		
 		logic = new GameLogic(dungeon);
-		logic.addGameElements(Hero);
+		//logic.addGameElements(Hero);
 		
+		logic.setGame();
+		
+	}
+	public ArrayList<GameElements> getElements() {
+		return logic.getGameElements();
+	}
+	public int getHeroPos() {
+		return logic.getHeroPosAtArray();
+	}
+	public void InitializeCreated(char[][] cs, ArrayList<GameElements> arrayList) {
+		
+		for(int z=0; z < cs.length; z++){
+			for(int y=0; y < cs[z].length; y++){
+				if(cs[z][y] == 'O'){
+					cs[z][y] = ' ';
+				}
+			}
+		}
+		
+		GameMap dungeon = new OgreMap(cs);
+		Hero = new GEHero(1,1,'H');
+		logic = new GameLogic(dungeon);
+		logic.addGameElements(Hero);
+		GameElements Ogre;
+		
+		for (int i = 0; i < arrayList.size(); i++) {
+			Ogre = new GEOgre(2,3+i,'O', 2, 4);
+			logic.addGameElements(Ogre);
+		}
+		
+		moveO();
+		moveH('d');
+		logic.setGame();
+		logic.cleanActualMap();
+		moveH('a');
 		logic.setGame();
 		
 	}

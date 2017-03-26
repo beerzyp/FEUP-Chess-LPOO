@@ -44,6 +44,7 @@ import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import javax.swing.JPanel;
@@ -54,7 +55,7 @@ import javax.swing.UIManager;
 public class guim{
 
     private Levels level = new Levels();
-	private JFrame frame;
+	JFrame frame;
 	private JTextField textField;
 
 	private setSprites sprite;
@@ -90,16 +91,19 @@ public class guim{
 
 	/**
 	 * Create the application.
+	 * @param i 
+	 * @param arrayList 
+	 * @param cs 
 	 */
 	public guim() {
 		initialize(false);
 	}
 	
-	public guim(Levels lvl, setSprites spr) {
+	
+	public guim(char[][] cs, ArrayList<GameElements> arrayList, int i) {
+		
 		initialize(true);
-		this.level = lvl;
-		this.sprite = spr;
-		initLevelCreated();
+		initLevelCreated(cs, arrayList,i);
 	}
 
     
@@ -118,11 +122,12 @@ public class guim{
 		
 		
 	
-	
+		if(!t){
 		JLabel guardtype = new JLabel("Personality of Guard: ");
 		guardtype.setVerticalAlignment(SwingConstants.TOP);
 		guardtype.setBounds(32, 43, 200, 22);
 		frame.getContentPane().add(guardtype);
+		
 		
 	    GuardType = new JComboBox(new String[] {"Rookie", "Suspicious","Drunken"});
 		GuardType.setBounds(191, 39, 248, 22);
@@ -153,8 +158,7 @@ public class guim{
 		btnNewGame.setBounds(364, 113, 117, 25);
 		frame.getContentPane().add(btnNewGame);
 		
-		if(t)
-			btnNewGame.setEnabled(false);
+		}
 		
 		sprite= new setSprites(level,this);
 		sprite.setBounds(20, 75, 330, 340);
@@ -369,18 +373,18 @@ public class guim{
 		
 	}	
 	
-	public void initLevelCreated() {
-		sprite.requestFocus();
-		sprite.setFocusable(true);
+	public void initLevelCreated(char[][] cs, ArrayList<GameElements> arrayList, int i) {
 		
 		label1.setText("Level Created by You");
 		this.a.setEnabled(true);
 		this.w.setEnabled(true);
 		this.s.setEnabled(true);
 		this.d.setEnabled(true);
-				
+		level.InitializeCreated(cs, arrayList);
+
 		sprite.setBounds(20, 75, 330, 340);
 		sprite.setLayout(new GridLayout(10, 10, 0, 0));
+		
 
 		sprite.drawImageOnBoard();
 		

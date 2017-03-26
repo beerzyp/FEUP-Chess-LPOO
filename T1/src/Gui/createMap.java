@@ -123,7 +123,18 @@ import java.awt.Font;
 					{ 
 						public void actionPerformed(ActionEvent a)
 						{
-							//new guim(level, panel);
+							EventQueue.invokeLater(new Runnable() {
+								public void run() { 
+									try {
+										guim window = new guim(level.getActualMap(), level.getElements(), level.getHeroPos());
+										window.frame.setVisible(true);
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+								}
+							});
+							
+							frame.dispose();
 						}
 					});
 
