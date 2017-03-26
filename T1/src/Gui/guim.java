@@ -144,7 +144,7 @@ public class guim{
 		btnNewGame.setBounds(364, 113, 117, 25);
 		frame.getContentPane().add(btnNewGame);
 		
-		sprite= new setSprites(level);
+		sprite= new setSprites(level,this);
 		sprite.setBounds(20, 75, 330, 340);
 		sprite.setLayout(new GridLayout(10, 10, 0, 0));
 		frame.getContentPane().add(sprite);
@@ -247,7 +247,10 @@ public class guim{
 		
 
 }
-
+	public boolean getGameOver()
+	{
+		return level.gameOver();
+	}
 
 	protected void moveHero(char a) {
 		level.cleanMap();

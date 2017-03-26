@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import UserInteraction.Levels;
 
 public class setSprites extends JPanel implements KeyListener {
-	
+	private guim gui;
 	private ImageIcon Hero = new ImageIcon("res/images/shinchan.gif");
 	private ImageIcon Guard = new ImageIcon("res/images/guard.gif");
 	private ImageIcon GuardSleeping = new ImageIcon("res/images/guardsleeping.gif");
@@ -33,8 +33,9 @@ public class setSprites extends JPanel implements KeyListener {
 	private int downKey = KeyEvent.VK_S;
 	
 	private Levels level;
-	public setSprites(Levels lvl)
+	public setSprites(Levels lvl, guim gui)
 	{this.level=lvl;
+	this.gui=gui;
 	addKeyListener(this);
 	setFocusable(true);
 	requestFocus();}
@@ -84,21 +85,23 @@ public class setSprites extends JPanel implements KeyListener {
 
 	
 	public void keyPressed(KeyEvent e) {
-	System.out.println("qasd");
+		if(gui.getGameOver())
+		{}
+		else{
 	switch(e.getKeyCode()){
 	case KeyEvent.VK_W:
-	
+	  gui.moveHero('w');
 		break;
 	case KeyEvent.VK_A:
-		
+		gui.moveHero('a');
 		break;
 	case KeyEvent.VK_D:
-	
+		gui.moveHero('d');
 		break;
 	case KeyEvent.VK_S:
-		
+		gui.moveHero('s');
 		break;
-	}
+	}}
 	
 	}
 
