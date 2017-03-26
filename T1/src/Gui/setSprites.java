@@ -150,7 +150,8 @@ System.out.print(this.DIVISOR);
 
 		
 		if(this.charSelected !=' ' && x > 0 && y > 0 && x < 9 && y < 9){
-			this.setNewCharOnMap(x, y, this.charSelected);
+			if(level.getActualMap()[x][y]!='H' || level.getActualMap()[x][y]!='O')
+				this.setNewCharOnMap(x, y, this.charSelected);
 			//this.level.setGame();
 			this.drawImageOnBoard();
 		}

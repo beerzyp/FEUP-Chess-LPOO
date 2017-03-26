@@ -105,103 +105,19 @@ import java.awt.Font;
 		 */
 		private void initialize() 
 		{ 
-			frame = new JFrame();
-			frame.getContentPane().setFont(new Font("Courier New", Font.PLAIN, 12));
-			frame.setBounds(100, 100, 602, 521);
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.getContentPane().setLayout(null);
-			
-			level.InitializeNewMap(this.newMap, new Pair(1,1));
-
+			frame = new JFrame();frame.getContentPane().setFont(new Font("Courier New", Font.PLAIN, 12));frame.setBounds(100, 100, 602, 521);frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);frame.getContentPane().setLayout(null);level.InitializeNewMap(this.newMap, new Pair(1,1));
 			final setSprites panel = new setSprites(this.level, this);
-			panel.setBounds(95, 45, 405, 405);
-			frame.getContentPane().add(panel);
-			panel.setLayout(new GridLayout(10, 0, 0, 0));
-			
+			panel.setBounds(95, 45, 405, 405);frame.getContentPane().add(panel);panel.setLayout(new GridLayout(10, 0, 0, 0));	
 			JButton btnCreate = new JButton("Create");
-			btnCreate.addActionListener(new ActionListener() //starts game
-					{ 
-						public void actionPerformed(ActionEvent a)
-						{
-							EventQueue.invokeLater(new Runnable() {
-								public void run() { 
-									try {
-										guim window = new guim(level.getActualMap(), level.getElements(), level.getHeroPos());
-										window.frame.setVisible(true);
-									} catch (Exception e) {
-										e.printStackTrace();
-									}
-								}
-							});
-							
-							frame.dispose();
-						}
-					});
-
+			btnCreate.addActionListener(new ActionListener(){ public void actionPerformed(ActionEvent a){EventQueue.invokeLater(new Runnable() {public void run() { try {guim window = new guim(level.getActualMap(), level.getElements(), level.getHeroPos());window.frame.setVisible(true);} catch (Exception e) {e.printStackTrace();}}});frame.dispose();}});
 			btnCreate.setBounds(242, 462, 117, 29);
-			frame.getContentPane().add(btnCreate);
-			 
-			panel.addMouseListener(panel);
-			panel.requestFocus();
-			
-			panel.drawImageOnBoard();
-			
-			JButton btnNewOgre = new JButton("New Ogre");
-			btnNewOgre.addActionListener(new ActionListener() //starts game
-					{ 
-						public void actionPerformed(ActionEvent a)
-						{
-							panel.setWorkingChar('O'); 
-						}
-					});
-			btnNewOgre.setBounds(6, 6, 117, 29);
-			frame.getContentPane().add(btnNewOgre);
-			
-			JButton btnNewWall = new JButton("New Wall");
-			btnNewWall.setBounds(124, 6, 117, 29);
-			btnNewWall.addActionListener(new ActionListener() //starts game
-					{ 
-						public void actionPerformed(ActionEvent a)
-						{
-							panel.setWorkingChar('X');
-						}
-					});
-			frame.getContentPane().add(btnNewWall);
-			
-			JButton btnNewHero = new JButton("New Weapon");
-			btnNewHero.setBounds(242, 6, 117, 29);
-			btnNewHero.addActionListener(new ActionListener() //starts game
-					{ 
-						public void actionPerformed(ActionEvent a)
-						{
-							panel.setWorkingChar('w');
-						}
-					});
-			frame.getContentPane().add(btnNewHero);
-			
-			JButton btnNewLever = new JButton("New Lever");
-			btnNewLever.setBounds(360, 6, 117, 29);
-			btnNewLever.addActionListener(new ActionListener() //starts game
-					{ 
-						public void actionPerformed(ActionEvent a)
-						{
-							panel.setWorkingChar('k');
-						}
-					});
-			frame.getContentPane().add(btnNewLever);
-			
-			JButton btnNewDoor = new JButton("New Door");
-			btnNewDoor.setBounds(477, 6, 117, 29);
-			btnNewDoor.addActionListener(new ActionListener() //starts game
-					{ 
-						public void actionPerformed(ActionEvent a)
-						{
-							panel.setWorkingChar('I');
-						}
-					});
-			frame.getContentPane().add(btnNewDoor);
-						
-
+			frame.getContentPane().add(btnCreate);panel.addMouseListener(panel);
+			panel.requestFocus();panel.drawImageOnBoard();JButton btnNewOgre = new JButton("New Ogre");
+			btnNewOgre.addActionListener(new ActionListener(){ public void actionPerformed(ActionEvent a){panel.setWorkingChar('O'); }});btnNewOgre.setBounds(6, 6, 117, 29);frame.getContentPane().add(btnNewOgre);JButton btnNewWall = new JButton("New Wall");btnNewWall.setBounds(124, 6, 117, 29);
+			btnNewWall.addActionListener(new ActionListener(){ public void actionPerformed(ActionEvent a){panel.setWorkingChar('X');}});frame.getContentPane().add(btnNewWall);JButton btnNewHero = new JButton("New Weapon");btnNewHero.setBounds(242, 6, 117, 29);
+			btnNewHero.addActionListener(new ActionListener(){ public void actionPerformed(ActionEvent a){panel.setWorkingChar('w');	}});
+			frame.getContentPane().add(btnNewHero);JButton btnNewLever = new JButton("New Lever");btnNewLever.setBounds(360, 6, 117, 29);btnNewLever.addActionListener(new ActionListener(){ public void actionPerformed(ActionEvent a){	panel.setWorkingChar('k');}});frame.getContentPane().add(btnNewLever);
+			JButton btnNewDoor = new JButton("New Door");btnNewDoor.setBounds(477, 6, 117, 29);btnNewDoor.addActionListener(new ActionListener(){ public void actionPerformed(ActionEvent a){panel.setWorkingChar('I');}});frame.getContentPane().add(btnNewDoor);
 	}
 		
 }
