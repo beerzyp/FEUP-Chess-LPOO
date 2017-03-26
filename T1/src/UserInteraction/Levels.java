@@ -321,6 +321,21 @@ public class Levels {
 	public boolean boolLevel2() {
 		return logic.level2;
 	}
+	public void addElements(GEOgre geOgre) {
+		logic.addGameElements(geOgre);
+		
+	}
+	public void InitializeNewMap(char[][] newMap, Pair pair) {
+		GameMap dungeon = new DungeonMap(newMap);
+	
+		GameElements Hero = new GEHero(pair.getx(),pair.gety(),'H');
+		
+		logic = new GameLogic(dungeon);
+		logic.addGameElements(Hero);
+		
+		logic.setGame();
+		
+	}
 
 
 }

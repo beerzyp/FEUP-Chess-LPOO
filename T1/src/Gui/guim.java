@@ -92,7 +92,14 @@ public class guim{
 	 * Create the application.
 	 */
 	public guim() {
-		initialize();
+		initialize(false);
+	}
+	
+	public guim(Levels lvl, setSprites spr) {
+		initialize(true);
+		this.level = lvl;
+		this.sprite = spr;
+		initLevelCreated();
 	}
 
     
@@ -101,7 +108,7 @@ public class guim{
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() 
+	private void initialize(boolean t) 
 	{  ImageIcon ii;
 		frame = new JFrame();
 		frame.getContentPane().setFont(new Font("Courier New", Font.PLAIN, 12));
@@ -145,6 +152,9 @@ public class guim{
 		});
 		btnNewGame.setBounds(364, 113, 117, 25);
 		frame.getContentPane().add(btnNewGame);
+		
+		if(t)
+			btnNewGame.setEnabled(false);
 		
 		sprite= new setSprites(level,this);
 		sprite.setBounds(20, 75, 330, 340);
@@ -316,7 +326,7 @@ public class guim{
 			nOgres = scan.nextInt();
 			scan.close();
 			
-			if(nOgres <= 0)
+			if(nOgres <= 0) 
 				throw new NoSuchElementException();
 			
 		}catch(NoSuchElementException exp){
@@ -358,6 +368,27 @@ public class guim{
 		sprite.drawImageOnBoard();
 		
 	}	
+	
+	public void initLevelCreated() {
+		sprite.requestFocus();
+		sprite.setFocusable(true);
+		
+		label1.setText("Level Created by You");
+		this.a.setEnabled(true);
+		this.w.setEnabled(true);
+		this.s.setEnabled(true);
+		this.d.setEnabled(true);
+				
+		sprite.setBounds(20, 75, 330, 340);
+		sprite.setLayout(new GridLayout(10, 10, 0, 0));
+
+		sprite.drawImageOnBoard();
+		
+	}
+
+	public boolean getGameWin() {
+		return level.gameWin();
+	}
 	
 	
 	
