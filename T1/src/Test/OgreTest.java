@@ -41,9 +41,14 @@ public class OgreTest {
 		logic.addGameElements(Hero);
 		logic.addGameElements(Ogre);	
 		logic.moveHero('d');		
+		assertEquals(false,logic.getGameWin());
+		assertEquals(false,logic.getGameOver());
+
 		assertFalse(logic.getGameOver());
 		logic.setGame();
 		assertTrue(logic.getGameOver());
+		assertEquals(false,logic.getGameWin());
+
 		Ogre.move(map); 
 	}
 	
@@ -54,6 +59,10 @@ public class OgreTest {
 		GameLogic logic = new GameLogic(ogremap);
 		logic.addGameElements(Hero);
 		logic.addGameElements(Ogre);	
+		assertEquals(false,logic.getGameWin());
+
+		assertEquals(false,logic.getGameWin());
+
 		
 		assertEquals(Hero.getSymbol(), 'H');
 		
@@ -61,6 +70,7 @@ public class OgreTest {
 		logic.moveHero('s');
 
 		logic.setGame();
+		assertEquals(false,logic.getGameOver());
 
 		assertEquals(Hero.getSymbol(), 'K');
 		
@@ -73,8 +83,11 @@ public class OgreTest {
 		GameMap ogremap = new OgreMap(map);
 		GameLogic logic = new GameLogic(ogremap);
 		logic.addGameElements(Hero);
-		logic.addGameElements(Ogre);	
-		
+		logic.addGameElements(Ogre);
+		assertEquals(false,logic.getGameWin());
+
+		assertEquals(false,logic.getGameOver());
+
 		assertEquals(logic.getActualMap()[2][0], 'I');
 		
 		logic.moveHero('s');	
@@ -91,6 +104,12 @@ public class OgreTest {
 		GameLogic logic = new GameLogic(ogremap);
 		logic.addGameElements(Hero);
 		logic.addGameElements(Ogre);	
+		assertEquals(false,logic.getGameWin());
+
+		assertEquals(false,logic.getGameWin());
+		assertEquals(false,logic.getGameOver());
+
+
 		
 		assertEquals(logic.getActualMap()[3][0], 'I');
 		
@@ -109,6 +128,10 @@ public class OgreTest {
 		GameLogic logic = new GameLogic(ogremap);
 		logic.addGameElements(Hero);
 		logic.addGameElements(Ogre);	
+		assertEquals(false,logic.getGameWin());
+
+		assertEquals(false,logic.getGameOver());
+
 		
 		assertFalse(logic.getGameWin());		
 		
@@ -129,7 +152,10 @@ public class OgreTest {
 		GameLogic logic = new GameLogic(ogremap);
 		GameElements Ogre1 = new GEOgre(1,3,'O', 1, 2);
 		logic.addGameElements(Hero);
+		assertEquals(false,logic.getGameOver());
 		logic.addGameElements(Ogre1);
+		assertEquals(false,logic.getGameWin());
+
 		
 		Ogre1.move(logic.getActualMap());
 		
