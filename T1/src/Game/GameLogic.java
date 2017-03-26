@@ -6,7 +6,11 @@ import Others.Pair;
 
 public class GameLogic implements Cloneable {
 	
-	
+	/**
+	 * This constructor creates a logic associated with a specific GameMap
+	 *
+	 * @param map  DungeonMap and OgreMap both implement the interface GameMap
+	 */
 	public GameLogic(GameMap map)
 	{
 		this.map = map;
@@ -23,13 +27,13 @@ public class GameLogic implements Cloneable {
 		this.gamewin = false;
 		OgreKey = false;
 		this.weaponBool = false;
-	};
+	}
 	
 	private boolean gameover;
 	private GameMap map;
 	private boolean key;
 	private ArrayList<GameElements> elements = new ArrayList<GameElements>();
-	private char[][] ActualMap;
+	public char[][] ActualMap;
 	private int keyx;
 	private int keyy;
 	private boolean OgreKey;
@@ -40,6 +44,12 @@ public class GameLogic implements Cloneable {
 	private char weaponSymbol='w';
 	private boolean weaponBool;
 	
+	
+	/**
+	 * Prints the current map state that is passed by getActualMap method
+	 * @see GameLogic.getActualMap()
+	 * 
+	 */
 	public void printboard()
 	{
 		for(int i =0; i < this.getActualMap().length; i++) //pinta o jogo
@@ -48,6 +58,11 @@ public class GameLogic implements Cloneable {
 		}
 	}
 	
+	
+	/**
+	 * returns it(int) to Hero position in ArrayList<GameElements> elements
+	 * @return Hero is indentified by char 'H' or 'K' or 'A'
+	 */
 	public int getHeroPosAtArray()
 	{  int p=0;
 		for(int i=0;i<this.getGameElements().size();i++)
@@ -59,11 +74,23 @@ public class GameLogic implements Cloneable {
 		}
 		return p;
 	}
+	
+	/**
+	 * This method constructs a pair with the current Hero position in the gameboard
+	 * @return A constructed Pair calling method getx() and gety() that return the position in board for any element
+	 * @see Others.Pair
+	 */
 	public Pair getHeroPosition()
 	{	 int p=getHeroPosAtArray();
 		
 		return new Pair(this.getGameElements().get(p).getx(),this.getGameElements().get(p).gety());
 	}
+	
+	/**
+	 * This method is responsible for moving the Hero in game
+	 * @param direction It's a char specified by the player in game, w=up , a=left, s=down, d=right
+	 * @return boolean, if true hero was able to move and hero positions were updated, if false nothing changed
+	 */
 	public boolean moveHero(char direction)
 	{ int p=getHeroPosAtArray();
 	    
@@ -123,23 +150,79 @@ public class GameLogic implements Cloneable {
 		return true;
 		
 	}
-	
+
+	/**
+	 * This is a bool indicating if level2 is currently the map
+	 */
 	public void setLevel2(){this.level2=true;}
+	
+	/**
+	 * This method is used to set private atribute gamewin
+	 * @param win If win value is true the Hero has won the game! It's initiated as false.
+	 */
 	public void setGameWin(boolean win){this.gamewin=win;}
+	
+	/**
+	 * @see setGameWin
+	 * @return Returns the GameWin boolean
+	 */
 	public boolean getGameWin(){return this.gamewin;}
 
-	
+	/**
+	 * This method set's the current map that is being played
+	 * @param m Recieves a type GameMap param
+	 * @see GameMap, DungeonMap,OgreMap and setMap function
+	 */
 	public void setMap(GameMap m){this.map=m;}
+	
+	/**
+	 * This method returns the current map that is being played
+	 * @return A type GameMap, GameMap is an interface and DungeonMap and OgreMap both implement GameMap
+	 */
 	public GameMap getMap(){return this.map;}
-
+	
+	/**
+	 * This method set's the gameover boolean, wich indicates if the Hero has lost the game
+	 * @param over if true Hero has lost the game, it's initiated as false
+	 */
 	public void setGameOver(boolean over){this.gameover = over;}
+	
+	/**
+	 * This method returns the gameover boolean, wich indicates if the Hero has lost the game
+	 * @return gameOver
+	 */
 	public boolean getGameOver(){return this.gameover;}
 	
+	/**
+	 * This method adds a element to the ArrayList<GameElements>, it has to be called(1 time) in the start of each game, to add elements to the game
+	 * @param element it's any character of the game
+	 */
 	public void addGameElements(GameElements element){this.elements.add(element);}
+	
+	/**
+	 * This method returns the ArrayList<GameElements>
+	 * @return returns a vector with all the characters that are in the current game
+	 */
 	public ArrayList<GameElements> getGameElements(){return this.elements;}
 	
+	/**
+	 * This method set's the key value to true or false
+	 * @param key true if Hero has the key in possession, it's initialized as false
+	 */
 	public void setKey(boolean key){this.key = key;}
+	
+	/**
+	 * This method returns the key value
+	 * @return key true if Hero has the key in possession, it's initialized as false
+	 */
 	public boolean getKey(){return this.key;}
+	
+	/**
+	 * This method is called with the intention of checking if Hero will pick the key in his next move (OgreMap), if it does it changes the hero symbol to 'K' and removes the key from map
+	 * @param x is the x value in the map 
+	 * @param y is the y value in the map 
+	 * @return boolean, true if hero has caught the key, false if hero landed on every other position that isn't the key position
+	 */
 	public boolean pickKey(int x, int y){
 		if(this.ActualMap[x][y] == 'k')
 		{
@@ -152,8 +235,15 @@ public class GameLogic implements Cloneable {
 		return false;
 	}
 
-	
+	/**
+	 * This method returns the actual game board
+	 * @return a [][]char matrix that is the current board
+	 */
 	public char[][]getActualMap(){return this.ActualMap;}
+	
+	/**
+	 * This method is called on every move of the game, and removes from board all elements from last iteration
+	 */
 	public void cleanActualMap(){
 		if(this.key){
 			this.ActualMap = CopyCharMatrix(this.map.getMap());
@@ -171,6 +261,9 @@ public class GameLogic implements Cloneable {
 
 	}
 	
+	/**
+	 * this method is responsible for setting all current characters in the board, it's called every move of the game before printing the board
+	 */
 	public void setGame(){		
 		for(int i = 0; i < this.elements.size(); i++)
 		{
@@ -187,6 +280,11 @@ public class GameLogic implements Cloneable {
 		}
 	}
 	
+	/**
+	 * This method creates a clone (copy of a matrix) of the initial map that was passed through the GameMap class
+	 * @param input recieves a char[][] matrix from the OgreMap or DungeonMap class
+	 * @return a char[][] copy of that matrix
+	 */
 	public static char[][] CopyCharMatrix(char[][] input) {
 	    if (input == null)
 	        return null;
@@ -200,7 +298,9 @@ public class GameLogic implements Cloneable {
 	    return result;
 	}
 
-	
+	/**
+	 *This method is useful for the Dungeon Map,  once the hero picks the key this method is called to change all doors from closed to open
+	 */
 	public void changeMapKey(){
 		for(int i=0;i<this.ActualMap.length;i++)
 		{
@@ -218,6 +318,10 @@ public class GameLogic implements Cloneable {
 			}
 		}
 	}
+	
+	/**
+	 * This method is useful for the OgreMap, once the hero picks the lever doors remain closed, they just open when hero is one position away from the doors
+	 */
 	public void changeMapOgreKey(){
 		for(int i=0;i<this.ActualMap.length;i++)
 		{
@@ -230,6 +334,13 @@ public class GameLogic implements Cloneable {
 			}
 		}
 	}	
+	
+	/**
+	 * This method is useful for checking if Hero has picked the key
+	 * @param x position in column
+	 * @param y position in line
+	 * @return  boolean, true is x,y conrresponds to key position
+	 */
 	public boolean testKey(int x, int y)
 	{
 		if(this.ActualMap[x][y] == 'k')
@@ -243,6 +354,10 @@ public class GameLogic implements Cloneable {
 		
 		return false;
 	}
+	
+	/**
+	 * There was a need to get the x and y position of the key in any map, this method goes through a map, and saves the keyx and keyy position for the key in that map
+	 */
 	public void setkeypos()
 	{
 		for(int i=0;i<this.ActualMap.length;i++)
@@ -258,6 +373,10 @@ public class GameLogic implements Cloneable {
 		}
 	}
 	
+	/**
+	 * This method checks whether the Hero has moved to a open door therefore winning the game
+	 * @param g1 Hero, only works with characters 'H','A','K'
+	 */
 	public void testWin(GameElements g1){
 		
 		if(g1.getSymbol() =='H' || g1.getSymbol() =='A' || g1.getSymbol()=='K')//se g1 for o Hero
@@ -275,10 +394,23 @@ public class GameLogic implements Cloneable {
 		}
 	}
 	
+	/**
+	 * Auxiliar method to calculate distance between two points, it's used in colisions
+	 * @param x1
+	 * @param y1
+	 * @param x2
+	 * @param y2
+	 * @return
+	 */
 	public double distancePoints(double x1,double y1, double x2,double y2)
 	{
 		return Math.sqrt(Math.abs(x2-x1)*Math.abs(x2-x1)+Math.abs(y2-y1)*Math.abs(y2-y1));
 	}
+	
+	/**
+	 * This method is called in function setGame for every element of the game, it checks the logic colisions for all the maps
+	 * @param g1 any game element
+	 */
 	public void colisoes(GameElements g1)
 	{
 		double a1=1;
