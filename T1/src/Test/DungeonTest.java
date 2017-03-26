@@ -42,6 +42,8 @@ public class DungeonTest {
 		assertEquals(new Pair(1,1) ,logic.getHeroPosition());
 		assertTrue(logic.moveHero('s'));
 		assertEquals(new Pair(2,1) ,logic.getHeroPosition());
+		assertEquals(false,logic.getGameWin());
+
 	}
 	
 	@Test
@@ -58,6 +60,8 @@ public class DungeonTest {
 		assertEquals(new Pair(1,1) ,logic.getHeroPosition());
 		logic.moveHero('w');
 		assertEquals(new Pair(1,1) ,logic.getHeroPosition());
+		assertEquals(false,logic.getGameWin());
+
 	}
 	
 	@Test
@@ -76,6 +80,8 @@ public class DungeonTest {
 		logic.moveHero('d');
 		logic.setGame();
 		assertTrue(logic.getGameOver());		
+		assertEquals(false,logic.getGameWin());
+
 	}
 	
 	@Test
@@ -96,6 +102,7 @@ public class DungeonTest {
 		assertEquals(new Pair(2,1) ,logic.getHeroPosition());
 		assertFalse(logic.getGameOver());
 		assertFalse(logic.getGameWin());
+		assertEquals(false,logic.getGameWin());
 	}
 	
 	@Test
@@ -117,6 +124,8 @@ public class DungeonTest {
 		logic.setGame();
 		assertEquals(logic.getActualMap()[2][0], 'S');
 		assertEquals(logic.getActualMap()[3][0], 'S');
+		assertEquals(false,logic.getGameWin());
+
 	}
 
 	@Test
@@ -127,6 +136,7 @@ public class DungeonTest {
 		caminho.add(new Pair(3,1));
 		caminho.add(new Pair(3,2));
 		caminho.add(new Pair(2,2));
+		assertEquals(false,logic.getGameWin());
 		caminho.add(new Pair(2,1));
 		GameElements Guard = new GEGuardRookie(1,3, caminho);
 		logic.addGameElements(Hero);
@@ -152,6 +162,8 @@ public class DungeonTest {
 		logic.addGameElements(Hero);
 		logic.addGameElements(Guard1);
 		Guard1.move(logic.getActualMap());
+		assertEquals(false,logic.getGameWin());
+
 		logic.setGame();
 		assertEquals(logic.getActualMap()[2][3],'G');
 	}
@@ -164,6 +176,7 @@ public class DungeonTest {
 		caminho.add(new Pair(3,2));
 		caminho.add(new Pair(2,2));
 		caminho.add(new Pair(2,1));
+		assertEquals(false,logic.getGameWin());
 		GameElements Guard1 = new GEGuardSuspicious(1,3,'G',caminho);
 		//GameElements GuardSusp = new GEGuardSuspicious(2,2,'H',caminho);
 		logic.addGameElements(Hero);
