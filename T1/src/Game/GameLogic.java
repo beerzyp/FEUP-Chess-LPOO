@@ -93,62 +93,18 @@ public class GameLogic implements Cloneable {
 	 */
 	public boolean moveHero(char direction)
 	{ int p=getHeroPosAtArray();
-	    
-		if(direction == 'w')
-		{	
+		if(direction == 'w'){	
 			if(((GEHero)this.getGameElements().get(p)).moveTo(ActualMap, this.getGameElements().get(p).getx()- 1, this.getGameElements().get(p).gety())){
-				if(level2)
-					this.pickKey(this.getGameElements().get(p).getx()- 1, this.getGameElements().get(p).gety());
-				else
-					this.testKey(this.getGameElements().get(p).getx()- 1, this.getGameElements().get(p).gety());
-				
-				this.getGameElements().get(p).setx(this.getGameElements().get(p).getx()- 1);
-				}
-			else
-				return false;
-				
-		}
-		else if(direction == 's')
-		{	if(((GEHero)this.getGameElements().get(p)).moveTo(ActualMap, this.getGameElements().get(p).getx()+ 1, this.getGameElements().get(p).gety())){
-			if(level2)
-				this.pickKey(this.getGameElements().get(p).getx()+ 1, this.getGameElements().get(p).gety());
-			else
-				this.testKey(this.getGameElements().get(p).getx()+ 1, this.getGameElements().get(p).gety());
-			
-			this.getGameElements().get(p).setx(this.getGameElements().get(p).getx()+ 1);
-			}
-				
-			else 
-				return false;
-			
-		}
-		else if(direction == 'd')
-		{   if(((GEHero)this.getGameElements().get(p)).moveTo(ActualMap, this.getGameElements().get(p).getx(), this.getGameElements().get(p).gety()+1)){
-			if(level2)
-				this.pickKey(this.getGameElements().get(p).getx(), this.getGameElements().get(p).gety()+1);
-			else
-				this.testKey(this.getGameElements().get(p).getx(), this.getGameElements().get(p).gety()+1);
-			
-			this.getGameElements().get(p).sety(this.getGameElements().get(p).gety()+ 1);
-			}
-			else 
-				return false;
-		}
-		else if(direction == 'a')
-		{ 	if(((GEHero)this.getGameElements().get(p)).moveTo(ActualMap, this.getGameElements().get(p).getx(), this.getGameElements().get(p).gety()-1)){
-			if(level2)
-				this.pickKey(this.getGameElements().get(p).getx(), this.getGameElements().get(p).gety()-1);
-			else
-				this.testKey(this.getGameElements().get(p).getx(), this.getGameElements().get(p).gety()-1);
-			
-			this.getGameElements().get(p).sety(this.getGameElements().get(p).gety()-1);
-			}			
-		else 
-				return false;
-		}
-		
-		return true;
-		
+				if(level2)this.pickKey(this.getGameElements().get(p).getx()- 1, this.getGameElements().get(p).gety());
+				else this.testKey(this.getGameElements().get(p).getx()- 1, this.getGameElements().get(p).gety());this.getGameElements().get(p).setx(this.getGameElements().get(p).getx()- 1);
+				}else return false;		}else if(direction == 's'){	if(((GEHero)this.getGameElements().get(p)).moveTo(ActualMap, this.getGameElements().get(p).getx()+ 1, this.getGameElements().get(p).gety())){
+			if(level2)this.pickKey(this.getGameElements().get(p).getx()+ 1, this.getGameElements().get(p).gety());else this.testKey(this.getGameElements().get(p).getx()+ 1, this.getGameElements().get(p).gety());
+			this.getGameElements().get(p).setx(this.getGameElements().get(p).getx()+ 1);}		else return false;	}
+		else if(direction == 'd'){   if(((GEHero)this.getGameElements().get(p)).moveTo(ActualMap, this.getGameElements().get(p).getx(), this.getGameElements().get(p).gety()+1)){if(level2)
+				this.pickKey(this.getGameElements().get(p).getx(), this.getGameElements().get(p).gety()+1);else this.testKey(this.getGameElements().get(p).getx(), this.getGameElements().get(p).gety()+1);
+			this.getGameElements().get(p).sety(this.getGameElements().get(p).gety()+ 1);}else return false;}
+		else if(direction == 'a'){ 	if(((GEHero)this.getGameElements().get(p)).moveTo(ActualMap, this.getGameElements().get(p).getx(), this.getGameElements().get(p).gety()-1)){
+			if(level2)this.pickKey(this.getGameElements().get(p).getx(), this.getGameElements().get(p).gety()-1);else this.testKey(this.getGameElements().get(p).getx(), this.getGameElements().get(p).gety()-1); this.getGameElements().get(p).sety(this.getGameElements().get(p).gety()-1);}			else return false;}return true;
 	}
 
 	/**

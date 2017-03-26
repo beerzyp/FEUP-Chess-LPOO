@@ -27,57 +27,20 @@ public class Levels {
 	public Levels(){}
 	public void Initializel1(String typeGuard)
 	{
-		ArrayList<Pair> caminho = new ArrayList<Pair>();
-		caminho.add(new Pair(8,1));
-		caminho.add(new Pair(7,1));
-		caminho.add(new Pair(7,2));
-		caminho.add(new Pair(7,3));
-		caminho.add(new Pair(7,4));
-		caminho.add(new Pair(7,5));
-		caminho.add(new Pair(6,5));
-		caminho.add(new Pair(5,5));
-		caminho.add(new Pair(4,5));
-		caminho.add(new Pair(3,5));
-		caminho.add(new Pair(2,5));
-		caminho.add(new Pair(1,5));
-		caminho.add(new Pair(1,6));
-		caminho.add(new Pair(2,6));
-		caminho.add(new Pair(3,6));
-		caminho.add(new Pair(4,6));
-		caminho.add(new Pair(5,6));
-		caminho.add(new Pair(6,6));
-		caminho.add(new Pair(7,6));
-		caminho.add(new Pair(8,6));
-		caminho.add(new Pair(8,5));
-		caminho.add(new Pair(8,4));
-		caminho.add(new Pair(8,3));
-		caminho.add(new Pair(8,2));		
-		caminho.add(new Pair(8,1));
-		
+		ArrayList<Pair> caminho = new ArrayList<Pair>();caminho.add(new Pair(8,1));caminho.add(new Pair(7,1));caminho.add(new Pair(7,2));
+		caminho.add(new Pair(7,3));caminho.add(new Pair(7,4));caminho.add(new Pair(7,5));caminho.add(new Pair(6,5));caminho.add(new Pair(5,5));caminho.add(new Pair(4,5));caminho.add(new Pair(3,5));caminho.add(new Pair(2,5));caminho.add(new Pair(1,5));caminho.add(new Pair(1,6));caminho.add(new Pair(2,6));
+		caminho.add(new Pair(3,6));caminho.add(new Pair(4,6));
+		caminho.add(new Pair(5,6));caminho.add(new Pair(6,6));caminho.add(new Pair(7,6));caminho.add(new Pair(8,6));
+		caminho.add(new Pair(8,5));caminho.add(new Pair(8,4));caminho.add(new Pair(8,3));caminho.add(new Pair(8,2));		caminho.add(new Pair(8,1));
 		GameMap dungeon = new DungeonMap(null);
-		logic = new GameLogic(dungeon);
-		
-		Hero = new GEHero(1,1,'H');
-		
-		if(typeGuard=="Suspicious")
-		{
-			Guard = new GEGuardSuspicious(1,8, caminho);
-		}
-		else if(typeGuard=="Rookie")
-		{
-			Guard = new GEGuardRookie(1,8, caminho);
-		}
+		logic = new GameLogic(dungeon);Hero = new GEHero(1,1,'H');
+		if(typeGuard=="Suspicious"){Guard = new GEGuardSuspicious(1,8, caminho);}
+		else if(typeGuard=="Rookie"){Guard = new GEGuardRookie(1,8, caminho);}
 		else if(typeGuard=="Drunken")
-		{
-			Guard = new GEGuardDrunken(1,8, caminho);
-		}
-		else{return;}
-		
-		logic.addGameElements(Hero);
-		logic.addGameElements(Guard);
-		Guard.move(logic.getActualMap());
-		logic.setGame();
+		{Guard = new GEGuardDrunken(1,8, caminho);}else{return;}
+		logic.addGameElements(Hero);logic.addGameElements(Guard);Guard.move(logic.getActualMap());logic.setGame();
 	}
+	
 	public char[][] getActualMap()
 	{
 		return this.logic.getActualMap();
@@ -134,10 +97,7 @@ public class Levels {
 		for (int i = 0; i < lblNumberOfOgres; i++) {
 			Ogre = new GEOgre(2,3+i,'O', 2, 4);
 			logic.addGameElements(Ogre);
-		}
-		
-		moveO();
-		moveH('d');
+		}moveO();moveH('d');
 		logic.setGame();
 		logic.cleanActualMap();
 		moveH('a');
@@ -208,29 +168,17 @@ Ogre.move(logic.getActualMap());Ogre2.move(logic.getActualMap());Ogre3.move(logi
 		return logic.getHeroPosAtArray();
 	}
 	public void InitializeCreated(char[][] cs, ArrayList<GameElements> arrayList) {
-		
 		for(int z=0; z < cs.length; z++){
 			for(int y=0; y < cs[z].length; y++){
 				if(cs[z][y] == 'O'){
-					cs[z][y] = ' ';
-				}
-			}
-		}
-		
+					cs[z][y] = ' ';}}}
 		GameMap dungeon = new OgreMap(cs);
 		Hero = new GEHero(1,1,'H');
 		logic = new GameLogic(dungeon);
 		logic.addGameElements(Hero);
 		GameElements Ogre;
-		
 		for (int i = 0; i < arrayList.size(); i++) {
-			Ogre = new GEOgre(2,3+i,'O', 2, 4);
-			logic.addGameElements(Ogre);
-		}
-		
-		moveO();
-		moveH('d');
-		logic.setGame();
+			Ogre = new GEOgre(2,3+i,'O', 2, 4);logic.addGameElements(Ogre);}moveO();moveH('d');logic.setGame();
 		logic.cleanActualMap();
 		moveH('a');
 		logic.setGame();
