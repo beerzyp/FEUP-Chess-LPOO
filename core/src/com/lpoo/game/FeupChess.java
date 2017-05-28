@@ -25,7 +25,7 @@ public class FeupChess extends Game {
 		batch = new SpriteBatch();
 		setScreen(new TheScreen(this));
 
-        BoardLogic board = new BoardLogic(); //inicialização da board;
+        /*BoardLogic board = new BoardLogic(); //inicialização da board;
 
         //inserção dos elementos da board
 
@@ -267,7 +267,7 @@ public class FeupChess extends Game {
 
         System.out.println("\n");
 
-        board.printBoardChess();
+        board.printBoardChess();*/
 
     }
 
