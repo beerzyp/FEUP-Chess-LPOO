@@ -30,41 +30,41 @@ public class FeupChess extends Game {
         //inserção dos elementos da board
 
 
-        //player 2 Pieces
-        Rooks r1 = new Rooks('r', 0);
-        Knights k1 = new Knights('k', 1);
-        Bishops b1  = new Bishops('b', 2);
-        Queen q = new Queen('q', 3);
-        King a = new King('a', 4);
-        Bishops b2  = new Bishops('b', 5);
-        Knights k2 = new Knights('k', 6);
-        Rooks r2 = new Rooks('r', 7);
-        Pawns p1 = new Pawns('p', 8);
-        Pawns p2 = new Pawns('p', 9);
-        Pawns p3 = new Pawns('p', 10);
-        Pawns p4 = new Pawns('p', 11);
-        Pawns p5 = new Pawns('p', 12);
-        Pawns p6 = new Pawns('p', 13);
-        Pawns p7 = new Pawns('p', 14);
-        Pawns p8 = new Pawns('p', 15);
+		//player 2 Pieces
+		Rooks r1 = new Rooks('r', 0, false);
+		Knights k1 = new Knights('k', 1, false);
+		Bishops b1  = new Bishops('b', 2, false);
+		Queen q = new Queen('q', 3, false);
+		King a = new King('a', 4, false);
+		Bishops b2  = new Bishops('b', 5, false);
+		Knights k2 = new Knights('k', 6, false);
+		Rooks r2 = new Rooks('r', 7, false);
+		Pawns p1 = new Pawns('p', 8, false);
+		Pawns p2 = new Pawns('p', 9, false);
+		Pawns p3 = new Pawns('p', 10, false);
+		Pawns p4 = new Pawns('p', 11, false);
+		Pawns p5 = new Pawns('p', 12, false);
+		Pawns p6 = new Pawns('p', 13, false);
+		Pawns p7 = new Pawns('p', 14, false);
+		Pawns p8 = new Pawns('p', 15, false);
 
-        //player 1 Pieces
-        Rooks R1 = new Rooks('R', 56);
-        Knights K1 = new Knights('K', 57);
-        Bishops B1  = new Bishops('B', 58);
-        Queen Q = new Queen('Q', 59);
-        King A = new King('A', 60);
-        Bishops B2  = new Bishops('B', 61);
-        Knights K2 = new Knights('K', 62);
-        Rooks R2 = new Rooks('R', 63);
-        Pawns P1 = new Pawns('P', 55);
-        Pawns P2 = new Pawns('P', 54);
-        Pawns P3 = new Pawns('P', 53);
-        Pawns P4 = new Pawns('P', 52);
-        Pawns P5 = new Pawns('P', 51);
-        Pawns P6 = new Pawns('P', 50);
-        Pawns P7 = new Pawns('P', 49);
-        Pawns P8 = new Pawns('P', 48);
+		//player 1 Pieces
+		Rooks R1 = new Rooks('R', 56, true);
+		Knights K1 = new Knights('K', 57, true);
+		Bishops B1  = new Bishops('B', 58, true);
+		Queen Q = new Queen('Q', 59, true);
+		King A = new King('A', 60, true);
+		Bishops B2  = new Bishops('B', 61, true);
+		Knights K2 = new Knights('K', 62, true);
+		Rooks R2 = new Rooks('R', 63, true);
+		Pawns P1 = new Pawns('P', 55, true);
+		Pawns P2 = new Pawns('P', 54, true);
+		Pawns P3 = new Pawns('P', 53, true);
+		Pawns P4 = new Pawns('P', 52, true);
+		Pawns P5 = new Pawns('P', 51, true);
+		Pawns P6 = new Pawns('P', 50, true);
+		Pawns P7 = new Pawns('P', 49, true);
+		Pawns P8 = new Pawns('P', 48, true);
 
         //add pieces to board
         board.addBishopPieces(B1);

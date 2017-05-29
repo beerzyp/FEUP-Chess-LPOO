@@ -12,16 +12,18 @@ public class Piece {
 
     int posOnBoard;
     String actualPossibleMoves;
+    public boolean playerColor;
 
 
     public void setPosOnBoard(int posOnBoard) {
         this.posOnBoard = posOnBoard;
     }
 
-    public Piece(char sym, int pos){
+    public Piece(char sym, int pos, boolean playerColor){
         this.symbol = sym;
         this.inGame = true;
         posOnBoard = pos;
+        this.playerColor = playerColor;
     }
 
     public void setXY(int pos){

@@ -5,8 +5,8 @@ package com.lpoo.game.Logic;
  */
 
 public class Rooks extends Piece {
-    public Rooks(char sym, int pos) {
-        super(sym, pos);
+    public Rooks(char sym, int pos, boolean playerColor) {
+        super(sym, pos, playerColor);
     }
 
     public String possibleMove(BoardLogic chessBoard){

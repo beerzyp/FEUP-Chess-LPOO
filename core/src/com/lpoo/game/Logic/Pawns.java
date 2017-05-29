@@ -11,8 +11,8 @@ import static java.lang.Character.isUpperCase;
 public class Pawns extends Piece {
     private ArrayList<String> possibleMoves = new ArrayList<String>(); //especificado no formato: Linha x Coluna x Linha-PeçaQueCome x Coluna-PeçaQueCome (caso nao coma LinhaxColunaxfxf)
 
-    public Pawns(char sym, int pos) {
-        super(sym, pos);
+    public Pawns(char sym, int pos, boolean playerColor) {
+        super(sym, pos, playerColor);
     }
 
     public String possibleMove(BoardLogic chessBoard){

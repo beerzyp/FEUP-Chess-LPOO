@@ -29,6 +29,29 @@ public class BoardLogic {
 
     public int kingPositionC, kingPositionL;
 
+    public String findJogada(int pos){
+        if(findKing(pos) != null){
+            return findKing(pos).possibleMove(this);
+        }
+        else if(findQueen(pos) != null){
+            return findQueen(pos).possibleMove(this);
+        }
+        else if(findPawn(pos) != null){
+            return findPawn(pos).possibleMove(this);
+        }
+        else if(findKnight(pos) != null){
+            return findKnight(pos).possibleMove(this);
+        }
+        else if(findRook(pos) != null){
+            return findRook(pos).possibleMove(this);
+        }
+        else if(findBishop(pos) != null){
+            return findBishop(pos).possibleMove(this);
+        }
+
+        return null;
+    }
+
     public King findKing(int pos){
         for(int i = 0; i < this.kingPieces.size(); i++){
             if(this.kingPieces.get(i).getPosOnBoard() == pos)
