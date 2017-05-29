@@ -327,14 +327,47 @@ public class TheScreen implements Screen {
     public void LoadPieces(){
 
         int flag;
+        int fl = 7;
+        boolean fplo = true;
+        int ind = 55;
 
         for(int i = 0; i < board.getChessBoard().length; i++){
+
             for(int j = 0; j < board.getChessBoard()[i].length ; j++){
 
                 flag = 0;
 
+                if(fplo == false){
+                    if(ind == 63){
+                        ind = 47;
+                    }
+                    else if(ind == 55){
+                        ind = 39;
+                    }
+                    else if(ind == 47){
+                        ind = 31;
+                    }
+                    else if(ind == 39){
+                        ind = 23;
+                    }
+                    else if(ind == 31){
+                        ind = 15;
+                    }
+                    else if(ind == 23){
+                        ind = 7;
+                    }
+                    else if(ind == 15){
+                        ind = -1;
+                    }
+                }
+                else{
+                    fplo = false;
+                }
+
+                ind ++;
+
                 tempPos++;
-                final int index = 63 - tempPos;
+                final int index = ind;
                 TextureRegion TextR = new TextureRegion(transparent);
 
                 switch(board.getChessBoard()[i][j]){
@@ -412,9 +445,10 @@ public class TheScreen implements Screen {
 
                 Pieces.addActor(bt);
 
-
             }
+
         }
+
     }
 
 
