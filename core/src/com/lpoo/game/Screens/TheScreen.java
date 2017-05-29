@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
@@ -49,19 +50,19 @@ public class TheScreen implements Screen {
     Stage stage;
     Stage Pieces;
     BoardLogic board; //inicialização da board;
-    Texture whiteKing = new Texture(Gdx.files.internal("Pieces/WhiteKing.png"));
-    Texture blackKing = new Texture(Gdx.files.internal("Pieces/BlackKing.png"));
-    Texture whiteRook = new Texture(Gdx.files.internal("Pieces/WhiteRook.png"));
-    Texture blackRook = new Texture(Gdx.files.internal("Pieces/BlackRook.png"));
-    Texture whiteKnight = new Texture(Gdx.files.internal("Pieces/WhiteKnight.png"));
-    Texture blackKnight = new Texture(Gdx.files.internal("Pieces/BlackKnight.png"));
-    Texture whiteQueen = new Texture(Gdx.files.internal("Pieces/WhiteQueen.png"));
-    Texture blackQueen = new Texture(Gdx.files.internal("Pieces/BlackQueen.png"));
-    Texture whitePawn = new Texture(Gdx.files.internal("Pieces/WhitePawn.png"));
-    Texture blackPawn = new Texture(Gdx.files.internal("Pieces/BlackPawn.png"));
-    Texture whiteBishop = new Texture(Gdx.files.internal("Pieces/WhiteBishop.png"));
-    Texture blackBishop = new Texture(Gdx.files.internal("Pieces/BlackBishop.png"));
-    Texture transparent = new Texture(Gdx.files.internal("Pieces/transparent.png"));
+    Sprite whiteKing = new Sprite(new Texture(Gdx.files.internal("Pieces/WhiteKing.png")));
+    Sprite blackKing = new Sprite(new Texture(Gdx.files.internal("Pieces/BlackKing.png")));
+    Sprite whiteRook = new Sprite(new Texture(Gdx.files.internal("Pieces/WhiteRook.png")));
+    Sprite blackRook = new Sprite(new Texture(Gdx.files.internal("Pieces/BlackRook.png")));
+    Sprite whiteKnight = new Sprite(new Texture(Gdx.files.internal("Pieces/WhiteKnight.png")));
+    Sprite blackKnight = new Sprite(new Texture(Gdx.files.internal("Pieces/BlackKnight.png")));
+    Sprite whiteQueen = new Sprite(new Texture(Gdx.files.internal("Pieces/WhiteQueen.png")));
+    Sprite blackQueen = new Sprite(new Texture(Gdx.files.internal("Pieces/BlackQueen.png")));
+    Sprite whitePawn = new Sprite(new Texture(Gdx.files.internal("Pieces/WhitePawn.png")));
+    Sprite blackPawn = new Sprite(new Texture(Gdx.files.internal("Pieces/BlackPawn.png")));
+    Sprite whiteBishop = new Sprite(new Texture(Gdx.files.internal("Pieces/WhiteBishop.png")));
+    Sprite blackBishop = new Sprite(new Texture(Gdx.files.internal("Pieces/BlackBishop.png")));
+    Sprite transparent = new Sprite(new Texture(Gdx.files.internal("Pieces/transparent.png")));
     int tempPos = -1;
 
 
@@ -70,6 +71,8 @@ public class TheScreen implements Screen {
         texture = new Texture("badlogic.jpg");
         gamecam = new OrthographicCamera();
         gameport = new FitViewport(500,500,gamecam);
+        //gamecam.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
         LoadLogic();
         LoadBoard();
         LoadPieces();
@@ -284,7 +287,7 @@ public class TheScreen implements Screen {
         green = new Texture(Gdx.files.internal("green.jpg"));
         white = new Texture(Gdx.files.internal("white.jpg"));
 
-
+        //board.flipBoard();
 
 
         stage = new Stage(gameport, game.batch);
@@ -321,6 +324,7 @@ public class TheScreen implements Screen {
             }
         }*/
 
+
     }
 
 
@@ -337,42 +341,14 @@ public class TheScreen implements Screen {
 
                 flag = 0;
 
-                if(fplo == false){
-                    if(ind == 63){
-                        ind = 47;
-                    }
-                    else if(ind == 55){
-                        ind = 39;
-                    }
-                    else if(ind == 47){
-                        ind = 31;
-                    }
-                    else if(ind == 39){
-                        ind = 23;
-                    }
-                    else if(ind == 31){
-                        ind = 15;
-                    }
-                    else if(ind == 23){
-                        ind = 7;
-                    }
-                    else if(ind == 15){
-                        ind = -1;
-                    }
-                }
-                else{
-                    fplo = false;
-                }
-
-                ind ++;
-
                 tempPos++;
-                final int index = ind;
+                final int index = tempPos;
                 TextureRegion TextR = new TextureRegion(transparent);
 
                 switch(board.getChessBoard()[i][j]){
                     case 'a':case 'A':{
-                        if(!board.findKing(tempPos).playerColor){
+                        if(board.findKing(tempPos).playerColor){
+                            //whiteKing.flip(false,true);
                             TextR = new TextureRegion(whiteKing);
                         }
                         else{
@@ -381,7 +357,7 @@ public class TheScreen implements Screen {
                         break;
                     }
                     case 'k':case 'K':{
-                        if(!board.findKnight(tempPos).playerColor){
+                        if(board.findKnight(tempPos).playerColor){
                             TextR = new TextureRegion(whiteKnight);
                         }
                         else{
@@ -390,7 +366,7 @@ public class TheScreen implements Screen {
                         break;
                     }
                     case 'b':case 'B':{
-                        if(!board.findBishop(tempPos).playerColor){
+                        if(board.findBishop(tempPos).playerColor){
                             TextR = new TextureRegion(whiteBishop);
                         }
                         else{
@@ -399,7 +375,7 @@ public class TheScreen implements Screen {
                         break;
                     }
                     case 'r':case 'R':{
-                        if(!board.findRook(tempPos).playerColor){
+                        if(board.findRook(tempPos).playerColor){
                             TextR = new TextureRegion(whiteRook);
                         }
                         else{
@@ -408,7 +384,7 @@ public class TheScreen implements Screen {
                         break;
                     }
                     case 'q':case 'Q':{
-                        if(!board.findQueen(tempPos).playerColor){
+                        if(board.findQueen(tempPos).playerColor){
                             TextR = new TextureRegion(whiteQueen);
                         }
                         else{
@@ -417,7 +393,7 @@ public class TheScreen implements Screen {
                         break;
                     }
                     case 'p':case 'P':{
-                        if(!board.findPawn(tempPos).playerColor){
+                        if(board.findPawn(tempPos).playerColor){
                             TextR = new TextureRegion(whitePawn);
                         }
                         else{
@@ -431,6 +407,7 @@ public class TheScreen implements Screen {
                         break;
                     }
                 }
+                TextR.flip(false,true);
                 ImageButton bt = new ImageButton(new TextureRegionDrawable(TextR));
 
                 if(flag != 1){
@@ -439,6 +416,7 @@ public class TheScreen implements Screen {
                         public void clicked(InputEvent event, float x, float y) {
                             System.out.println(index);
                             System.out.println(board.findJogada(index));
+
                         };
                     });
                 }
@@ -448,6 +426,9 @@ public class TheScreen implements Screen {
             }
 
         }
+
+        Pieces.getCamera().up.set(0, -1, 0);
+        Pieces.getCamera().direction.set(0, 0, 1);
 
     }
 
