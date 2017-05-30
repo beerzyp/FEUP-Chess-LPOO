@@ -13,12 +13,14 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.SnapshotArray;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -47,6 +49,7 @@ public class TheScreen implements Screen {
     private Viewport gameport;
     BitmapFont font;
     Texture green, white;
+    DragAndDrop dnd;
     Stage stage;
     Stage Pieces;
     BoardLogic board; //inicialização da board;
@@ -71,11 +74,12 @@ public class TheScreen implements Screen {
         texture = new Texture("badlogic.jpg");
         gamecam = new OrthographicCamera();
         gameport = new FitViewport(500,500,gamecam);
-        //gamecam.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
+        //gamecam.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight())
         LoadLogic();
         LoadBoard();
+        Gdx.input.setInputProcessor(Pieces);
         LoadPieces();
+        //Gdx.input.setInputProcessor(stage);
     }
 
     public void LoadLogic(){
@@ -308,6 +312,19 @@ public class TheScreen implements Screen {
                         stage.addActor(new ImageButton(new TextureRegionDrawable(new TextureRegion(white))));
             }
         }
+        float buttonWidth = gamecam.viewportWidth / 8;
+        float buttonHeight = gamecam.viewportHeight / 8;
+        for(int y = 0; y < 8; y++){
+            for(int x = 0; x < 8; x++){
+                ImageButton button = (ImageButton)stage.getActors().get(x + y * 8);
+                button.setSize(100,100);
+                button.setX(x * buttonWidth);
+                button.setY(y * buttonHeight);
+                button.setWidth(buttonWidth);
+                button.setHeight(buttonHeight);
+            }
+        }
+
 
         /*for(int y = 0; y < 8; y++){
             for(int x = 0; x < 8; x++){
@@ -408,7 +425,7 @@ public class TheScreen implements Screen {
                     }
                 }
                 TextR.flip(false,true);
-                ImageButton bt = new ImageButton(new TextureRegionDrawable(TextR));
+                final Image bt = new Image(new TextureRegionDrawable(TextR));
 
                 if(flag != 1){
                     bt.addListener( new ClickListener() {
@@ -419,12 +436,56 @@ public class TheScreen implements Screen {
 
                         };
                     });
+                    dnd = new DragAndDrop();
+                    dnd.addSource(new DragAndDrop.Source(bt) {
+                        public DragAndDrop.Payload dragStart(InputEvent event, float x, float y, int pointer) {
+                            dnd.setTapSquareSize(2);
+                            final DragAndDrop.Payload payload = new DragAndDrop.Payload();
+                            payload.setDragActor(bt);
+                            //dnd.setDragActorPosition(-x,-y+(gamecam.viewportHeight / 8));
+                            return payload;
+                        }
+                        @Override
+                        public void dragStop (InputEvent event, float x, float y, int pointer, DragAndDrop.Payload payload,DragAndDrop.Target target) {
+                            if(target != null) {
+                                bt.setPosition(target.getActor().getX(), target.getActor().getY());
+                            }
+                            Pieces.addActor(bt);
+                        }
+
+                    });
+                    //to add targets
+                   /* dnd.addTarget(new DragAndDrop.Target(bt){
+
+                        @Override
+                        public boolean drag(DragAndDrop.Source source, DragAndDrop.Payload payload, float x, float y, int pointer) {
+                            return true;
+                        }
+
+                        @Override
+                        public void drop(DragAndDrop.Source source, DragAndDrop.Payload payload, float x, float y, int pointer) {
+
+                        }
+                    });*/
                 }
 
                 Pieces.addActor(bt);
 
             }
 
+        }
+        float buttonWidth = gamecam.viewportWidth / 8;
+        float buttonHeight = gamecam.viewportHeight / 8;
+        for(int y = 0; y < 8; y++){
+            for(int x = 0; x < 8; x++){
+                Image button = (Image)Pieces.getActors().get(x + y * 8);
+                button.setSize(100,100);
+                button.setX(x * buttonWidth);
+                button.setY(y * buttonHeight);
+                button.setWidth(buttonWidth);
+                button.setHeight(buttonHeight);
+
+            }
         }
 
         Pieces.getCamera().up.set(0, -1, 0);
@@ -444,33 +505,7 @@ public class TheScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         //game.batch.setProjectionMatrix(gamecam.combined);
 
-        float buttonWidth = gamecam.viewportWidth / 8;
-        float buttonHeight = gamecam.viewportHeight / 8;
-        for(int y = 0; y < 8; y++){
-            for(int x = 0; x < 8; x++){
-                ImageButton button = (ImageButton)stage.getActors().get(x + y * 8);
-                button.setSize(100,100);
-                button.setX(x * buttonWidth);
-                button.setY(y * buttonHeight);
-                button.setWidth(buttonWidth);
-                button.setHeight(buttonHeight);
-            }
-        }
 
-
-        //System.out.println(board.findJogada(48));
-
-        for(int y = 0; y < 8; y++){
-            for(int x = 0; x < 8; x++){
-                ImageButton button = (ImageButton)Pieces.getActors().get(x + y * 8);
-                button.setSize(100,100);
-                button.setX(x * buttonWidth);
-                button.setY(y * buttonHeight);
-                button.setWidth(buttonWidth);
-                button.setHeight(buttonHeight);
-                Gdx.input.setInputProcessor(Pieces);
-            }
-        }
         //tempPos = -1;
 
         stage.act(delta);
