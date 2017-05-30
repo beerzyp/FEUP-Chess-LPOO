@@ -434,7 +434,7 @@ public class TheScreen implements Screen {
                             System.out.println(index);
                             System.out.println(board.findJogada(index));
 
-                        };
+                        }
                     });
                     dnd = new DragAndDrop();
                     dnd.addSource(new DragAndDrop.Source(bt) {
