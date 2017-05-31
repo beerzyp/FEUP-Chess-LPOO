@@ -392,7 +392,7 @@ public class TheScreen implements Screen {
                         }
                         break;
                     }
-                    case 'r':case 'R':{
+                       case 'r':case 'R':{
                         if(board.findRook(tempPos).playerColor){
                             TextR = new TextureRegion(whiteRook);
                         }
