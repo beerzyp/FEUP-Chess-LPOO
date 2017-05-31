@@ -465,7 +465,7 @@ public class TheScreen implements Screen {
 
                     });
                     //to add targets
-                   /* dnd.addTarget(new DragAndDrop.Target(bt){
+                    dnd.addTarget(new DragAndDrop.Target(bt){
 
                         @Override
                         public boolean drag(DragAndDrop.Source source, DragAndDrop.Payload payload, float x, float y, int pointer) {
@@ -476,7 +476,7 @@ public class TheScreen implements Screen {
                         public void drop(DragAndDrop.Source source, DragAndDrop.Payload payload, float x, float y, int pointer) {
 
                         }
-                    });*/
+                    });
                 }
 
                 Pieces.addActor(bt);
