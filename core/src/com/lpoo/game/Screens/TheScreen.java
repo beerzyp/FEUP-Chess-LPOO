@@ -3,6 +3,7 @@ package com.lpoo.game.Screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -302,21 +303,21 @@ public class TheScreen implements Screen {
             for(int x = 0; x < 8; x++){
                 if(y % 2 == 0)
                     if(x % 2 == 0)
-                        stage.addActor(new ImageButton(new TextureRegionDrawable(new TextureRegion(white))));
+                        stage.addActor(new Image(new TextureRegionDrawable(new TextureRegion(white))));
                     else
-                        stage.addActor(new ImageButton(new TextureRegionDrawable(new TextureRegion(green))));
+                        stage.addActor(new Image(new TextureRegionDrawable(new TextureRegion(green))));
                 else
                     if(x % 2 == 0)
-                        stage.addActor(new ImageButton(new TextureRegionDrawable(new TextureRegion(green))));
+                        stage.addActor(new Image(new TextureRegionDrawable(new TextureRegion(green))));
                     else
-                        stage.addActor(new ImageButton(new TextureRegionDrawable(new TextureRegion(white))));
+                        stage.addActor(new Image(new TextureRegionDrawable(new TextureRegion(white))));
             }
         }
         float buttonWidth = gamecam.viewportWidth / 8;
         float buttonHeight = gamecam.viewportHeight / 8;
         for(int y = 0; y < 8; y++){
             for(int x = 0; x < 8; x++){
-                ImageButton button = (ImageButton)stage.getActors().get(x + y * 8);
+                Image button = (Image)stage.getActors().get(x + y * 8);
                 button.setSize(100,100);
                 button.setX(x * buttonWidth);
                 button.setY(y * buttonHeight);
@@ -431,8 +432,17 @@ public class TheScreen implements Screen {
                     bt.addListener( new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
-                            System.out.println(index);
-                            System.out.println(board.findJogada(index));
+                            String[] AllPossibleMoves=board.retrievePossibleMovesList(board.findJogada(index));
+                            if(AllPossibleMoves.length!=0)
+                            {
+                                for(int l=0;l<AllPossibleMoves.length;l++)
+                                {
+                                   int indexOnBoard=board.getPossibleMoveIndexAtBoard(AllPossibleMoves[l]);
+                                   if(indexOnBoard!=-1)
+                                    stage.getActors().get(indexOnBoard).setColor(Color.RED);
+                                    //System.out.println(indexOnBoard);
+                                }
+                            }
 
                         }
                     });
