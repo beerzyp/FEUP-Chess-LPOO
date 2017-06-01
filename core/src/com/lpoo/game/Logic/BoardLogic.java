@@ -7,7 +7,12 @@ import java.util.ArrayList;
  */
 
 public class BoardLogic {
-    public BoardLogic(){}
+    public boolean kingSsNotSafe;
+    public boolean gameOver;
+
+    public BoardLogic(){
+        this.gameOver = false;
+    }
 
     private char chessBoard[][]={
         {'r','k','b','q','a','b','k','r'},

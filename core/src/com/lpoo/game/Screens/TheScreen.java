@@ -95,6 +95,13 @@ public class TheScreen implements Screen {
         int flag;
         tempPos = -1;
         globalMade = new ArrayList<Integer>();
+        board.kingSsNotSafe = false;
+
+        for(int i = 0; i < Pieces.getActors().size; i++){
+            Pieces.getActors().get(i).clearListeners();
+        }
+
+        board.printBoardChess();
 
 
         //Pieces = new Stage(gameport, game.batch);
@@ -179,7 +186,33 @@ public class TheScreen implements Screen {
                 final Image bt = new Image(new TextureRegionDrawable(TextR));
 
                 if(flag != 1){
-                    listenerTreatment(index, bt);
+                    if(Character.isUpperCase(board.getChessBoard()[i][j])){
+
+
+                            for(int z= 0 ; z < board.getKingPieces().size(); z++)
+                                if(board.getKingPieces().get(z).getSymbol() == 'A')
+                                    board.getKingPieces().get(z).possibleMove(board);
+
+
+                        if(!board.kingSsNotSafe)
+                            listenerTreatment(index, bt);
+                        else{
+                            //System.out.println("O rei nao esta seguro!");
+                            if(board.getChessBoard()[i][j] == 'A'){
+                                bt.setColor(Color.RED);
+                                listenerTreatment(index, bt);
+
+                                for(int z= 0 ; z < board.getKingPieces().size(); z++)
+                                    if(board.getKingPieces().get(z).getSymbol() == 'A')
+                                        if(board.getKingPieces().get(z).possibleMove(board) == ""){
+                                            board.gameOver = true;
+                                        }
+
+
+                            }
+                        }
+                    }
+
                 }
 
                 Pieces.addActor(bt);
@@ -197,14 +230,7 @@ public class TheScreen implements Screen {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 Gdx.app.log("Example", "touch started at (" + x + ", " + y + ")");
                 listenerFlag = true;
-                if(globalMade != null){
-                    for(int i=0; i < globalMade.size(); i++){
-                        System.out.print("Pontos: ");
-                        System.out.println(globalMade.get(i));
-                        Pieces.getActors().get(globalMade.get(i)).clearListeners();
-                        //Pieces.getActors().get(globalMade.get(i)).clear();
-                    }
-                }
+                clearActiveListeners();
                 return true;
             }
 
@@ -221,7 +247,7 @@ public class TheScreen implements Screen {
 
 
                         if(indexOnBoard!=-1){
-                            //stage.getActors().get(indexOnBoard).setColor(Color.RED);
+                            stage.getActors().get(indexOnBoard).setColor(Color.RED);
 
                             if(listenerFlag)
                                 ((Image)Pieces.getActors().get(indexOnBoard)).addListener( new InputListener() {
@@ -263,6 +289,7 @@ public class TheScreen implements Screen {
                                             Pieces.getActors().get(indexOnBoard).clearListeners();
                                             Pieces.getActors().get(index).clearListeners();
 
+                                            clearActiveListeners();
 
                                         }
 
@@ -279,6 +306,17 @@ public class TheScreen implements Screen {
 
             }
         });
+    }
+
+    public void clearActiveListeners() {
+        if(globalMade != null){
+            for(int i=0; i < globalMade.size(); i++){
+                System.out.print("Pontos: ");
+                System.out.println(globalMade.get(i));
+                stage.getActors().get(globalMade.get(i)).setColor(Color.WHITE);
+                Pieces.getActors().get(globalMade.get(i)).clearListeners();
+            }
+        }
     }
 
     public void LoadLogic(){
@@ -391,7 +429,6 @@ public class TheScreen implements Screen {
 
     }
 
-
     public void LoadPieces(){
 
         int flag;
@@ -500,6 +537,10 @@ public class TheScreen implements Screen {
 
 
         //tempPos = -1;
+
+        if(board.gameOver){
+            System.out.println("Game Over!");
+        }
 
         if(madeNewMove == true){
             madeNewMove = false;
