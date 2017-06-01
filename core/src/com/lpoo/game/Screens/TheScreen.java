@@ -205,6 +205,7 @@ public class TheScreen implements Screen {
                                 for(int z= 0 ; z < board.getKingPieces().size(); z++)
                                     if(board.getKingPieces().get(z).getSymbol() == 'A')
                                         if(board.getKingPieces().get(z).possibleMove(board) == ""){
+                                            bt.setColor(Color.GOLD);
                                             board.gameOver = true;
                                         }
                             }
