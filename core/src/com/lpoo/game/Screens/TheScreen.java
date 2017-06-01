@@ -53,6 +53,7 @@ public class TheScreen implements Screen {
     DragAndDrop dnd;
     Stage stage;
     Stage Pieces;
+    boolean madeNewMove;
     BoardLogic board; //inicialização da board;
     Sprite whiteKing = new Sprite(new Texture(Gdx.files.internal("Pieces/WhiteKing.png")));
     Sprite blackKing = new Sprite(new Texture(Gdx.files.internal("Pieces/BlackKing.png")));
@@ -80,7 +81,163 @@ public class TheScreen implements Screen {
         LoadBoard();
         Gdx.input.setInputProcessor(Pieces);
         LoadPieces();
+        madeNewMove = false;
+        PlayOnBoard();
         //Gdx.input.setInputProcessor(stage);
+    }
+
+    public void PlayOnBoard(){
+        int flag;
+        tempPos = -1;
+
+        //Pieces = new Stage(gameport, game.batch);
+        Pieces.clear();
+
+        //board.printBoardChess();
+
+        for(int i = 0; i < board.getChessBoard().length; i++){
+
+            for(int j = 0; j < board.getChessBoard()[i].length ; j++){
+
+                flag = 0;
+
+                tempPos++;
+                final int index = tempPos;
+                TextureRegion TextR = new TextureRegion(transparent);
+
+                switch(board.getChessBoard()[i][j]){
+                    case 'a':case 'A':{
+                        if(board.findKing(tempPos).playerColor){
+                            //whiteKing.flip(false,true);
+                            TextR = new TextureRegion(whiteKing);
+                        }
+                        else{
+                            TextR = new TextureRegion(blackKing);
+                        }
+                        break;
+                    }
+                    case 'k':case 'K':{
+                        if(board.findKnight(tempPos).playerColor){
+                            TextR = new TextureRegion(whiteKnight);
+                        }
+                        else{
+                            TextR = new TextureRegion(blackKnight);
+                        }
+                        break;
+                    }
+                    case 'b':case 'B':{
+                        if(board.findBishop(tempPos).playerColor){
+                            TextR = new TextureRegion(whiteBishop);
+                        }
+                        else{
+                            TextR = new TextureRegion(blackBishop);
+                        }
+                        break;
+                    }
+                    case 'r':case 'R':{
+                        if(board.findRook(tempPos).playerColor){
+                            TextR = new TextureRegion(whiteRook);
+                        }
+                        else{
+                            TextR = new TextureRegion(blackRook);
+                        }
+                        break;
+                    }
+                    case 'q':case 'Q':{
+                        if(board.findQueen(tempPos).playerColor){
+                            TextR = new TextureRegion(whiteQueen);
+                        }
+                        else{
+                            TextR = new TextureRegion(blackQueen);
+                        }
+                        break;
+                    }
+                    case 'p':case 'P':{
+                        if(board.findPawn(tempPos).playerColor){
+                            TextR = new TextureRegion(whitePawn);
+                        }
+                        else{
+                            TextR = new TextureRegion(blackPawn);
+                        }
+                        break;
+                    }
+                    case ' ':{
+                        TextR = new TextureRegion(transparent);
+                        flag = 1;
+                        break;
+                    }
+                }
+                TextR.flip(false,true);
+
+                final Image bt = new Image(new TextureRegionDrawable(TextR));
+
+                if(flag != 1){
+                    bt.addListener( new ClickListener() {
+                        @Override
+                        public void clicked(InputEvent event, float x, float y) {
+                            final String[] AllPossibleMoves=board.retrievePossibleMovesList(board.findJogada(index));
+                            if(AllPossibleMoves.length!=0)
+                            {
+                                for(int l=0;l<AllPossibleMoves.length;l++)
+                                {
+                                    final int tmp = l;
+                                    final int indexOnBoard=board.getPossibleMoveIndexAtBoard(AllPossibleMoves[l]);
+
+                                    if(indexOnBoard!=-1){
+                                        Pieces.getActors().get(indexOnBoard).setColor(Color.RED);
+
+                                        ((Image)Pieces.getActors().get(indexOnBoard)).addListener( new ClickListener() {
+                                            @Override
+                                            public void clicked(InputEvent event, float x, float y) {
+                                                System.out.println(tmp);
+                                                System.out.println(index);
+                                                System.out.println(AllPossibleMoves[tmp]);
+
+                                                if(board.findKing(index) != null){
+                                                     board.findKing(index).setNewMove(AllPossibleMoves[tmp], board);
+
+                                                }
+                                                else if(board.findQueen(index) != null){
+                                                     board.findQueen(index).setNewMove(AllPossibleMoves[tmp], board);
+                                                }
+                                                else if(board.findPawn(index) != null){
+                                                    board.findPawn(index).setNewMove(AllPossibleMoves[tmp], board);
+                                                }
+                                                else if(board.findKnight(index) != null){
+                                                    board.findKnight(index).setNewMove(AllPossibleMoves[tmp], board);
+                                                }
+                                                else if(board.findRook(index) != null){
+                                                    board.findRook(index).setNewMove(AllPossibleMoves[tmp], board);
+                                                }
+                                                else if(board.findBishop(index) != null){
+                                                    board.findBishop(index).setNewMove(AllPossibleMoves[tmp], board);
+                                                }
+
+                                                board.flipBoard();
+                                                madeNewMove = true;
+
+                                                //board.printBoardChess();
+                                            }
+                                        });
+
+
+
+                                    }
+
+                                }
+
+                            }
+
+                        }
+                    });
+                }
+
+                Pieces.addActor(bt);
+
+            }
+
+        }
+
     }
 
     public void LoadLogic(){
@@ -159,131 +316,6 @@ public class TheScreen implements Screen {
         board.addPawnPieces(P8);
 
 
-        //int pos = 0;
-
-        /*while(pos != -1){
-
-            board.printBoardChess();
-
-            System.out.println("\n");
-
-            System.out.println("Search for a piece (48-63): ");
-            Scanner S = new Scanner(System.in);
-            pos = S.nextInt();
-
-            while(board.getChessBoard()[pos/8][pos%8] == ' ' || Character.isLowerCase(board.getChessBoard()[pos/8][pos%8])){
-                System.out.println("That chell is empty or represents a piece of the other player!: ");
-                S = new Scanner(System.in);
-                pos = S.nextInt();
-            }
-
-            if(board.findBishop(pos) != null){
-                Bishops bishop = board.findBishop(pos);
-                String[] possibleMoves = board.retrievePossibleMovesList(bishop.possibleMove(board));
-
-                System.out.println("Choose move (0-X):\n");
-
-                for(int i = 0; i < possibleMoves.length; i++){
-                    System.out.print(i);
-                    System.out.print(" -> ");
-                    System.out.println(possibleMoves[i]);
-                }
-
-                Scanner scan = new Scanner(System.in);
-                pos = scan.nextInt();
-
-                bishop.setNewMove(possibleMoves[pos], board);
-
-            }
-            else if(board.findKing(pos) != null){
-                King king = board.findKing(pos);
-                String[] possibleMoves = board.retrievePossibleMovesList(king.possibleMove(board));
-
-                System.out.println("Choose move (0-X):\n");
-
-                for(int i = 0; i < possibleMoves.length; i++){
-                    System.out.print(i);
-                    System.out.print(" -> ");
-                    System.out.println(possibleMoves[i]);
-                }
-
-                Scanner scan = new Scanner(System.in);
-                pos = scan.nextInt();
-
-                king.setNewMove(possibleMoves[pos], board);
-            }
-            else if(board.findKnight(pos) != null){
-                Knights knight = board.findKnight(pos);
-                String[] possibleMoves = board.retrievePossibleMovesList(knight.possibleMove(board));
-
-                System.out.println("Choose move (0-X):\n");
-
-                for(int i = 0; i < possibleMoves.length; i++){
-                    System.out.print(i);
-                    System.out.print(" -> ");
-                    System.out.println(possibleMoves[i]);
-                }
-
-                Scanner scan = new Scanner(System.in);
-                pos = scan.nextInt();
-
-                knight.setNewMove(possibleMoves[pos], board);
-            }
-            else if(board.findPawn(pos) != null){
-                Pawns pawn = board.findPawn(pos);
-                String[] possibleMoves = board.retrievePossibleMovesList(pawn.possibleMove(board));
-
-                System.out.println("Choose move (0-X):\n");
-
-                for(int i = 0; i < possibleMoves.length; i++){
-                    System.out.print(i);
-                    System.out.print(" -> ");
-                    System.out.println(possibleMoves[i]);
-                }
-
-                Scanner scan = new Scanner(System.in);
-                pos = scan.nextInt();
-
-                pawn.setNewMove(possibleMoves[pos], board);
-            }
-            else if(board.findQueen(pos) != null){
-                Queen queen = board.findQueen(pos);
-                String[] possibleMoves = board.retrievePossibleMovesList(queen.possibleMove(board));
-
-                System.out.println("Choose move (0-X):\n");
-
-                for(int i = 0; i < possibleMoves.length; i++){
-                    System.out.print(i);
-                    System.out.print(" -> ");
-                    System.out.println(possibleMoves[i]);
-                }
-
-                Scanner scan = new Scanner(System.in);
-                pos = scan.nextInt();
-
-                queen.setNewMove(possibleMoves[pos], board);
-            }
-            else if(board.findRook(pos) != null){
-                Rooks rook = board.findRook(pos);
-                String[] possibleMoves = board.retrievePossibleMovesList(rook.possibleMove(board));
-
-                System.out.println("Choose move (0-X):\n");
-
-                for(int i = 0; i < possibleMoves.length; i++){
-                    System.out.print(i);
-                    System.out.print(" -> ");
-                    System.out.println(possibleMoves[i]);
-                }
-
-                Scanner scan = new Scanner(System.in);
-                pos = scan.nextInt();
-
-                rook.setNewMove(possibleMoves[pos], board);
-            }
-
-            System.out.println("\n");
-            board.flipBoard();
-        }*/
     }
 
     public void LoadBoard(){
@@ -313,34 +345,7 @@ public class TheScreen implements Screen {
                         stage.addActor(new Image(new TextureRegionDrawable(new TextureRegion(white))));
             }
         }
-        float buttonWidth = gamecam.viewportWidth / 8;
-        float buttonHeight = gamecam.viewportHeight / 8;
-        for(int y = 0; y < 8; y++){
-            for(int x = 0; x < 8; x++){
-                Image button = (Image)stage.getActors().get(x + y * 8);
-                button.setSize(100,100);
-                button.setX(x * buttonWidth);
-                button.setY(y * buttonHeight);
-                button.setWidth(buttonWidth);
-                button.setHeight(buttonHeight);
-            }
-        }
 
-
-        /*for(int y = 0; y < 8; y++){
-            for(int x = 0; x < 8; x++){
-                if(y % 2 == 0)
-                    if(x % 2 == 0)
-                        Pieces.addActor(new ImageButton(new TextureRegionDrawable(new TextureRegion(whiteKing))));
-                    else
-                        Pieces.addActor(new ImageButton(new TextureRegionDrawable(new TextureRegion(blackKing))));
-                else
-                if(x % 2 == 0)
-                    Pieces.addActor(new ImageButton(new TextureRegionDrawable(new TextureRegion(blackKing))));
-                else
-                    Pieces.addActor(new ImageButton(new TextureRegionDrawable(new TextureRegion(whiteKing))));
-            }
-        }*/
 
 
     }
@@ -428,7 +433,7 @@ public class TheScreen implements Screen {
                 TextR.flip(false,true);
                 final Image bt = new Image(new TextureRegionDrawable(TextR));
 
-                if(flag != 1){
+                /*if(flag != 1){
                     bt.addListener( new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
@@ -446,7 +451,7 @@ public class TheScreen implements Screen {
 
                         }
                     });
-                    dnd = new DragAndDrop();
+                    /*dnd = new DragAndDrop();
                     dnd.addSource(new DragAndDrop.Source(bt) {
                         public DragAndDrop.Payload dragStart(InputEvent event, float x, float y, int pointer) {
                             dnd.setTapSquareSize(2);
@@ -477,26 +482,14 @@ public class TheScreen implements Screen {
 
                         }
                     });
-                }
+                }*/
 
                 Pieces.addActor(bt);
 
             }
 
         }
-        float buttonWidth = gamecam.viewportWidth / 8;
-        float buttonHeight = gamecam.viewportHeight / 8;
-        for(int y = 0; y < 8; y++){
-            for(int x = 0; x < 8; x++){
-                Image button = (Image)Pieces.getActors().get(x + y * 8);
-                button.setSize(100,100);
-                button.setX(x * buttonWidth);
-                button.setY(y * buttonHeight);
-                button.setWidth(buttonWidth);
-                button.setHeight(buttonHeight);
 
-            }
-        }
 
         Pieces.getCamera().up.set(0, -1, 0);
         Pieces.getCamera().direction.set(0, 0, 1);
@@ -518,10 +511,44 @@ public class TheScreen implements Screen {
 
         //tempPos = -1;
 
+        if(madeNewMove == true){
+            madeNewMove = false;
+            PlayOnBoard();
+        }
+
+        float buttonWidth = gamecam.viewportWidth / 8;
+        float buttonHeight = gamecam.viewportHeight / 8;
+
+        for(int y = 0; y < 8; y++){
+            for(int x = 0; x < 8; x++){
+                Image button = (Image)stage.getActors().get(x + y * 8);
+                button.setSize(100,100);
+                button.setX(x * buttonWidth);
+                button.setY(y * buttonHeight);
+                button.setWidth(buttonWidth);
+                button.setHeight(buttonHeight);
+            }
+        }
+
+        for(int y = 0; y < 8; y++){
+            for(int x = 0; x < 8; x++){
+                Image button = (Image)Pieces.getActors().get(x + y * 8);
+                button.setSize(100,100);
+                button.setX(x * buttonWidth);
+                button.setY(y * buttonHeight);
+                button.setWidth(buttonWidth);
+                button.setHeight(buttonHeight);
+
+            }
+        }
+
         stage.act(delta);
         stage.draw();
+
         Pieces.act(delta);
         Pieces.draw();
+
+
 
         /*SnapshotArray<Actor> actors = new SnapshotArray<Actor>(Pieces.getActors());
         for(Actor actor : actors) {
