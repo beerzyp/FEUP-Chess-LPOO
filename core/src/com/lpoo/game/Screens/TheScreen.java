@@ -207,8 +207,6 @@ public class TheScreen implements Screen {
                                         if(board.getKingPieces().get(z).possibleMove(board) == ""){
                                             board.gameOver = true;
                                         }
-
-
                             }
                         }
                     }
