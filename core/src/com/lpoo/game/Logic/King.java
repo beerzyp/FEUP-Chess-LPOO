@@ -25,8 +25,6 @@ public class King extends Piece {
                         if (chessBoard.kingSafe()) {
                             list=list+r+c+this.getSymbol()+(r-1+j/3)+(c-1+j%3)+oldPiece+';';
                         }
-                        else
-                            chessBoard.kingSsNotSafe = true;
                         chessBoard.getChessBoard()[r][c]='A';
                         chessBoard.getChessBoard()[r-1+j/3][c-1+j%3]=oldPiece;
                         chessBoard.kingPositionC=kingTemp;

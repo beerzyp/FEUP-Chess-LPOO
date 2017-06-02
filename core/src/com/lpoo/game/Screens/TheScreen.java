@@ -198,8 +198,8 @@ public class TheScreen implements Screen {
                 if(flag != 1){
                     if(Character.isUpperCase(board.getChessBoard()[i][j])){
                         if(board.getChessBoard()[i][j] == 'A'){
-                            board.findKing(tempPos).possibleMove(board);
-                            if(board.kingSsNotSafe)
+                            //board.findKing(tempPos).possibleMove(board);
+                            if(!board.kingSafe())
                                 bt.setColor(Color.RED);
                             else
                                 bt.setColor(Color.WHITE);
