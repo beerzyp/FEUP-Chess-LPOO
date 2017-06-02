@@ -73,6 +73,7 @@ public class TheScreen implements Screen {
     int tempPos = -1;
     ArrayList<Integer> globalMade;
     boolean listenerFlag;
+    int counter, counterCheck;
 
 
     public TheScreen(FeupChess game){
@@ -92,6 +93,8 @@ public class TheScreen implements Screen {
     }
 
     public void PlayOnBoard(){
+        counter=0;
+        counterCheck=0;
         int flag;
         tempPos = -1;
         globalMade = new ArrayList<Integer>();
@@ -185,29 +188,24 @@ public class TheScreen implements Screen {
 
                 final Image bt = new Image(new TextureRegionDrawable(TextR));
 
+                if(Character.isUpperCase(board.getChessBoard()[i][j])){
+                    counter++;
+                    if(board.findJogada(tempPos) == "")
+                        counterCheck++;
+
+                }
+
                 if(flag != 1){
                     if(Character.isUpperCase(board.getChessBoard()[i][j])){
-                        listenerTreatment(index, bt);
-
-                        /*if(!board.kingSsNotSafe){
-                            if(board.getChessBoard()[i][j] == 'A')
-                                bt.setColor(Color.WHITE);
-                            listenerTreatment(index, bt);
-                        }
-                        else{
-                            //System.out.println("O rei nao esta seguro!");
-                            if(board.getChessBoard()[i][j] == 'A'){
+                        if(board.getChessBoard()[i][j] == 'A'){
+                            board.findKing(tempPos).possibleMove(board);
+                            if(board.kingSsNotSafe)
                                 bt.setColor(Color.RED);
-                                listenerTreatment(index, bt);
+                            else
+                                bt.setColor(Color.WHITE);
+                        }
 
-                                for(int z= 0 ; z < board.getKingPieces().size(); z++)
-                                    if(board.getKingPieces().get(z).getSymbol() == 'A')
-                                        if(board.getKingPieces().get(z).possibleMove(board) == ""){
-                                            bt.setColor(Color.GOLD);
-                                            board.gameOver = true;
-                                        }
-                            }
-                        }*/
+                        listenerTreatment(index, bt);
                     }
 
                 }
@@ -216,6 +214,11 @@ public class TheScreen implements Screen {
 
             }
 
+        }
+
+        if(counter == counterCheck){
+            Pieces.getActors().get(board.kingPositionC).setColor(Color.GOLD);
+            board.gameOver = true;
         }
 
     }
