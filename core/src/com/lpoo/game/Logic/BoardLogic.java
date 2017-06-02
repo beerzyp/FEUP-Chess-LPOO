@@ -386,6 +386,7 @@ public class BoardLogic {
         String[] parts = str.split("\\;");
         return parts;
     }
+
     public int calculatePos(int x, int y){
         int temp[][] = new int[8][8];
 
@@ -407,12 +408,26 @@ public class BoardLogic {
 
         return pos - 1;
     }
+
     public int getPossibleMoveIndexAtBoard(String a1)
     {   int index=-1;
         if(!a1.isEmpty()) {
-        int x = Integer.valueOf(a1.substring(3, 4));
-        int y = Integer.valueOf(a1.substring(4, 5));
-        index = this.calculatePos(x, y);
+            //column1,column2,this-piece,captured-piece,new-piece,P
+
+            //list=list+c+c+this.getSymbol()+oldPiece+temp[k]+'P'+';';
+            System.out.print("Printoff: ");
+            System.out.println(a1);
+
+            if(a1.length() <= 6){
+                int x = Integer.valueOf(a1.substring(3, 4));
+                int y = Integer.valueOf(a1.substring(4, 5));
+                index = this.calculatePos(x, y);
+            }
+            else{ // promotion
+                    int y = Integer.valueOf(a1.substring(1, 2));
+                    int x = 0;
+                    index = this.calculatePos(x, y);
+            }
     }
         return index;
 

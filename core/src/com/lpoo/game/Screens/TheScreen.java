@@ -2,6 +2,7 @@ package com.lpoo.game.Screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -35,6 +36,7 @@ import com.lpoo.game.Logic.BoardLogic;
 import com.lpoo.game.Logic.King;
 import com.lpoo.game.Logic.Knights;
 import com.lpoo.game.Logic.Pawns;
+import com.lpoo.game.Logic.Piece;
 import com.lpoo.game.Logic.Queen;
 import com.lpoo.game.Logic.Rooks;
 
@@ -53,8 +55,10 @@ public class TheScreen implements Screen {
     BitmapFont font;
     Texture green, white;
     DragAndDrop dnd;
+    boolean promotion;
     Stage stage;
     Stage Pieces;
+    Stage SelectPiece;
     boolean madeNewMove;
     BoardLogic board; //inicialização da board;
     Sprite whiteKing = new Sprite(new Texture(Gdx.files.internal("Pieces/WhiteKing.png")));
@@ -74,6 +78,7 @@ public class TheScreen implements Screen {
     ArrayList<Integer> globalMade;
     boolean listenerFlag;
     int counter, counterCheck;
+    InputMultiplexer inputMultiplexer;
 
 
     public TheScreen(FeupChess game){
@@ -82,14 +87,25 @@ public class TheScreen implements Screen {
         gamecam = new OrthographicCamera();
         gameport = new FitViewport(500,500,gamecam);
         //gamecam.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight())
+        promotion = false;
         LoadLogic();
         LoadBoard();
-        Gdx.input.setInputProcessor(Pieces);
         LoadPieces();
         madeNewMove = false;
         PlayOnBoard();
 
-        //Gdx.input.setInputProcessor(stage);
+        inputMultiplexer = new InputMultiplexer();
+        inputMultiplexer.addProcessor(Pieces);
+        inputMultiplexer.addProcessor(SelectPiece);
+        Gdx.input.setInputProcessor(inputMultiplexer);
+
+        //Gdx.input.setInputProcessor(Pieces);
+    }
+
+    public void removeAllListeners(){
+        for(int i = 0; i < SelectPiece.getActors().size; i++){
+            SelectPiece.getActors().get(i).clearListeners();
+        }
     }
 
     public void PlayOnBoard(){
@@ -240,72 +256,145 @@ public class TheScreen implements Screen {
                 final String[] AllPossibleMoves=board.retrievePossibleMovesList(board.findJogada(index));
                 if(AllPossibleMoves.length!=0)
                 {
-                    for(int l=0;l<AllPossibleMoves.length;l++)
-                    {
-                        final int tmp = l;
-                        final int indexOnBoard=board.getPossibleMoveIndexAtBoard(AllPossibleMoves[l]);
+                    for(int l=0;l<AllPossibleMoves.length;l++) {
+                        if (AllPossibleMoves[l].length() <= 6) {
+
+                            normalListener(l, AllPossibleMoves, index);
+
+                        }
+                        else{
+                            pawnPromotionListener(l, AllPossibleMoves, index);
+                        }
+                    }
+                }
+
+            }
+        });
+    }
+
+    private void pawnPromotionListener(int l, final String[] allPossibleMoves,final int index) {
+        final int tmp = l;
+        final int indexOnBoard = board.getPossibleMoveIndexAtBoard(allPossibleMoves[l]);
 
 
-                        if(indexOnBoard!=-1){
-                            stage.getActors().get(indexOnBoard).setColor(Color.RED);
+        if (indexOnBoard != -1) {
+            stage.getActors().get(indexOnBoard).setColor(Color.RED);
 
-                            if(listenerFlag)
-                                ((Image)Pieces.getActors().get(indexOnBoard)).addListener( new InputListener() {
+            if (listenerFlag)
+                ((Image) Pieces.getActors().get(indexOnBoard)).addListener(new InputListener() {
+                    @Override
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        Gdx.app.log("Example", "touch started at (" + x + ", " + y + ")");
+                        return true;
+                    }
+
+                    @Override
+                    public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                        if (listenerFlag == true) {
+                            removeAllListeners();
+                            clearActiveListeners();
+                            for(int i = 1; i < SelectPiece.getActors().size; i++){
+                                final int pos = i;
+                                SelectPiece.getActors().get(i).addListener(new InputListener() {
                                     @Override
-                                    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                                         Gdx.app.log("Example", "touch started at (" + x + ", " + y + ")");
                                         return true;
                                     }
 
                                     @Override
-                                    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                                        if(listenerFlag == true){
-                                            System.out.println(tmp);
-                                            System.out.println(index);
-                                            System.out.println(AllPossibleMoves[tmp]);
-
-                                            if(board.findKing(index) != null){
-                                                board.findKing(index).setNewMove(AllPossibleMoves[tmp], board);
+                                    public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                                        if (listenerFlag == true) {
+                                            boolean t = board.findPawn(index).playerColor;
+                                            board.delPawn(index);
+                                            if(pos==1){
+                                                board.addQueenPieces(new Queen('Q', indexOnBoard, t));
+                                                board.setChessBoard(index/8, index%8, indexOnBoard/8, indexOnBoard%8, 'Q');
                                             }
-                                            else if(board.findQueen(index) != null){
-                                                board.findQueen(index).setNewMove(AllPossibleMoves[tmp], board);
+                                            else if(pos == 2){
+                                                board.addRookPieces(new Rooks('R', indexOnBoard, t));
+                                                board.setChessBoard(index/8, index%8, indexOnBoard/8, indexOnBoard%8, 'R');
                                             }
-                                            else if(board.findPawn(index) != null){
-                                                board.findPawn(index).setNewMove(AllPossibleMoves[tmp], board);
+                                            else if(pos == 3){
+                                                board.addBishopPieces(new Bishops('B', indexOnBoard, t));
+                                                board.setChessBoard(index/8, index%8, indexOnBoard/8, indexOnBoard%8, 'B');
                                             }
-                                            else if(board.findKnight(index) != null){
-                                                board.findKnight(index).setNewMove(AllPossibleMoves[tmp], board);
-                                            }
-                                            else if(board.findRook(index) != null){
-                                                board.findRook(index).setNewMove(AllPossibleMoves[tmp], board);
-                                            }
-                                            else if(board.findBishop(index) != null){
-                                                board.findBishop(index).setNewMove(AllPossibleMoves[tmp], board);
+                                            else if(pos == 4){
+                                                board.addKnightPieces(new Knights('K', indexOnBoard, t));
+                                                board.setChessBoard(index/8, index%8, indexOnBoard/8, indexOnBoard%8, 'K');
                                             }
 
-
-                                            board.flipBoard();
+                                            promotion = false;
                                             madeNewMove = true;
-                                            Pieces.getActors().get(indexOnBoard).clearListeners();
-                                            Pieces.getActors().get(index).clearListeners();
-
-                                            clearActiveListeners();
-
                                         }
 
-                                        //board.printBoardChess();
+                                        board.flipBoard();
                                     }
                                 });
+                            }
 
-                            globalMade.add(indexOnBoard);
+
+                            promotion = true;
                         }
+                    }
+                });
 
+            globalMade.add(indexOnBoard);
+        }
+    }
+
+    public void normalListener(int l, final String[] allPossibleMoves, final int index) {
+        final int tmp = l;
+        final int indexOnBoard = board.getPossibleMoveIndexAtBoard(allPossibleMoves[l]);
+
+
+        if (indexOnBoard != -1) {
+            stage.getActors().get(indexOnBoard).setColor(Color.RED);
+
+            if (listenerFlag)
+                ((Image) Pieces.getActors().get(indexOnBoard)).addListener(new InputListener() {
+                    @Override
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        Gdx.app.log("Example", "touch started at (" + x + ", " + y + ")");
+                        return true;
                     }
 
-                }
+                    @Override
+                    public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                        if (listenerFlag == true) {
+                            System.out.println(tmp);
+                            System.out.println(index);
+                            System.out.println(allPossibleMoves[tmp]);
 
-            }
-        });
+                            if (board.findKing(index) != null) {
+                                board.findKing(index).setNewMove(allPossibleMoves[tmp], board);
+                            } else if (board.findQueen(index) != null) {
+                                board.findQueen(index).setNewMove(allPossibleMoves[tmp], board);
+                            } else if (board.findPawn(index) != null) {
+                                board.findPawn(index).setNewMove(allPossibleMoves[tmp], board);
+                            } else if (board.findKnight(index) != null) {
+                                board.findKnight(index).setNewMove(allPossibleMoves[tmp], board);
+                            } else if (board.findRook(index) != null) {
+                                board.findRook(index).setNewMove(allPossibleMoves[tmp], board);
+                            } else if (board.findBishop(index) != null) {
+                                board.findBishop(index).setNewMove(allPossibleMoves[tmp], board);
+                            }
+
+
+                            board.flipBoard();
+                            madeNewMove = true;
+                            Pieces.getActors().get(indexOnBoard).clearListeners();
+                            Pieces.getActors().get(index).clearListeners();
+
+                            clearActiveListeners();
+                            removeAllListeners();
+
+                        }
+                    }
+                });
+
+            globalMade.add(indexOnBoard);
+        }
     }
 
     public void clearActiveListeners() {
@@ -399,11 +488,27 @@ public class TheScreen implements Screen {
 
     public void LoadBoard(){
 
-        //font = new BitmapFont(Gdx.files.internal("Arial.fnt"));
         green = new Texture(Gdx.files.internal("green.jpg"));
         white = new Texture(Gdx.files.internal("white.jpg"));
 
-        //board.flipBoard();
+        Texture promotionBox = new Texture(Gdx.files.internal("promotion.png"));
+        TextureRegion prom = new TextureRegion(promotionBox);
+        prom.flip(false, true);
+        TextureRegion wQ =  new Sprite(new Texture(Gdx.files.internal("Pieces/WhiteQueen.png")));
+        TextureRegion wR = new Sprite(new Texture(Gdx.files.internal("Pieces/WhiteRook.png")));;
+        TextureRegion wB = new Sprite(new Texture(Gdx.files.internal("Pieces/WhiteBishop.png")));;
+        TextureRegion wK = new Sprite(new Texture(Gdx.files.internal("Pieces/WhiteKnight.png")));;
+        wQ.flip(false, true);
+        wR.flip(false, true);
+        wB.flip(false, true);
+        wK.flip(false, true);
+
+        SelectPiece = new Stage(gameport, game.batch);
+        SelectPiece.addActor(new Image(new TextureRegionDrawable(prom)));
+        SelectPiece.addActor(new Image(new TextureRegionDrawable(wQ)));
+        SelectPiece.addActor(new Image(new TextureRegionDrawable(wR)));
+        SelectPiece.addActor(new Image(new TextureRegionDrawable(wB)));
+        SelectPiece.addActor(new Image(new TextureRegionDrawable(wK)));
 
 
         stage = new Stage(gameport, game.batch);
@@ -424,9 +529,6 @@ public class TheScreen implements Screen {
                         stage.addActor(new Image(new TextureRegionDrawable(new TextureRegion(white))));
             }
         }
-
-
-
     }
 
     public void LoadPieces(){
@@ -573,18 +675,41 @@ public class TheScreen implements Screen {
             }
         }
 
+
+
+
         stage.act(delta);
         stage.draw();
 
         Pieces.act(delta);
         Pieces.draw();
 
+        if(promotion){
+            for(int x = 1; x < 5; x++){
+
+                Image button = (Image)SelectPiece.getActors().get(x);
+                //button.setColor(Color.ORANGE);
+                button.setSize(100,100);
+
+                if(x == 1)
+                    button.setX(45);
+                else if(x == 2)
+                    button.setX(145);
+                else if(x == 3)
+                    button.setX(245);
+                else if(x == 4)
+                    button.setX(345);
 
 
-        /*SnapshotArray<Actor> actors = new SnapshotArray<Actor>(Pieces.getActors());
-        for(Actor actor : actors) {
-            actor.remove();
-        }*/
+                button.setY(225);
+                button.setWidth(100);
+                button.setHeight(100);
+            }
+
+            SelectPiece.act(delta);
+            SelectPiece.draw();
+        }
+
     }
 
 

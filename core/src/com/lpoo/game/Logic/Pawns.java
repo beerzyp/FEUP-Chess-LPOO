@@ -41,7 +41,7 @@ public class Pawns extends Piece {
                         chessBoard.getChessBoard()[r-1][c+j]=temp[k];
                         if (chessBoard.kingSafe()) {
                             //column1,column2,captured-piece,new-piece,P
-                            list=list+c+this.getSymbol()+(c+j)+oldPiece+temp[k]+'P'+';';
+                            list=list+c+(c+j)+this.getSymbol()+oldPiece+temp[k]+'P'+' '+';';
                         }
                         chessBoard.getChessBoard()[r][c]='P';
                         chessBoard.getChessBoard()[r-1][c+j]=oldPiece;
@@ -69,8 +69,8 @@ public class Pawns extends Piece {
                     chessBoard.getChessBoard()[r][c]=' ';
                     chessBoard.getChessBoard()[r-1][c]=temp[k];
                     if (chessBoard.kingSafe()) {
-                        //column1,column2,captured-piece,new-piece,P
-                        list=list+c+c+this.getSymbol()+oldPiece+temp[k]+'P'+';';
+                        //column1,column2,this-piece,captured-piece,new-piece,P
+                        list=list+c+c+this.getSymbol()+oldPiece+temp[k]+'P'+' '+';';
                     }
                     chessBoard.getChessBoard()[r][c]='P';
                     chessBoard.getChessBoard()[r-1][c]=oldPiece;
