@@ -12,6 +12,8 @@ public class BoardLogic {
 
     public BoardLogic(){
         this.gameOver = false;
+        while ('A' != chessBoard[kingPositionC/8][kingPositionC%8]) {kingPositionC++;}//get King's location
+        while ('a' != chessBoard[kingPositionL/8][kingPositionL%8]) {kingPositionL++;}//get king's location
     }
 
     private char chessBoard[][]={
@@ -214,6 +216,9 @@ public class BoardLogic {
     }
 
     public boolean kingSafe() {
+        /*for(int z= 0 ; z < getKingPieces().size(); z++)
+            if(getKingPieces().get(z).getSymbol() == 'A')
+                getKingPieces().get(z).possibleMove(this);*/
         //bishop/queen
         int temp=1;
         for (int i=-1; i<=1; i+=2) {

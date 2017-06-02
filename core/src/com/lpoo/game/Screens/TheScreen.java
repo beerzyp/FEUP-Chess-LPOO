@@ -187,15 +187,13 @@ public class TheScreen implements Screen {
 
                 if(flag != 1){
                     if(Character.isUpperCase(board.getChessBoard()[i][j])){
+                        listenerTreatment(index, bt);
 
-
-                            for(int z= 0 ; z < board.getKingPieces().size(); z++)
-                                if(board.getKingPieces().get(z).getSymbol() == 'A')
-                                    board.getKingPieces().get(z).possibleMove(board);
-
-
-                        if(!board.kingSsNotSafe)
+                        /*if(!board.kingSsNotSafe){
+                            if(board.getChessBoard()[i][j] == 'A')
+                                bt.setColor(Color.WHITE);
                             listenerTreatment(index, bt);
+                        }
                         else{
                             //System.out.println("O rei nao esta seguro!");
                             if(board.getChessBoard()[i][j] == 'A'){
@@ -209,7 +207,7 @@ public class TheScreen implements Screen {
                                             board.gameOver = true;
                                         }
                             }
-                        }
+                        }*/
                     }
 
                 }

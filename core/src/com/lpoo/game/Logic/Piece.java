@@ -93,5 +93,7 @@ public class Piece {
 
         int pos=0;
 
+        if ('A' == board.getChessBoard()[Character.getNumericValue(move.charAt(3))][Character.getNumericValue(move.charAt(4))])
+            board.kingPositionC=8*Character.getNumericValue(move.charAt(3))+Character.getNumericValue(move.charAt(4));
     }
 }
