@@ -10,13 +10,13 @@ public class Knights extends Piece {
     }
 
     public String possibleMove(BoardLogic chessBoard){
-        String list="";
-        char oldPiece;
+
+        String list=""; char oldPiece;
         int r=this.posOnBoard/8, c=this.posOnBoard%8;
         for (int j=-1; j<=1; j+=2) {
             for (int k=-1; k<=1; k+=2) {
                 try {
-                    if (' ' == chessBoard.getChessBoard()[r+j][c+k*2] || ' ' == chessBoard.getChessBoard()[r+j][c+k*2]) {
+                    if (Character.isLowerCase(chessBoard.getChessBoard()[r+j][c+k*2]) || ' ' == chessBoard.getChessBoard()[r+j][c+k*2]) {
                         oldPiece=chessBoard.getChessBoard()[r+j][c+k*2];
                         chessBoard.getChessBoard()[r][c]=' ';
                         if (chessBoard.kingSafe()) {
@@ -39,8 +39,6 @@ public class Knights extends Piece {
                 } catch (Exception e) {}
             }
         }
-
-        this.actualPossibleMoves = list;
         return list;
     }
 }

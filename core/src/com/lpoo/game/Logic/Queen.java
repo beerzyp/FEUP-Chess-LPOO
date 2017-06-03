@@ -25,6 +25,8 @@ public class Queen extends Piece {
                             chessBoard.getChessBoard()[r+temp*j][c+temp*k]='Q';
                             if (chessBoard.kingSafe()) {
                                 list=list+r+c+this.getSymbol()+(r+temp*j)+(c+temp*k)+oldPiece+';';
+                                chessBoard.printBoardChess();
+
                             }
                             chessBoard.getChessBoard()[r][c]='Q';
                             chessBoard.getChessBoard()[r+temp*j][c+temp*k]=oldPiece;
@@ -36,6 +38,8 @@ public class Queen extends Piece {
                             chessBoard.getChessBoard()[r+temp*j][c+temp*k]='Q';
                             if (chessBoard.kingSafe()) {
                                 list=list+r+c+this.getSymbol()+(r+temp*j)+(c+temp*k)+oldPiece+';';
+                                chessBoard.printBoardChess();
+
                             }
                             chessBoard.getChessBoard()[r][c]='Q';
                             chessBoard.getChessBoard()[r+temp*j][c+temp*k]=oldPiece;
