@@ -2,6 +2,7 @@ package com.lpoo.game.Screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -49,11 +50,13 @@ import java.util.ArrayList;
 
 public class TheScreen implements Screen {
     private FeupChess game;
+    public boolean gyroscopeAvail;
     Texture texture;
     private OrthographicCamera gamecam;
     private Viewport gameport;
     BitmapFont font;
     Texture green, white;
+    float startingX,startingY;
     DragAndDrop dnd;
     boolean promotion;
     Stage stage;
@@ -86,6 +89,9 @@ public class TheScreen implements Screen {
         texture = new Texture("badlogic.jpg");
         gamecam = new OrthographicCamera();
         gameport = new FitViewport(500,500,gamecam);
+        //startingX=
+
+        gyroscopeAvail = Gdx.input.isPeripheralAvailable(Input.Peripheral.Gyroscope);
         //gamecam.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight())
         promotion = false;
         LoadLogic();
@@ -105,6 +111,21 @@ public class TheScreen implements Screen {
     public void removeAllListeners(){
         for(int i = 0; i < SelectPiece.getActors().size; i++){
             SelectPiece.getActors().get(i).clearListeners();
+        }
+    }
+
+    public void gyroscopeRotate()
+    {
+        if(gyroscopeAvail){
+            float xmin=200;
+            float ymin=200;
+            float gyroX = Gdx.input.getGyroscopeX();
+            float gyroY = Gdx.input.getGyroscopeY();
+           // float gyroZ = Gdx.input.getGyroscopeZ();
+            if(startingX >=xmin || startingY>=ymin);
+            {
+                gamecam.translate(gyroX, gyroY);
+            }
         }
     }
 
@@ -636,7 +657,7 @@ public class TheScreen implements Screen {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         //game.batch.setProjectionMatrix(gamecam.combined);
-
+        gyroscopeRotate();
 
         //tempPos = -1;
 

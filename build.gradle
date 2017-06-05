@@ -92,6 +92,14 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
+
+        // Required -- JUnit 4 framework
+        testCompile 'junit:junit:4.12'
+        // Optional -- Mockito framework
+        testCompile 'org.mockito:mockito-core:1.10.19'
+
+
+
     }
 }
 
