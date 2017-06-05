@@ -89,9 +89,13 @@ public class TheScreen implements Screen {
         texture = new Texture("badlogic.jpg");
         gamecam = new OrthographicCamera();
         gameport = new FitViewport(500,500,gamecam);
-        //startingX=
 
         gyroscopeAvail = Gdx.input.isPeripheralAvailable(Input.Peripheral.Gyroscope);
+        if(gyroscopeAvail)
+        {
+            startingX=Gdx.input.getGyroscopeX();
+            startingY=Gdx.input.getGyroscopeY();
+        }
         //gamecam.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight())
         promotion = false;
         LoadLogic();
@@ -122,7 +126,8 @@ public class TheScreen implements Screen {
             float gyroX = Gdx.input.getGyroscopeX();
             float gyroY = Gdx.input.getGyroscopeY();
            // float gyroZ = Gdx.input.getGyroscopeZ();
-            if(startingX >=xmin || startingY>=ymin);
+            boolean flag=false;
+            if(flag);
             {
                 gamecam.translate(gyroX, gyroY);
             }
@@ -657,7 +662,9 @@ public class TheScreen implements Screen {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         //game.batch.setProjectionMatrix(gamecam.combined);
-        gyroscopeRotate();
+        boolean gyro=false;
+        if(gyro)
+            gyroscopeRotate();
 
         //tempPos = -1;
 
