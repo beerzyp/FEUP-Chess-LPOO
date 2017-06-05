@@ -59,6 +59,7 @@ public class TheScreen implements Screen {
     float startingX,startingY;
     DragAndDrop dnd;
     boolean promotion;
+    boolean gyro;
     Stage stage;
     Stage Pieces;
     Stage SelectPiece;
@@ -82,6 +83,13 @@ public class TheScreen implements Screen {
     boolean listenerFlag;
     int counter, counterCheck;
     InputMultiplexer inputMultiplexer;
+    Texture feupBar = new Texture(Gdx.files.internal("feupBar.png"));
+    Texture btUndo = new Texture(Gdx.files.internal("btUndo.png"));
+    Texture btGit = new Texture(Gdx.files.internal("btGit.png"));
+    Texture btExit = new Texture(Gdx.files.internal("btExit.png"));
+    Texture btGyr = new Texture(Gdx.files.internal("gyr.png"));
+
+    Stage barBox;
 
 
     public TheScreen(FeupChess game){
@@ -89,6 +97,7 @@ public class TheScreen implements Screen {
         texture = new Texture("badlogic.jpg");
         gamecam = new OrthographicCamera();
         gameport = new FitViewport(500,500,gamecam);
+        gyro = false;
 
         gyroscopeAvail = Gdx.input.isPeripheralAvailable(Input.Peripheral.Gyroscope);
         if(gyroscopeAvail)
@@ -107,8 +116,8 @@ public class TheScreen implements Screen {
         inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(Pieces);
         inputMultiplexer.addProcessor(SelectPiece);
+        inputMultiplexer.addProcessor(barBox);
         Gdx.input.setInputProcessor(inputMultiplexer);
-
         //Gdx.input.setInputProcessor(Pieces);
     }
 
@@ -517,6 +526,8 @@ public class TheScreen implements Screen {
         green = new Texture(Gdx.files.internal("green.jpg"));
         white = new Texture(Gdx.files.internal("white.jpg"));
 
+        barBox = new Stage(gameport, game.batch);
+
         Texture promotionBox = new Texture(Gdx.files.internal("promotion.png"));
         TextureRegion prom = new TextureRegion(promotionBox);
         prom.flip(false, true);
@@ -537,6 +548,83 @@ public class TheScreen implements Screen {
         SelectPiece.addActor(new Image(new TextureRegionDrawable(wK)));
 
 
+        TextureRegion fbar = new Sprite(feupBar);
+        TextureRegion undo = new Sprite(btUndo);
+        TextureRegion git = new Sprite(btGit);
+        TextureRegion exit = new Sprite(btExit);
+        TextureRegion gyr = new Sprite(btGyr);
+
+        fbar.flip(false,true);
+        gyr.flip(false, true);
+        undo.flip(false,true);
+        git.flip(false,true);
+        exit.flip(false,true);
+
+        barBox.addActor(new Image(new TextureRegionDrawable(fbar)));
+        barBox.addActor(new Image(new TextureRegionDrawable(git)));
+        barBox.addActor(new Image(new TextureRegionDrawable(gyr)));
+        barBox.addActor(new Image(new TextureRegionDrawable(undo)));
+        barBox.addActor(new Image(new TextureRegionDrawable(exit)));
+
+        barBox.getActors().get(1).setX(320);
+        barBox.getActors().get(2).setX(360);
+        barBox.getActors().get(3).setX(400);
+        barBox.getActors().get(4).setX(440);
+
+        barBox.getActors().get(4).addListener( new InputListener() {
+
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                System.exit(0);
+            }
+        });
+
+        barBox.getActors().get(3).addListener( new InputListener() {
+
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                //System.exit(0);
+            }
+        });
+
+        barBox.getActors().get(2).addListener( new InputListener() { // listener para a flag giroscopio
+
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                gyro = true;
+            }
+        });
+
+        barBox.getActors().get(1).addListener( new InputListener() {
+
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                Gdx.net.openURI("https://github.com/beerzyp/LPOO1617_T5G8");
+            }
+        });
+
+
+
         stage = new Stage(gameport, game.batch);
         Pieces = new Stage(gameport, game.batch);
 
@@ -549,10 +637,10 @@ public class TheScreen implements Screen {
                     else
                         stage.addActor(new Image(new TextureRegionDrawable(new TextureRegion(green))));
                 else
-                    if(x % 2 == 0)
-                        stage.addActor(new Image(new TextureRegionDrawable(new TextureRegion(green))));
-                    else
-                        stage.addActor(new Image(new TextureRegionDrawable(new TextureRegion(white))));
+                if(x % 2 == 0)
+                    stage.addActor(new Image(new TextureRegionDrawable(new TextureRegion(green))));
+                else
+                    stage.addActor(new Image(new TextureRegionDrawable(new TextureRegion(white))));
             }
         }
     }
@@ -662,7 +750,6 @@ public class TheScreen implements Screen {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         //game.batch.setProjectionMatrix(gamecam.combined);
-        boolean gyro=false;
         if(gyro)
             gyroscopeRotate();
 
@@ -677,26 +764,26 @@ public class TheScreen implements Screen {
             PlayOnBoard();
         }
 
-        float buttonWidth = gamecam.viewportWidth / 8;
-        float buttonHeight = gamecam.viewportHeight / 8;
+        float buttonWidth = (gamecam.viewportWidth) / 8;
+        float buttonHeight = (gamecam.viewportHeight-50) / 8;
 
-        for(int y = 0; y < 8; y++){
+        for(int y = 1; y <= 8; y++){
             for(int x = 0; x < 8; x++){
-                Image button = (Image)stage.getActors().get(x + y * 8);
+                Image button = (Image)stage.getActors().get(x + (y-1) * 8);
                 button.setSize(100,100);
                 button.setX(x * buttonWidth);
-                button.setY(y * buttonHeight);
+                button.setY(y * buttonHeight-6);
                 button.setWidth(buttonWidth);
                 button.setHeight(buttonHeight);
             }
         }
 
-        for(int y = 0; y < 8; y++){
+        for(int y = 1; y <= 8; y++){
             for(int x = 0; x < 8; x++){
-                Image button = (Image)Pieces.getActors().get(x + y * 8);
+                Image button = (Image)Pieces.getActors().get(x + (y-1) * 8);
                 button.setSize(100,100);
                 button.setX(x * buttonWidth);
-                button.setY(y * buttonHeight);
+                button.setY(y * buttonHeight-6);
                 button.setWidth(buttonWidth);
                 button.setHeight(buttonHeight);
 
@@ -711,6 +798,9 @@ public class TheScreen implements Screen {
 
         Pieces.act(delta);
         Pieces.draw();
+
+        barBox.act(delta);
+        barBox.draw();
 
         if(promotion){
             for(int x = 1; x < 5; x++){
