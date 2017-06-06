@@ -298,7 +298,13 @@ public class TheScreen implements Screen {
 
                         }
                         else{
+                            if(AllPossibleMoves[l].charAt(5)=='C')
+                            {
+                                normalListener(l, AllPossibleMoves, index);
+                            }
+                            else{
                             pawnPromotionListener(l, AllPossibleMoves, index);
+                            }
                         }
                     }
                 }
@@ -406,6 +412,7 @@ public class TheScreen implements Screen {
                             } else if (board.findQueen(index) != null) {
                                 board.findQueen(index).setNewMove(allPossibleMoves[tmp], board);
                             } else if (board.findPawn(index) != null) {
+                                //System.out.println(allPossibleMoves[tmp]);
                                 board.findPawn(index).setNewMove(allPossibleMoves[tmp], board);
                             } else if (board.findKnight(index) != null) {
                                 board.findKnight(index).setNewMove(allPossibleMoves[tmp], board);
@@ -444,7 +451,7 @@ public class TheScreen implements Screen {
     }
 
     public void LoadLogic(){
-        board = new BoardLogic();
+        board = new BoardLogic(null);
 
         //inserção dos elementos da board
 

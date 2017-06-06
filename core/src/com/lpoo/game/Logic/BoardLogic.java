@@ -1,6 +1,7 @@
 package com.lpoo.game.Logic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by FranciscoSilva on 17/05/17.
@@ -9,11 +10,21 @@ import java.util.ArrayList;
 public class BoardLogic {
     public boolean kingSsNotSafe;
     public boolean gameOver;
+    public static boolean castleWhiteLong=true, castleWhiteShort=true, castleBlackLong=true, castleBlackShort=true;
 
-    public BoardLogic(){
+    public BoardLogic(char[][] map){
         this.gameOver = false;
         while ('A' != chessBoard[kingPositionC/8][kingPositionC%8]) {kingPositionC++;}//get King's location
         while ('a' != chessBoard[kingPositionL/8][kingPositionL%8]) {kingPositionL++;}//get king's location
+
+        if(map!=null)
+        {
+            int l = map.length;
+            chessBoard = new char[l][];
+            for  (int i = 0 ; i < l ; i++) {
+                chessBoard[i] = Arrays.copyOf(map[i], map[i].length);
+            }
+        }
     }
 
     private char chessBoard[][]={
@@ -214,6 +225,50 @@ public class BoardLogic {
             System.out.print("\n");
         }
     }
+    public void makeKingMove(String move) {
+        //trackMakeMove++;
+        if (move.charAt(4)!='C' && move.charAt(4)!='P') {
+            chessBoard[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))]=chessBoard[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))];
+            chessBoard[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))]=' ';
+            if ('A'==(chessBoard[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))])) {
+                kingPositionC=8*Character.getNumericValue(move.charAt(2))+Character.getNumericValue(move.charAt(3));//updates the king position
+            }
+        } else if (move.charAt(4)=='P') {
+            //if pawn promotion
+            chessBoard[1][Character.getNumericValue(move.charAt(0))]=' ';
+            chessBoard[0][Character.getNumericValue(move.charAt(1))]=move.charAt(3);
+        } else {
+            //if castling
+            chessBoard[7][Character.getNumericValue(move.charAt(0))]=' ';
+            chessBoard[7][Character.getNumericValue(move.charAt(1))]=' ';
+            chessBoard[7][Character.getNumericValue(move.charAt(2))]='A';
+            chessBoard[7][Character.getNumericValue(move.charAt(3))]='R';
+            kingPositionC=56+Character.getNumericValue(move.charAt(2));//updates the king position (56=8*7)
+        }
+    }
+
+    public void undoKingMove(String move) {
+        if (move.charAt(4)!='C' && move.charAt(4)!='P') {
+            chessBoard[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))]=chessBoard[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))];
+            chessBoard[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))]=move.charAt(4);
+            if ('A'==chessBoard[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))]) {
+                kingPositionC=8*Character.getNumericValue(move.charAt(0))+Character.getNumericValue(move.charAt(1));//updates the king position
+            }
+        } else if (move.charAt(4)=='P') {
+            //if pawn demotion
+            chessBoard[1][Character.getNumericValue(move.charAt(0))]='P';
+            chessBoard[0][Character.getNumericValue(move.charAt(1))]=move.charAt(2);
+        } else {
+            //if uncastling
+            chessBoard[7][Character.getNumericValue(move.charAt(0))]='A';
+            chessBoard[7][Character.getNumericValue(move.charAt(1))]='R';
+            chessBoard[7][Character.getNumericValue(move.charAt(2))]=' ';
+            chessBoard[7][Character.getNumericValue(move.charAt(3))]=' ';
+            kingPositionC=56+Character.getNumericValue(move.charAt(0));//updates the king position (56=8*7)
+
+        }
+    }
+
 
     public boolean kingSafe() {
         /*for(int z= 0 ; z < getKingPieces().size(); z++)
@@ -417,21 +472,33 @@ public class BoardLogic {
             //list=list+c+c+this.getSymbol()+oldPiece+temp[k]+'P'+';';
             System.out.print("Printoff: ");
             System.out.println(a1);
-
+//
             if(a1.length() <= 6){
-                int x = Integer.valueOf(a1.substring(3, 4));
-                int y = Integer.valueOf(a1.substring(4, 5));
-                index = this.calculatePos(x, y);
-            }
-            else{ // promotion
-                    int y = Integer.valueOf(a1.substring(1, 2));
-                    int x = 0;
+                    int x = Integer.valueOf(a1.substring(3, 4));
+                    int y = Integer.valueOf(a1.substring(4, 5));
                     index = this.calculatePos(x, y);
             }
+            else{ // promotion
+
+                if(a1.charAt(5)=='C')
+                {
+                    int kingNew = Integer.valueOf(a1.substring(3, 4));
+                    index = this.calculatePos(7, kingNew);
+
+                }
+                   else{
+                        int y = Integer.valueOf(a1.substring(1, 2));
+                        int x = 0;
+                        index = this.calculatePos(x, y);
+                   }
+            }
+
     }
         return index;
 
     }
+
+
 
 
 }

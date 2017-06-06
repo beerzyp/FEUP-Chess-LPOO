@@ -32,7 +32,61 @@ public class King extends Piece {
                 } catch (Exception e) {}
             }
         }
+
+        //castling (returns move as kingColumn,rookColumn,kingNewColumn,rookNewColumn,C
+        if ('A'==chessBoard.getChessBoard()[7][4] && chessBoard.castleWhiteLong && 'R'==chessBoard.getChessBoard()[7][0] && ' '==chessBoard.getChessBoard()[7][1] && ' '==(chessBoard.getChessBoard()[7][2]) && ' '==chessBoard.getChessBoard()[7][3]) {
+            boolean temp=false;
+            for (int j=1;j<=2;j++) {
+                chessBoard.makeKingMove("747"+j+" ");
+                temp=(temp || !chessBoard.kingSafe());
+                chessBoard.undoKingMove("747"+j+" ");
+            }
+            if (!temp) {
+                //all criteria have been met:
+                //System.out.println("White Castle Long");
+                list+="40A23C ;";
+            }
+        }
+        if ('A'==(chessBoard.getChessBoard()[7][4]) && chessBoard.castleWhiteShort && 'R'==(chessBoard.getChessBoard()[7][7]) && ' '==(chessBoard.getChessBoard()[7][5]) && ' '==(chessBoard.getChessBoard()[7][6])) {
+            boolean temp=false;
+            for (int j=5;j<=6;j++) {
+                chessBoard.makeKingMove("747"+j+" ");
+                temp=(temp || !chessBoard.kingSafe());
+                chessBoard.undoKingMove("747"+j+" ");
+            }
+            if (!temp) {
+                //all criteria have been met:
+                //System.out.println("White Castle Short");
+                list+="47A65C ;";
+            }
+        }
+        if ('A'==(chessBoard.getChessBoard()[7][3]) && chessBoard.castleBlackLong && 'R'==(chessBoard.getChessBoard()[7][7]) && ' '==(chessBoard.getChessBoard()[7][4]) && ' '==(chessBoard.getChessBoard()[7][5]) && ' '==(chessBoard.getChessBoard()[7][6])) {
+            boolean temp=false;
+            for (int j=4;j<=5;j++) {
+                chessBoard.makeKingMove("747"+j+" ");
+                temp=(temp || !chessBoard.kingSafe());
+                chessBoard.undoKingMove("747"+j+" ");
+            }
+            if (!temp) {
+                //all criteria have been met:
+                //System.out.println("Black Castle Long");
+                list+="37A54C ;";
+            }
+        }
+        if ('A'==(chessBoard.getChessBoard()[7][3]) && chessBoard.castleBlackShort && 'R'==(chessBoard.getChessBoard()[7][0]) && ' '==(chessBoard.getChessBoard()[7][1]) && ' '==(chessBoard.getChessBoard()[7][2])) {
+            boolean temp=false;
+            for (int j=1;j<=2;j++) {
+                chessBoard.makeKingMove("747"+j+" ");
+                temp=(temp || !chessBoard.kingSafe());
+                chessBoard.undoKingMove("747"+j+" ");
+            }
+            if (!temp) {
+                //all criteria have been met:
+                //System.out.println("Black Castle Short");
+                list+="30A12C ;";
+            }
         //need to add casting later
+        }
         return list;
     }
 }
