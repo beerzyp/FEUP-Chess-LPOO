@@ -225,7 +225,7 @@ public class BoardLogic {
             System.out.print("\n");
         }
     }
-    public void makeKingMove(String move) {
+    public void makeKingMove(String move) {/*
         //trackMakeMove++;
         if (move.charAt(4)!='C' && move.charAt(4)!='P') {
             chessBoard[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))]=chessBoard[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))];
@@ -244,10 +244,10 @@ public class BoardLogic {
             chessBoard[7][Character.getNumericValue(move.charAt(2))]='A';
             chessBoard[7][Character.getNumericValue(move.charAt(3))]='R';
             kingPositionC=56+Character.getNumericValue(move.charAt(2));//updates the king position (56=8*7)
-        }
+        }*/
     }
 
-    public void undoKingMove(String move) {
+    public void undoKingMove(String move) {/*
         if (move.charAt(4)!='C' && move.charAt(4)!='P') {
             chessBoard[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))]=chessBoard[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))];
             chessBoard[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))]=move.charAt(4);
@@ -266,7 +266,7 @@ public class BoardLogic {
             chessBoard[7][Character.getNumericValue(move.charAt(3))]=' ';
             kingPositionC=56+Character.getNumericValue(move.charAt(0));//updates the king position (56=8*7)
 
-        }
+        }*/
     }
 
 

@@ -349,6 +349,7 @@ public class TheScreen implements Screen {
                                             boolean t = board.findPawn(index).playerColor;
                                             board.delPawn(index);
                                             if(pos==1){
+
                                                 board.addQueenPieces(new Queen('Q', indexOnBoard, t));
                                                 board.setChessBoard(index/8, index%8, indexOnBoard/8, indexOnBoard%8, 'Q');
                                             }
