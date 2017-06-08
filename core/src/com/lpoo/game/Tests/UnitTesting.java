@@ -86,6 +86,38 @@ public class UnitTesting {
      // System.out.println( board.retrievePossibleMovesList(board.findJogada(63)).length);
 
     }
+    @Test
+    public void testCaputreWithRook(){
+        char[][] chessBoard= new char[][]{
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', 'p'},
+                {' ', ' ',' ', ' ', ' ', ' ', ' ', 'R'}
+        };
+
+        BoardLogic board=new BoardLogic(chessBoard);
+        int pos=board.calculatePos(6,7);
+
+        Rooks r2 = new Rooks('R', 63, false);
+        Pawns p1 = new Pawns('p', pos, true);
+        //Pawns p2 = new Pawns('p',54, false);
+        board.addRookPieces(r2);
+        board.addPawnPieces(p1);
+        board.printBoardChess();
+        assertEquals(r2.getPosOnBoard(),board.getRookPieces().get(0).getPosOnBoard());
+        //if(board.retrievePossibleMovesList(board.findJogada(63)).length!=0)
+        //System.out.println(board.retrievePossibleMovesList(board.findJogada(63))[7]);
+        //board.findQueen(63).setNewMove(board.retrievePossibleMovesList(board.findJogada(63))[0], board);
+        board.findRook(63).setNewMove(board.retrievePossibleMovesList(board.findJogada(63))[7], board);
+        assertEquals(r2.getSymbol(),board.getChessBoard()[6][7]);
+        assertEquals(0,board.getPawnPieces().size());
+        // System.out.println( board.retrievePossibleMovesList(board.findJogada(63)).length);
+        board.printBoardChess();
+    }
 
     @Test
     public void testMoveQueenHorizontaly(){
@@ -183,6 +215,42 @@ public class UnitTesting {
     }
 
 
+    @Test
+    public void testCaptureBishop(){
+        char[][] chessBoard= new char[][]{
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', 'p', ' '},
+                {' ', ' ',' ', ' ', ' ', ' ', ' ', 'B'}
+        };
+
+        BoardLogic board=new BoardLogic(chessBoard);
+        int pos=board.calculatePos(6,6);
+
+        Bishops r2 = new Bishops('B', 63, true);
+        Pawns p1 = new Pawns('p', pos, false);
+        //Pawns p2 = new Pawns('p',54, false);
+        board.addBishopPieces(r2);
+        board.addPawnPieces(p1);
+        //board.printBoardChess();
+        assertEquals(r2.getPosOnBoard(),board.getBishopPieces().get(0).getPosOnBoard());
+        //if(board.retrievePossibleMovesList(board.findJogada(63)).length!=0)
+        // System.out.println(board.findJogada(63));
+        board.findBishop(63).setNewMove(board.retrievePossibleMovesList(board.findJogada(63))[0], board);
+        assertEquals(r2.getSymbol(),board.getChessBoard()[6][6]);
+        assertEquals(' ',board.getChessBoard()[7][7]);
+        assertEquals(board.getPawnPieces().size(),0);
+
+        // board.printBoardChess();
+        // System.out.println( board.retrievePossibleMovesList(board.findJogada(63)).length);
+
+    }
+
+
 
     @Test
     public void testMoveKnight(){
@@ -216,6 +284,8 @@ public class UnitTesting {
         // System.out.println( board.retrievePossibleMovesList(board.findJogada(63)).length);
 
     }
+
+
 
 
 
@@ -336,7 +406,6 @@ public class UnitTesting {
         assertEquals(r2.getSymbol(),board.getChessBoard()[7][3]);
         board.printBoardChess();
     }
-
 
 
 
