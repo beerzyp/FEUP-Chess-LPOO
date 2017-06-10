@@ -299,6 +299,7 @@ public class TheScreen implements Screen {
 
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                hintBool = false;
                 globalMade = new ArrayList<Integer>();
                 final String[] AllPossibleMoves=board.retrievePossibleMovesList(board.findJogada(index));
                 System.out.println("Cavalo: ");

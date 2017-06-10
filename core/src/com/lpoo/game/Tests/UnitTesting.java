@@ -613,55 +613,6 @@ public class UnitTesting {
 
     }
 
-    @Test
-    public void testKnightEatOnCheck(){
-        char[][] chessBoard= new char[][]{
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', 'b'},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ',' ', ' ', 'K', ' ', ' ', 'A'}
-        };
-
-        BoardLogic board=new BoardLogic(chessBoard);
-        int qPos=board.calculatePos(5,7);
-        int pPos=board.calculatePos(6,6);
-        //assertEquals(pawnPos,15);
-        King r2 = new King('A', 63, true);
-        Knights k1 = new Knights('K', 60, true);
-        Bishops b1 = new Bishops('b',qPos, false);
-        //Pawns p2 = new Pawns('p',54, false);
-        board.addKingPieces(r2);
-        board.addKnightPieces(k1);
-        board.addBishopPieces(b1);
-
-        assertEquals(board.kingSafe(),true);
-board.findJogada(qPos);
-        board.findBishop(qPos).setNewMove("57b66 ", board);
-        board.printBoardChess();
-
-        assertEquals(board.kingSafe(),false);
-
-
-
-        /*assertEquals(p1.getSymbol(),board.getChessBoard()[6][6]);
-        assertEquals(q1.getSymbol(),board.getChessBoard()[5][5]);*/
-
-        for(int i = 0; i < board.retrievePossibleMovesList(board.findKnight(60).possibleMove(board)).length; i++)
-        System.out.println(board.retrievePossibleMovesList(board.findKnight(60).possibleMove(board))[i]);
-
-        //board.findPawn(pPos).setNewMove(board.retrievePossibleMovesList(board.findJogada(pPos))[0],board);
-        // assertEquals(board.findJogada(15),p1.possibleMove(board));
-        //assertEquals(p1.getSymbol(),board.getChessBoard()[5][5]);
-
-        board.printBoardChess();
-        // assertEquals(p1.getSymbol(),board.getChessBoard()[5][7]);
-
-    }
-
 
 
 
