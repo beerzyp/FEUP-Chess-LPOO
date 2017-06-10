@@ -44,6 +44,8 @@ import com.lpoo.game.Logic.Rooks;
 import java.awt.Font;
 import java.util.ArrayList;
 
+import javax.xml.soap.Text;
+
 /**
  * Created by FranciscoSilva on 17/05/17.
  */
@@ -89,6 +91,11 @@ public class TheScreen implements Screen {
     Texture btExit = new Texture(Gdx.files.internal("btExit.png"));
     Texture btGyr = new Texture(Gdx.files.internal("gyr.png"));
 
+    Stage Hint;
+    Texture hintText = new Texture(Gdx.files.internal("hint.png"));
+    boolean hintBool;
+    String hintMove;
+
     Stage barBox;
     int player;
 
@@ -99,6 +106,8 @@ public class TheScreen implements Screen {
         gamecam = new OrthographicCamera();
         gameport = new FitViewport(500,500,gamecam);
         gyro = false;
+        hintBool = false;
+        hintMove = "";
 
         gyroscopeAvail = Gdx.input.isPeripheralAvailable(Input.Peripheral.Gyroscope);
         if(gyroscopeAvail)
@@ -119,6 +128,7 @@ public class TheScreen implements Screen {
         inputMultiplexer.addProcessor(Pieces);
         inputMultiplexer.addProcessor(SelectPiece);
         inputMultiplexer.addProcessor(barBox);
+        inputMultiplexer.addProcessor(Hint);
         Gdx.input.setInputProcessor(inputMultiplexer);
         //Gdx.input.setInputProcessor(Pieces);
     }
@@ -541,6 +551,7 @@ public class TheScreen implements Screen {
         white = new Texture(Gdx.files.internal("white.jpg"));
 
         barBox = new Stage(gameport, game.batch);
+        Hint = new Stage(gameport, game.batch);
 
         Texture promotionBox = new Texture(Gdx.files.internal("promotion.png"));
         TextureRegion prom = new TextureRegion(promotionBox);
@@ -568,6 +579,23 @@ public class TheScreen implements Screen {
         TextureRegion exit = new Sprite(btExit);
         TextureRegion gyr = new Sprite(btGyr);
 
+        font = new BitmapFont(Gdx.files.internal("Arial.fnt"),Gdx.files.internal("Arial.png"),false);
+
+        TextButton.TextButtonStyle a = new TextButton.TextButtonStyle();
+
+        a.font = new BitmapFont(true);
+        a.fontColor = Color.BLACK;
+
+        TextButton txt = new TextButton("a2c5", a);
+        txt.setX(230);
+        txt.setY(150);
+        //txt.setScale(-1, 1);
+
+
+
+        TextureRegion hHint = new Sprite(hintText);
+        hHint.flip(false, true);
+
         fbar.flip(false,true);
         gyr.flip(false, true);
         undo.flip(false,true);
@@ -584,6 +612,9 @@ public class TheScreen implements Screen {
         barBox.getActors().get(2).setX(360);
         barBox.getActors().get(3).setX(400);
         barBox.getActors().get(4).setX(440);
+
+        Hint.addActor(new Image(new TextureRegionDrawable(hHint)));
+        Hint.addActor(txt);
 
         barBox.getActors().get(4).addListener( new InputListener() {
 
@@ -607,11 +638,16 @@ public class TheScreen implements Screen {
 
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                    //System.out.println(board.Hint(0));
 
-                if(player == 0)
-                    System.out.println(board.Hint(0));
-                else
-                    System.out.println(board.Hint(1));
+                hintBool = !hintBool;
+
+                hintMove = board.Hint(0);
+                System.out.println(hintMove);
+
+                ((TextButton)Hint.getActors().get(1)).setText(hintMove);
+
+
             }
         });
 
@@ -777,6 +813,7 @@ public class TheScreen implements Screen {
             System.out.println("Game Over!");
         }
 
+
         if(madeNewMove == true){
             madeNewMove = false;
             if(player == 0) player=1; else player=0;
@@ -845,6 +882,11 @@ public class TheScreen implements Screen {
 
             SelectPiece.act(delta);
             SelectPiece.draw();
+        }
+
+        if(hintBool){
+            Hint.act(delta);
+            Hint.draw();
         }
 
     }
