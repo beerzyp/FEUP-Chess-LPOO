@@ -34,7 +34,7 @@ public class King extends Piece {
         }
 
         //castling (returns move as kingColumn,rookColumn,kingNewColumn,rookNewColumn,C
-        if ('A'==chessBoard.getChessBoard()[7][4] && chessBoard.castleWhiteLong && 'R'==chessBoard.getChessBoard()[7][0] && ' '==chessBoard.getChessBoard()[7][1] && ' '==(chessBoard.getChessBoard()[7][2]) && ' '==chessBoard.getChessBoard()[7][3]) {
+        if ('A'==chessBoard.getChessBoard()[7][4] && BoardLogic.castleWhiteLong && 'R'==chessBoard.getChessBoard()[7][0] && ' '==chessBoard.getChessBoard()[7][1] && ' '==(chessBoard.getChessBoard()[7][2]) && ' '==chessBoard.getChessBoard()[7][3]) {
             boolean temp=false;
             for (int j=1;j<=2;j++) {
                 chessBoard.makeKingMove("747"+j+" ");
@@ -47,7 +47,7 @@ public class King extends Piece {
                 list+="40A23C ;";
             }
         }
-        if ('A'==(chessBoard.getChessBoard()[7][4]) && chessBoard.castleWhiteShort && 'R'==(chessBoard.getChessBoard()[7][7]) && ' '==(chessBoard.getChessBoard()[7][5]) && ' '==(chessBoard.getChessBoard()[7][6])) {
+        if ('A'==(chessBoard.getChessBoard()[7][4]) && BoardLogic.castleWhiteShort && 'R'==(chessBoard.getChessBoard()[7][7]) && ' '==(chessBoard.getChessBoard()[7][5]) && ' '==(chessBoard.getChessBoard()[7][6])) {
             boolean temp=false;
             for (int j=5;j<=6;j++) {
                 chessBoard.makeKingMove("747"+j+" ");
@@ -60,7 +60,7 @@ public class King extends Piece {
                 list+="47A65C ;";
             }
         }
-        if ('A'==(chessBoard.getChessBoard()[7][3]) && chessBoard.castleBlackLong && 'R'==(chessBoard.getChessBoard()[7][7]) && ' '==(chessBoard.getChessBoard()[7][4]) && ' '==(chessBoard.getChessBoard()[7][5]) && ' '==(chessBoard.getChessBoard()[7][6])) {
+        if ('A'==(chessBoard.getChessBoard()[7][3]) && BoardLogic.castleBlackLong && 'R'==(chessBoard.getChessBoard()[7][7]) && ' '==(chessBoard.getChessBoard()[7][4]) && ' '==(chessBoard.getChessBoard()[7][5]) && ' '==(chessBoard.getChessBoard()[7][6])) {
             boolean temp=false;
             for (int j=4;j<=5;j++) {
                 chessBoard.makeKingMove("747"+j+" ");
@@ -73,7 +73,7 @@ public class King extends Piece {
                 list+="37A54C ;";
             }
         }
-        if ('A'==(chessBoard.getChessBoard()[7][3]) && chessBoard.castleBlackShort && 'R'==(chessBoard.getChessBoard()[7][0]) && ' '==(chessBoard.getChessBoard()[7][1]) && ' '==(chessBoard.getChessBoard()[7][2])) {
+        if ('A'==(chessBoard.getChessBoard()[7][3]) && BoardLogic.castleBlackShort && 'R'==(chessBoard.getChessBoard()[7][0]) && ' '==(chessBoard.getChessBoard()[7][1]) && ' '==(chessBoard.getChessBoard()[7][2])) {
             boolean temp=false;
             for (int j=1;j<=2;j++) {
                 chessBoard.makeKingMove("747"+j+" ");

@@ -27,6 +27,53 @@ public class BoardLogic {
         }
     }
 
+    public String Hint(int player){
+
+        char newBoard[][] = chessBoard.clone();
+
+                ;/* = {{"r","k","b","q","a","b","k","r"},
+                                {"p","p","p","p","p","p","p","p"},
+                                {" "," "," "," "," "," "," "," "},
+                                {" "," "," "," "," "," "," "," "},
+                                {" "," "," "," "," "," "," "," "},
+                                {" "," "," "," "," "," "," "," "},
+                                {"P","P","P","P","P","P","P","P"},
+                                {"R","K","B","Q","A","B","K","R"}};*/
+
+        /*if(player == 0){
+            for(int i = 7; i >= 0; i--)
+            {
+                for(int j = 7; j >= 7; j--)
+                {
+                    newBoard[i][j] = chessBoard[i][7-j];
+                }
+            }
+        }
+        else{
+            for(int i = 7; i >= 0; i--)
+            {
+                for(int j = 7; j >= 7; j--)
+                {
+                    newBoard[i][j] = chessBoard[i][j];
+                }
+            }
+        }*/
+
+       /* for (int i = 0; i < newBoard.length; i++){
+            for (int j = 0; j < newBoard[i].length; j++){
+                System.out.print(newBoard[i][j]);
+                System.out.print(" ");
+            }
+            System.out.print("\n");
+        }*/
+
+        //printBoardChess();
+
+        HintMove hint = new HintMove(chessBoard, player);
+
+        return hint.alphaBeta(4, 1000000, -1000000, "", 0);
+    }
+
     private char chessBoard[][]={
         {'r','k','b','q','a','b','k','r'},
         {'p','p','p','p','p','p','p','p'},

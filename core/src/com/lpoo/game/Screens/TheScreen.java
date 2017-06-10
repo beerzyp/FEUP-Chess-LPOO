@@ -90,6 +90,7 @@ public class TheScreen implements Screen {
     Texture btGyr = new Texture(Gdx.files.internal("gyr.png"));
 
     Stage barBox;
+    int player;
 
 
     public TheScreen(FeupChess game){
@@ -111,6 +112,7 @@ public class TheScreen implements Screen {
         LoadBoard();
         LoadPieces();
         madeNewMove = false;
+        int player = 0;
         PlayOnBoard();
 
         inputMultiplexer = new InputMultiplexer();
@@ -289,9 +291,13 @@ public class TheScreen implements Screen {
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 globalMade = new ArrayList<Integer>();
                 final String[] AllPossibleMoves=board.retrievePossibleMovesList(board.findJogada(index));
+                System.out.println("Cavalo: ");
+
+
                 if(AllPossibleMoves.length!=0)
                 {
                     for(int l=0;l<AllPossibleMoves.length;l++) {
+                        System.out.println(AllPossibleMoves[l]);
                         if (AllPossibleMoves[l].length() <= 6) {
 
                             normalListener(l, AllPossibleMoves, index);
@@ -322,7 +328,7 @@ public class TheScreen implements Screen {
             stage.getActors().get(indexOnBoard).setColor(Color.RED);
 
             if (listenerFlag)
-                ((Image) Pieces.getActors().get(indexOnBoard)).addListener(new InputListener() {
+                Pieces.getActors().get(indexOnBoard).addListener(new InputListener() {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         Gdx.app.log("Example", "touch started at (" + x + ", " + y + ")");
@@ -394,7 +400,7 @@ public class TheScreen implements Screen {
             stage.getActors().get(indexOnBoard).setColor(Color.RED);
 
             if (listenerFlag)
-                ((Image) Pieces.getActors().get(indexOnBoard)).addListener(new InputListener() {
+                Pieces.getActors().get(indexOnBoard).addListener(new InputListener() {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         Gdx.app.log("Example", "touch started at (" + x + ", " + y + ")");
@@ -540,9 +546,9 @@ public class TheScreen implements Screen {
         TextureRegion prom = new TextureRegion(promotionBox);
         prom.flip(false, true);
         TextureRegion wQ =  new Sprite(new Texture(Gdx.files.internal("Pieces/WhiteQueen.png")));
-        TextureRegion wR = new Sprite(new Texture(Gdx.files.internal("Pieces/WhiteRook.png")));;
-        TextureRegion wB = new Sprite(new Texture(Gdx.files.internal("Pieces/WhiteBishop.png")));;
-        TextureRegion wK = new Sprite(new Texture(Gdx.files.internal("Pieces/WhiteKnight.png")));;
+        TextureRegion wR = new Sprite(new Texture(Gdx.files.internal("Pieces/WhiteRook.png")));
+        TextureRegion wB = new Sprite(new Texture(Gdx.files.internal("Pieces/WhiteBishop.png")));
+        TextureRegion wK = new Sprite(new Texture(Gdx.files.internal("Pieces/WhiteKnight.png")));
         wQ.flip(false, true);
         wR.flip(false, true);
         wB.flip(false, true);
@@ -601,7 +607,11 @@ public class TheScreen implements Screen {
 
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                //System.exit(0);
+
+                if(player == 0)
+                    System.out.println(board.Hint(0));
+                else
+                    System.out.println(board.Hint(1));
             }
         });
 
@@ -769,6 +779,7 @@ public class TheScreen implements Screen {
 
         if(madeNewMove == true){
             madeNewMove = false;
+            if(player == 0) player=1; else player=0;
             PlayOnBoard();
         }
 
