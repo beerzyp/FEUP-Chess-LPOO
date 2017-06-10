@@ -640,9 +640,14 @@ public class TheScreen implements Screen {
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                     //System.out.println(board.Hint(0));
 
+
                 hintBool = !hintBool;
 
+
                 hintMove = board.Hint(0);
+
+                hintMove = "Row " + hintMove.charAt(0) + " Column " + hintMove.charAt(1) + " moves to row " + hintMove.charAt(2) + " column " + hintMove.charAt(3);
+
                 System.out.println(hintMove);
 
                 ((TextButton)Hint.getActors().get(1)).setText(hintMove);
