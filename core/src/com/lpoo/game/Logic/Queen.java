@@ -8,7 +8,12 @@ public class Queen extends Piece {
     public Queen(char sym, int pos, boolean playerColor) {
         super(sym, pos, playerColor);
     }
-
+    /**
+     *
+     * @param chessBoard given an instance of the gameLogic
+     * @return Returns a String with All the possible moves that this. King has in form Line Column A NextLine NextColumn   ( + oldPiece or +'C') when possibility to castle
+     * in case of castle it returns as KingOldColumn RookOldColumn K KingNewColumn RookNewColumn C
+     */
     public String possibleMove(BoardLogic chessBoard){
         String list="";
         char oldPiece;

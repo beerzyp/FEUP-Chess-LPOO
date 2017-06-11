@@ -9,6 +9,11 @@ public class Bishops extends Piece {
         super(sym, pos, playerColor);
     }
 
+    /**
+     *
+     * @param chessBoard given an instance of the gameLogic
+     * @return Returns a String with All the possible moves that this. Bishop has in form Line Column B NextLine NextColumn + or not oldPiece
+     */
     public String possibleMove(BoardLogic chessBoard){
         String list="";
         char oldPiece;

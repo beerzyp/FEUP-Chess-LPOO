@@ -7,6 +7,7 @@ import java.util.Arrays;
  * Created by FranciscoSilva on 17/05/17.
  */
 
+
 public class BoardLogic {
     public boolean kingSsNotSafe;
     public boolean gameOver;
@@ -27,6 +28,11 @@ public class BoardLogic {
         }
     }
 
+    /**
+     *
+     * @param player
+     * @return  return in the form of 1234b########## String with next move given by AI using Alpha–beta pruning
+     */
     public String Hint(int player){
 
         char newBoard[][] = chessBoard.clone();
@@ -74,6 +80,7 @@ public class BoardLogic {
         return hint.alphaBeta(4, 1000000, -1000000, "", 0);
     }
 
+
     private char chessBoard[][]={
         {'r','k','b','q','a','b','k','r'},
         {'p','p','p','p','p','p','p','p'},
@@ -94,6 +101,12 @@ public class BoardLogic {
 
     public int kingPositionC, kingPositionL;
 
+    /**
+     *
+     *
+     * @param pos Position of player on Board 0-63, function goes on to find the piece in that pos
+     * @return String with all possible moves of the piece in the form (Line Column PieceToMove Line Column) + 'C' + PieceToTake + 'p'
+     */
     public String findJogada(int pos){
         if(findKing(pos) != null){
             return findKing(pos).possibleMove(this);
@@ -117,6 +130,11 @@ public class BoardLogic {
         return null;
     }
 
+    /**
+     *
+     * @param pos of Piece on the Board
+     * @return if a king is in pos returns the type King class
+     */
     public King findKing(int pos){
         for(int i = 0; i < this.kingPieces.size(); i++){
             if(this.kingPieces.get(i).getPosOnBoard() == pos)
@@ -126,6 +144,11 @@ public class BoardLogic {
         return null;
     }
 
+    /**
+     *
+     * @param pos of Piece on the Board
+     * @return if a queen is in pos returns the type Queen class
+     */
     public Queen findQueen(int pos){
         for(int i = 0; i < this.queenPieces.size(); i++){
             if(this.queenPieces.get(i).getPosOnBoard() == pos)
@@ -135,6 +158,12 @@ public class BoardLogic {
         return null;
     }
 
+
+    /**
+     *
+     * @param pos of Piece on the Board
+     * @return if a knight is in pos returns the type Knight class
+     */
     public Knights findKnight(int pos){
         for(int i = 0; i < this.knightPieces.size(); i++){
             if(this.knightPieces.get(i).getPosOnBoard() == pos)
@@ -144,6 +173,12 @@ public class BoardLogic {
         return null;
     }
 
+
+    /**
+     *
+     * @param pos of Piece on the Board
+     * @return if a rook is in pos returns the type Rook class
+     */
     public Rooks findRook(int pos){
         for(int i = 0; i < this.rookPieces.size(); i++){
             if(this.rookPieces.get(i).getPosOnBoard() == pos)
@@ -153,6 +188,12 @@ public class BoardLogic {
         return null;
     }
 
+
+    /**
+     *
+     * @param pos of Piece on the Board
+     * @return if a bishop is in pos returns the type Bishop class
+     */
     public Bishops findBishop(int pos){
         for(int i = 0; i < this.bishopPieces.size(); i++){
             if(this.bishopPieces.get(i).getPosOnBoard() == pos)
@@ -162,6 +203,12 @@ public class BoardLogic {
         return null;
     }
 
+
+    /**
+     *
+     * @param pos of Piece on the Board
+     * @return if a pawn is in pos returns the type Pawn class
+     */
     public Pawns findPawn(int pos){
         for(int i = 0; i < this.pawnPieces.size(); i++){
             if(this.pawnPieces.get(i).getPosOnBoard() == pos)
@@ -171,13 +218,22 @@ public class BoardLogic {
         return null;
     }
 
+    /**
+     *
+     * @param pos on board of Pawn to erase
+     *            if Pawn is on that pos of Board, it removes it from the Pawn Array List (Pieces in play)
+     */
     public void delPawn(int pos){
         for(int i = 0; i < this.pawnPieces.size(); i++){
             if(this.pawnPieces.get(i).getPosOnBoard() == pos)
                 this.pawnPieces.remove(i);
         }
     }
-
+    /**
+     *
+     * @param pos on board of Bishop to erase
+     *            if Bishop is on that pos of Board, it removes it from the Bishop Array List (Pieces in play)
+     */
     public void delBishop(int pos){
         for(int i = 0; i < this.bishopPieces.size(); i++){
             if(this.bishopPieces.get(i).getPosOnBoard() == pos)
@@ -185,6 +241,11 @@ public class BoardLogic {
         }
     }
 
+    /**
+     *
+     * @param pos on board of Queen to erase
+     *            if Queen is on that pos of Board, it removes it from the queen Array List (Pieces in play)
+     */
     public void delQueen(int pos){
         for(int i = 0; i < this.queenPieces.size(); i++){
             if(this.queenPieces.get(i).getPosOnBoard() == pos)
@@ -192,6 +253,11 @@ public class BoardLogic {
         }
     }
 
+    /**
+     *
+     * @param pos on board of Knight to erase
+     *            if Knight is on that pos of Board, it removes it from the Knight Array List (Pieces in play)
+     */
     public void delknight(int pos){
         for(int i = 0; i < this.knightPieces.size(); i++){
             if(this.knightPieces.get(i).getPosOnBoard() == pos)
@@ -199,6 +265,12 @@ public class BoardLogic {
         }
     }
 
+
+    /**
+     *
+     * @param pos on board of Rook to erase
+     *            if Rook is on that pos of Board, it removes it from the Rook Array List (Pieces in play)
+     */
     public void delRook(int pos){
         for(int i = 0; i < this.rookPieces.size(); i++){
             if(this.rookPieces.get(i).getPosOnBoard() == pos)
@@ -254,11 +326,23 @@ public class BoardLogic {
         this.knightPieces.add(knightPieces);
     }
 
+    /**
+     *
+     * @param xAtual Previous Line of Piece to move
+     * @param yAtual Previous Column of Piece to move
+     * @param xNovo Piece new Line on board
+     * @param yNovo Piece new Column on board
+     * @param sym Symbol of piece
+     */
     public void setChessBoard(int xAtual, int yAtual, int xNovo, int yNovo, char sym){
         this.chessBoard[xAtual][yAtual] = ' ';
         this.chessBoard[xNovo][yNovo] = sym;
     }
 
+    /**
+     *
+     * @return gameboard 8x8
+     */
     public char[][] getChessBoard(){
         return this.chessBoard;
     }
@@ -272,51 +356,11 @@ public class BoardLogic {
             System.out.print("\n");
         }
     }
-    public void makeKingMove(String move) {/*
-        //trackMakeMove++;
-        if (move.charAt(4)!='C' && move.charAt(4)!='P') {
-            chessBoard[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))]=chessBoard[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))];
-            chessBoard[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))]=' ';
-            if ('A'==(chessBoard[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))])) {
-                kingPositionC=8*Character.getNumericValue(move.charAt(2))+Character.getNumericValue(move.charAt(3));//updates the king position
-            }
-        } else if (move.charAt(4)=='P') {
-            //if pawn promotion
-            chessBoard[1][Character.getNumericValue(move.charAt(0))]=' ';
-            chessBoard[0][Character.getNumericValue(move.charAt(1))]=move.charAt(3);
-        } else {
-            //if castling
-            chessBoard[7][Character.getNumericValue(move.charAt(0))]=' ';
-            chessBoard[7][Character.getNumericValue(move.charAt(1))]=' ';
-            chessBoard[7][Character.getNumericValue(move.charAt(2))]='A';
-            chessBoard[7][Character.getNumericValue(move.charAt(3))]='R';
-            kingPositionC=56+Character.getNumericValue(move.charAt(2));//updates the king position (56=8*7)
-        }*/
-    }
 
-    public void undoKingMove(String move) {/*
-        if (move.charAt(4)!='C' && move.charAt(4)!='P') {
-            chessBoard[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))]=chessBoard[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))];
-            chessBoard[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))]=move.charAt(4);
-            if ('A'==chessBoard[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))]) {
-                kingPositionC=8*Character.getNumericValue(move.charAt(0))+Character.getNumericValue(move.charAt(1));//updates the king position
-            }
-        } else if (move.charAt(4)=='P') {
-            //if pawn demotion
-            chessBoard[1][Character.getNumericValue(move.charAt(0))]='P';
-            chessBoard[0][Character.getNumericValue(move.charAt(1))]=move.charAt(2);
-        } else {
-            //if uncastling
-            chessBoard[7][Character.getNumericValue(move.charAt(0))]='A';
-            chessBoard[7][Character.getNumericValue(move.charAt(1))]='R';
-            chessBoard[7][Character.getNumericValue(move.charAt(2))]=' ';
-            chessBoard[7][Character.getNumericValue(move.charAt(3))]=' ';
-            kingPositionC=56+Character.getNumericValue(move.charAt(0));//updates the king position (56=8*7)
-
-        }*/
-    }
-
-
+    /**
+     * This function takes the position of the King on Board kingPositionC, and checks if any of the pieces in play are threatning the king
+     * @return true if safe
+     */
     public boolean kingSafe() {
         /*for(int z= 0 ; z < getKingPieces().size(); z++)
             if(getKingPieces().get(z).getSymbol() == 'A')
@@ -397,6 +441,10 @@ public class BoardLogic {
         return true;
     }
 
+    /**
+     * The logic is designed so that it's allways Uppercase pieces playing
+     * This function inverts the piece positions symetrically so that they are in the same position if the board is rotated 180d
+     */
     public void invertAllPiecesInfo(){
         for(int i=0; i < this.bishopPieces.size(); i++){
             if(Character.isUpperCase(this.bishopPieces.get(i).getSymbol())){
@@ -459,6 +507,9 @@ public class BoardLogic {
         }
     }
 
+    /**
+     * flipBoard rotates the board, and calls InvertAllPieces So  that the info of the Pieces is corrected after the board rotation
+     */
     public void flipBoard() {
         char temp;
 
@@ -484,11 +535,22 @@ public class BoardLogic {
         invertAllPiecesInfo();
     }
 
+    /**
+     *
+     * @param str Receieves a string with all the possible plays from a Piece, in form play1 ; play2 ;
+     * @return a String array with the plays correctly formatted to be treated by logic in form (Line Column PieceToMove Line Column) + exceptions
+     */
     public String[] retrievePossibleMovesList(String str){
         String[] parts = str.split("\\;");
         return parts;
     }
 
+    /**
+     *
+     * @param x Line in board
+     * @param y Column in board
+     * @return Returns the position 0-63 of the piece in the Board[8][8]
+     */
     public int calculatePos(int x, int y){
         int temp[][] = new int[8][8];
 
@@ -511,6 +573,55 @@ public class BoardLogic {
         return pos - 1;
     }
 
+
+    public void makeKingMove(String move) {/*
+        //trackMakeMove++;
+        if (move.charAt(4)!='C' && move.charAt(4)!='P') {
+            chessBoard[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))]=chessBoard[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))];
+            chessBoard[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))]=' ';
+            if ('A'==(chessBoard[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))])) {
+                kingPositionC=8*Character.getNumericValue(move.charAt(2))+Character.getNumericValue(move.charAt(3));//updates the king position
+            }
+        } else if (move.charAt(4)=='P') {
+            //if pawn promotion
+            chessBoard[1][Character.getNumericValue(move.charAt(0))]=' ';
+            chessBoard[0][Character.getNumericValue(move.charAt(1))]=move.charAt(3);
+        } else {
+            //if castling
+            chessBoard[7][Character.getNumericValue(move.charAt(0))]=' ';
+            chessBoard[7][Character.getNumericValue(move.charAt(1))]=' ';
+            chessBoard[7][Character.getNumericValue(move.charAt(2))]='A';
+            chessBoard[7][Character.getNumericValue(move.charAt(3))]='R';
+            kingPositionC=56+Character.getNumericValue(move.charAt(2));//updates the king position (56=8*7)
+        }*/
+    }
+
+    public void undoKingMove(String move) {/*
+        if (move.charAt(4)!='C' && move.charAt(4)!='P') {
+            chessBoard[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))]=chessBoard[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))];
+            chessBoard[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))]=move.charAt(4);
+            if ('A'==chessBoard[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))]) {
+                kingPositionC=8*Character.getNumericValue(move.charAt(0))+Character.getNumericValue(move.charAt(1));//updates the king position
+            }
+        } else if (move.charAt(4)=='P') {
+            //if pawn demotion
+            chessBoard[1][Character.getNumericValue(move.charAt(0))]='P';
+            chessBoard[0][Character.getNumericValue(move.charAt(1))]=move.charAt(2);
+        } else {
+            //if uncastling
+            chessBoard[7][Character.getNumericValue(move.charAt(0))]='A';
+            chessBoard[7][Character.getNumericValue(move.charAt(1))]='R';
+            chessBoard[7][Character.getNumericValue(move.charAt(2))]=' ';
+            chessBoard[7][Character.getNumericValue(move.charAt(3))]=' ';
+            kingPositionC=56+Character.getNumericValue(move.charAt(0));//updates the king position (56=8*7)
+        }*/
+    }
+
+    /**
+     *
+     * @param a1 Recieves a play of type (Line Column PieceToMove NextLine NextColumn)
+     * @return returns an int to the board position of next play (NextLine,NextColumn)
+     */
     public int getPossibleMoveIndexAtBoard(String a1)
     {   int index=-1;
         if(!a1.isEmpty()) {

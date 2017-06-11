@@ -8,7 +8,11 @@ public class Rooks extends Piece {
     public Rooks(char sym, int pos, boolean playerColor) {
         super(sym, pos, playerColor);
     }
-
+    /**
+     *
+     * @param chessBoard given an instance of the gameLogic
+     * @return Returns a String with All the possible moves that this. Rook has in form Line Column R NextLine NextColumn  + oldPiece
+     */
     public String possibleMove(BoardLogic chessBoard){
         String list="";
         char oldPiece;

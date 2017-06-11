@@ -50,6 +50,12 @@ public class Piece {
         this.symbol = symbol;
     }
 
+    /**
+     *
+     * @param x Line on Board
+     * @param y Column on Board
+     * @return Position 0-63 on board
+     */
     public int calculatePos(int x, int y){
         int temp[][] = new int[8][8];
 
@@ -72,6 +78,13 @@ public class Piece {
         return pos - 1;
     }//castling (returns move as 0kingColumn,1rookColumn,2kingNewColumn,3rookNewColumn,4C
 
+    /**
+     *
+     * @param move A Possible move for a piece
+     * @param board an instance of GameLogic
+     *              This function updates the information on the board according to the move recieved,
+     *              in case of 24B35p it would delete a pawn from the Board, and move the bishop from position (2,4) to (3,5)
+     */
     public void setNewMove(String move, BoardLogic board){
         if(move.charAt(5)=='C') {
             //trackMakeMove++;

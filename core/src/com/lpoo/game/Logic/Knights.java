@@ -8,7 +8,11 @@ public class Knights extends Piece {
     public Knights(char sym, int pos, boolean playerColor) {
         super(sym, pos, playerColor);
     }
-
+    /**
+     *
+     * @param chessBoard given an instance of the gameLogic
+     * @return Returns a String with All the possible moves that this. Knight has in form Line Column K NextLine NextColumn + or not oldPiece
+     */
     public String possibleMove(BoardLogic chessBoard){
 
         /*String list=""; char oldPiece;

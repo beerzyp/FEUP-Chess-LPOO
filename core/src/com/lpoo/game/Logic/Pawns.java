@@ -14,7 +14,12 @@ public class Pawns extends Piece {
     public Pawns(char sym, int pos, boolean playerColor) {
         super(sym, pos, playerColor);
     }
-
+    /**
+     *
+     * @param chessBoard given an instance of the gameLogic
+     * @return Returns a String with All the possible moves that this. Pawn has in form Line Column P NextLine NextColumn + or not oldPiece
+     * /TODO en passant
+     */
     public String possibleMove(BoardLogic chessBoard){
         String list = ""; char oldPiece;
         int r=this.posOnBoard/8, c=this.posOnBoard%8;
