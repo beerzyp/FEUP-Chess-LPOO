@@ -4,7 +4,9 @@ package com.lpoo.game.Logic;
  * Created by FranciscoSilva on 17/05/17.
  */
 
+
 public class Knights extends Piece {
+    public static void naoFazNada(){};
     public Knights(char sym, int pos, boolean playerColor) {
         super(sym, pos, playerColor);
     }
@@ -30,7 +32,7 @@ public class Knights extends Piece {
                         chessBoard.getChessBoard()[r][c]='K';
                         chessBoard.getChessBoard()[r+j][c+k*2]=oldPiece;
                     }
-                } catch (Exception e) {}
+                } catch (Exception e) {naoFazNada();}
                 try {
                     if (Character.isLowerCase(chessBoard.getChessBoard()[r+j*2][c+k]) || ' ' == (chessBoard.getChessBoard()[r+j*2][c+k])) {
                         oldPiece=chessBoard.getChessBoard()[r+j*2][c+k];
@@ -41,7 +43,7 @@ public class Knights extends Piece {
                         chessBoard.getChessBoard()[r][c]='K';
                         chessBoard.getChessBoard()[r+j*2][c+k]=oldPiece;
                     }
-                } catch (Exception e) {}
+                } catch (Exception e) {naoFazNada();}
             }
         }
         return list;

@@ -13,6 +13,7 @@ public class HintMove {
     static int kingPositionC, kingPositionL;
     static int humanAsWhite=-1;//1=human as white, 0=human as black
     static int globalDepth=4;
+    public static void naoFazNada(){};
     /*public static void main(String[] args) {
         while (!"A".equals(chessBoard[kingPositionC/8][kingPositionC%8])) {kingPositionC++;}//get King's location
         while (!"a".equals(chessBoard[kingPositionL/8][kingPositionL%8])) {kingPositionL++;}//get king's location
@@ -79,7 +80,7 @@ public class HintMove {
             while (!"A".equals(chessBoard[kingPositionC/8][kingPositionC%8])) {kingPositionC++;}//get King's location
             while (!"a".equals(chessBoard[kingPositionL/8][kingPositionL%8])) {kingPositionL++;}//get king's location
         }
-        //chessBoard = board.clone();
+
     }
 
 
@@ -105,8 +106,6 @@ public class HintMove {
                 if (player==0) {return move+beta;} else {return move+alpha;}
             }
         }
-
-        //printBoardChess();
         if (player==0) {return move+beta;} else {return move+alpha;}
     }
 

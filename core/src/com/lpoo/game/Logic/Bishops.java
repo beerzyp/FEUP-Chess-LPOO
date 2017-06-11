@@ -8,7 +8,7 @@ public class Bishops extends Piece {
     public Bishops(char sym, int pos, boolean playerColor) {
         super(sym, pos, playerColor);
     }
-
+    public static void naoFazNada(){};
     /**
      *
      * @param chessBoard given an instance of the gameLogic
@@ -44,7 +44,7 @@ public class Bishops extends Piece {
                         chessBoard.getChessBoard()[r][c]='B';
                         chessBoard.getChessBoard()[r+temp*j][c+temp*k]=oldPiece;
                     }
-                } catch (Exception e) {}
+                } catch (Exception e) {naoFazNada();}
                 temp=1;
             }
         }
