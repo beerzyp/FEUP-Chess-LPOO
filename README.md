@@ -1,3 +1,5 @@
+<img src='https://bettercodehub.com/edge/badge/beerzyp/LPOO1617_T5G8?branch=finalRelease&token=8ad76b37169e018295809009e3d8776e1436005d'>
+
 # Chess-LPOO
 Chess Game Final Project LPOO
 
