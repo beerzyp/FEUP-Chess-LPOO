@@ -56,27 +56,7 @@ public class Piece {
      * @param y Column on Board
      * @return Position 0-63 on board
      */
-    public int calculatePos(int x, int y){
-        int temp[][] = new int[8][8];
-
-        if(x == 7 && y == 7)
-            temp[x][y] = 0;
-        else
-            temp[x][y] = 1;
-
-        int pos=0;
-
-        for(int i = 0; i < temp.length; i++){
-            for(int j = 0; j < temp[i].length; j++) {
-                pos++;
-                if (temp[i][j] == 1) {
-                    return pos-1;
-                }
-            }
-        }
-
-        return pos - 1;
-    }//castling (returns move as 0kingColumn,1rookColumn,2kingNewColumn,3rookNewColumn,4C
+//castling (returns move as 0kingColumn,1rookColumn,2kingNewColumn,3rookNewColumn,4C
 
     /**
      *
@@ -96,8 +76,8 @@ public class Piece {
             board.kingPositionC = 56 + Character.getNumericValue(move.charAt(3));//updates the king position (56=8*7)
 
 
-            this.posOnBoard = calculatePos(7, Character.getNumericValue(move.charAt(3)));
-            board.findRook(calculatePos(7, Character.getNumericValue(move.charAt(1)))).setPosOnBoard(calculatePos(7, Character.getNumericValue(move.charAt(4))));
+            this.posOnBoard = board.calculatePos(7, Character.getNumericValue(move.charAt(3)));
+            board.findRook(board.calculatePos(7, Character.getNumericValue(move.charAt(1)))).setPosOnBoard(board.calculatePos(7, Character.getNumericValue(move.charAt(4))));
             System.out.println("Pos on Board: ");
             System.out.print(this.posOnBoard);
 
@@ -110,18 +90,18 @@ public class Piece {
             if (move.charAt(5) != ' ') {
                 switch (move.charAt(5)) {
                     case 'p':
-                        board.delPawn(calculatePos(Character.getNumericValue(move.charAt(3)), Character.getNumericValue(move.charAt(4))));
+                        board.delPawn(board.calculatePos(Character.getNumericValue(move.charAt(3)), Character.getNumericValue(move.charAt(4))));
                     case 'q':
-                        board.delQueen(calculatePos(Character.getNumericValue(move.charAt(3)), Character.getNumericValue(move.charAt(4))));
+                        board.delQueen(board.calculatePos(Character.getNumericValue(move.charAt(3)), Character.getNumericValue(move.charAt(4))));
                     case 'r':
-                        board.delRook(calculatePos(Character.getNumericValue(move.charAt(3)), Character.getNumericValue(move.charAt(4))));
+                        board.delRook(board.calculatePos(Character.getNumericValue(move.charAt(3)), Character.getNumericValue(move.charAt(4))));
                     case 'k':
-                        board.delknight(calculatePos(Character.getNumericValue(move.charAt(3)), Character.getNumericValue(move.charAt(4))));
+                        board.delknight(board.calculatePos(Character.getNumericValue(move.charAt(3)), Character.getNumericValue(move.charAt(4))));
                     case 'b':
-                        board.delBishop(calculatePos(Character.getNumericValue(move.charAt(3)), Character.getNumericValue(move.charAt(4))));
+                        board.delBishop(board.calculatePos(Character.getNumericValue(move.charAt(3)), Character.getNumericValue(move.charAt(4))));
                 }
             }
-            this.posOnBoard = calculatePos(Character.getNumericValue(move.charAt(3)), Character.getNumericValue(move.charAt(4)));
+            this.posOnBoard = board.calculatePos(Character.getNumericValue(move.charAt(3)), Character.getNumericValue(move.charAt(4)));
             System.out.println("Pos on Board: ");
             System.out.print(this.posOnBoard);
 
