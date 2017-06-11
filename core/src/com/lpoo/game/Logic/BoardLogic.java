@@ -37,44 +37,6 @@ public class BoardLogic {
 
         char newBoard[][] = chessBoard.clone();
 
-                ;/* = {{"r","k","b","q","a","b","k","r"},
-                                {"p","p","p","p","p","p","p","p"},
-                                {" "," "," "," "," "," "," "," "},
-                                {" "," "," "," "," "," "," "," "},
-                                {" "," "," "," "," "," "," "," "},
-                                {" "," "," "," "," "," "," "," "},
-                                {"P","P","P","P","P","P","P","P"},
-                                {"R","K","B","Q","A","B","K","R"}};*/
-
-        /*if(player == 0){
-            for(int i = 7; i >= 0; i--)
-            {
-                for(int j = 7; j >= 7; j--)
-                {
-                    newBoard[i][j] = chessBoard[i][7-j];
-                }
-            }
-        }
-        else{
-            for(int i = 7; i >= 0; i--)
-            {
-                for(int j = 7; j >= 7; j--)
-                {
-                    newBoard[i][j] = chessBoard[i][j];
-                }
-            }
-        }*/
-
-       /* for (int i = 0; i < newBoard.length; i++){
-            for (int j = 0; j < newBoard[i].length; j++){
-                System.out.print(newBoard[i][j]);
-                System.out.print(" ");
-            }
-            System.out.print("\n");
-        }*/
-
-        //printBoardChess();
-
         com.lpoo.game.AI.HintMove hint = new com.lpoo.game.AI.HintMove(chessBoard, player);
 
         return hint.alphaBeta(4, 1000000, -1000000, "", 0);
@@ -362,9 +324,6 @@ public class BoardLogic {
      * @return true if safe
      */
     public boolean kingSafe() {
-        /*for(int z= 0 ; z < getKingPieces().size(); z++)
-            if(getKingPieces().get(z).getSymbol() == 'A')
-                getKingPieces().get(z).possibleMove(this);*/
         //bishop/queen
         int temp=1;
         for (int i=-1; i<=1; i+=2) {
@@ -574,47 +533,10 @@ public class BoardLogic {
     }
 
 
-    public void makeKingMove(String move) {/*
-        //trackMakeMove++;
-        if (move.charAt(4)!='C' && move.charAt(4)!='P') {
-            chessBoard[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))]=chessBoard[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))];
-            chessBoard[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))]=' ';
-            if ('A'==(chessBoard[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))])) {
-                kingPositionC=8*Character.getNumericValue(move.charAt(2))+Character.getNumericValue(move.charAt(3));//updates the king position
-            }
-        } else if (move.charAt(4)=='P') {
-            //if pawn promotion
-            chessBoard[1][Character.getNumericValue(move.charAt(0))]=' ';
-            chessBoard[0][Character.getNumericValue(move.charAt(1))]=move.charAt(3);
-        } else {
-            //if castling
-            chessBoard[7][Character.getNumericValue(move.charAt(0))]=' ';
-            chessBoard[7][Character.getNumericValue(move.charAt(1))]=' ';
-            chessBoard[7][Character.getNumericValue(move.charAt(2))]='A';
-            chessBoard[7][Character.getNumericValue(move.charAt(3))]='R';
-            kingPositionC=56+Character.getNumericValue(move.charAt(2));//updates the king position (56=8*7)
-        }*/
+    public void makeKingMove(String move) {
     }
 
-    public void undoKingMove(String move) {/*
-        if (move.charAt(4)!='C' && move.charAt(4)!='P') {
-            chessBoard[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))]=chessBoard[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))];
-            chessBoard[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))]=move.charAt(4);
-            if ('A'==chessBoard[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))]) {
-                kingPositionC=8*Character.getNumericValue(move.charAt(0))+Character.getNumericValue(move.charAt(1));//updates the king position
-            }
-        } else if (move.charAt(4)=='P') {
-            //if pawn demotion
-            chessBoard[1][Character.getNumericValue(move.charAt(0))]='P';
-            chessBoard[0][Character.getNumericValue(move.charAt(1))]=move.charAt(2);
-        } else {
-            //if uncastling
-            chessBoard[7][Character.getNumericValue(move.charAt(0))]='A';
-            chessBoard[7][Character.getNumericValue(move.charAt(1))]='R';
-            chessBoard[7][Character.getNumericValue(move.charAt(2))]=' ';
-            chessBoard[7][Character.getNumericValue(move.charAt(3))]=' ';
-            kingPositionC=56+Character.getNumericValue(move.charAt(0));//updates the king position (56=8*7)
-        }*/
+    public void undoKingMove(String move) {
     }
 
     /**
@@ -625,9 +547,7 @@ public class BoardLogic {
     public int getPossibleMoveIndexAtBoard(String a1)
     {   int index=-1;
         if(!a1.isEmpty()) {
-            //column1,column2,this-piece,captured-piece,new-piece,P
 
-            //list=list+c+c+this.getSymbol()+oldPiece+temp[k]+'P'+';';
             System.out.print("Printoff: ");
             System.out.println(a1);
 //
