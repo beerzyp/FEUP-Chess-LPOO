@@ -205,7 +205,7 @@ public class HintMove {
                     chessBoard[r][c]="P";
                     chessBoard[r-1][c+j]=oldPiece;
                 }
-            } catch (Exception e) {}
+            } catch (Exception e) {naoFazNada();}
             try {//promotion && capture
                 if (Character.isLowerCase(chessBoard[r-1][c+j].charAt(0)) && i<16) {
                     String[] temp={"Q","R","B","K"};
@@ -221,7 +221,7 @@ public class HintMove {
                         chessBoard[r-1][c+j]=oldPiece;
                     }
                 }
-            } catch (Exception e) {}
+            } catch (Exception e) {naoFazNada();}
         }
         try {//move one up
             if (" ".equals(chessBoard[r-1][c]) && i>=16) {
@@ -234,7 +234,7 @@ public class HintMove {
                 chessBoard[r][c]="P";
                 chessBoard[r-1][c]=oldPiece;
             }
-        } catch (Exception e) {}
+        } catch (Exception e) {naoFazNada();}
         try {//promotion && no capture
             if (" ".equals(chessBoard[r-1][c]) && i<16) {
                 String[] temp={"Q","R","B","K"};
@@ -250,7 +250,7 @@ public class HintMove {
                     chessBoard[r-1][c]=oldPiece;
                 }
             }
-        } catch (Exception e) {}
+        } catch (Exception e) {naoFazNada();}
         try {//move two up
             if (" ".equals(chessBoard[r-1][c]) && " ".equals(chessBoard[r-2][c]) && i>=48) {
                 oldPiece=chessBoard[r-2][c];
@@ -262,7 +262,7 @@ public class HintMove {
                 chessBoard[r][c]="P";
                 chessBoard[r-2][c]=oldPiece;
             }
-        } catch (Exception e) {}
+        } catch (Exception e) {naoFazNada();}
         return list;
     }
     public static String posibleR(int i) {
@@ -293,7 +293,7 @@ public class HintMove {
                     chessBoard[r][c]="R";
                     chessBoard[r][c+temp*j]=oldPiece;
                 }
-            } catch (Exception e) {}
+            } catch (Exception e) {naoFazNada();}
             temp=1;
             try {
                 while(" ".equals(chessBoard[r+temp*j][c]))
@@ -318,7 +318,7 @@ public class HintMove {
                     chessBoard[r][c]="R";
                     chessBoard[r+temp*j][c]=oldPiece;
                 }
-            } catch (Exception e) {}
+            } catch (Exception e) {naoFazNada();}
             temp=1;
         }
         return list;
@@ -338,7 +338,7 @@ public class HintMove {
                         chessBoard[r][c]="K";
                         chessBoard[r+j][c+k*2]=oldPiece;
                     }
-                } catch (Exception e) {}
+                } catch (Exception e) {naoFazNada();}
                 try {
                     if (Character.isLowerCase(chessBoard[r+j*2][c+k].charAt(0)) || " ".equals(chessBoard[r+j*2][c+k])) {
                         oldPiece=chessBoard[r+j*2][c+k];
@@ -349,7 +349,7 @@ public class HintMove {
                         chessBoard[r][c]="K";
                         chessBoard[r+j*2][c+k]=oldPiece;
                     }
-                } catch (Exception e) {}
+                } catch (Exception e) {naoFazNada();}
             }
         }
         return list;
@@ -383,7 +383,7 @@ public class HintMove {
                         chessBoard[r][c]="B";
                         chessBoard[r+temp*j][c+temp*k]=oldPiece;
                     }
-                } catch (Exception e) {}
+                } catch (Exception e) {naoFazNada();}
                 temp=1;
             }
         }
@@ -419,7 +419,7 @@ public class HintMove {
                             chessBoard[r][c]="Q";
                             chessBoard[r+temp*j][c+temp*k]=oldPiece;
                         }
-                    } catch (Exception e) {}
+                    } catch (Exception e) {naoFazNada();}
                     temp=1;
                 }
             }
@@ -445,7 +445,7 @@ public class HintMove {
                         chessBoard[r-1+j/3][c-1+j%3]=oldPiece;
                         kingPositionC=kingTemp;
                     }
-                } catch (Exception e) {}
+                } catch (Exception e) {naoFazNada();}
             }
         }
         //need to add casting later
@@ -481,7 +481,7 @@ public class HintMove {
                             "q".equals(chessBoard[kingPositionC/8+temp*i][kingPositionC%8+temp*j])) {
                         return false;
                     }
-                } catch (Exception e) {}
+                } catch (Exception e) {naoFazNada();}
                 temp=1;
             }
         }
@@ -493,7 +493,7 @@ public class HintMove {
                         "q".equals(chessBoard[kingPositionC/8][kingPositionC%8+temp*i])) {
                     return false;
                 }
-            } catch (Exception e) {}
+            } catch (Exception e) {naoFazNada();}
             temp=1;
             try {
                 while(" ".equals(chessBoard[kingPositionC/8+temp*i][kingPositionC%8])) {temp++;}
@@ -501,7 +501,7 @@ public class HintMove {
                         "q".equals(chessBoard[kingPositionC/8+temp*i][kingPositionC%8])) {
                     return false;
                 }
-            } catch (Exception e) {}
+            } catch (Exception e) {naoFazNada();}
             temp=1;
         }
         //knight
@@ -511,12 +511,12 @@ public class HintMove {
                     if ("k".equals(chessBoard[kingPositionC/8+i][kingPositionC%8+j*2])) {
                         return false;
                     }
-                } catch (Exception e) {}
+                } catch (Exception e) {naoFazNada();}
                 try {
                     if ("k".equals(chessBoard[kingPositionC/8+i*2][kingPositionC%8+j])) {
                         return false;
                     }
-                } catch (Exception e) {}
+                } catch (Exception e) {naoFazNada();}
             }
         }
         //pawn
@@ -525,12 +525,12 @@ public class HintMove {
                 if ("p".equals(chessBoard[kingPositionC/8-1][kingPositionC%8-1])) {
                     return false;
                 }
-            } catch (Exception e) {}
+            } catch (Exception e) {naoFazNada();}
             try {
                 if ("p".equals(chessBoard[kingPositionC/8-1][kingPositionC%8+1])) {
                     return false;
                 }
-            } catch (Exception e) {}
+            } catch (Exception e) {naoFazNada();}
             //king
             for (int i=-1; i<=1; i++) {
                 for (int j=-1; j<=1; j++) {
@@ -539,7 +539,7 @@ public class HintMove {
                             if ("a".equals(chessBoard[kingPositionC/8+i][kingPositionC%8+j])) {
                                 return false;
                             }
-                        } catch (Exception e) {}
+                        } catch (Exception e) {naoFazNada();}
                     }
                 }
             }

@@ -10,7 +10,7 @@ import static java.lang.Character.isUpperCase;
 
 public class Pawns extends Piece {
     private ArrayList<String> possibleMoves = new ArrayList<String>(); //especificado no formato: Linha x Coluna x Linha-PeçaQueCome x Coluna-PeçaQueCome (caso nao coma LinhaxColunaxfxf)
-
+    public static void naoFazNada(){}
     public Pawns(char sym, int pos, boolean playerColor) {
         super(sym, pos, playerColor);
     }
@@ -36,7 +36,7 @@ public class Pawns extends Piece {
                     chessBoard.getChessBoard()[r][c]='P';
                     chessBoard.getChessBoard()[r-1][c+j]=oldPiece;
                 }
-            } catch (Exception e) {}
+            } catch (Exception e) {naoFazNada();}
             try {//promotion && capture
                 if (Character.isLowerCase(chessBoard.getChessBoard()[r-1][c+j]) && this.posOnBoard<16) { // duvida
                     char[] temp={'Q','R','B','K'};
@@ -52,7 +52,7 @@ public class Pawns extends Piece {
                         chessBoard.getChessBoard()[r-1][c+j]=oldPiece;
                     }
                 }
-            } catch (Exception e) {}
+            } catch (Exception e) {naoFazNada();}
         }
         try {//move one up
             if (' ' == chessBoard.getChessBoard()[r-1][c] && this.posOnBoard>=16) {
@@ -65,7 +65,7 @@ public class Pawns extends Piece {
                 chessBoard.getChessBoard()[r][c]='P';
                 chessBoard.getChessBoard()[r-1][c]=oldPiece;
             }
-        } catch (Exception e) {}
+        } catch (Exception e) {naoFazNada();}
         try {//promotion && no capture
             if (' ' == chessBoard.getChessBoard()[r-1][c] && this.posOnBoard<16) {
                 char[] temp={'Q','R','B','K'};
@@ -81,7 +81,7 @@ public class Pawns extends Piece {
                     chessBoard.getChessBoard()[r-1][c]=oldPiece;
                 }
             }
-        } catch (Exception e) {}
+        } catch (Exception e) {naoFazNada();}
         try {//move two up
             if (' ' == chessBoard.getChessBoard()[r-1][c] && ' ' == chessBoard.getChessBoard()[r-2][c] && this.posOnBoard>=48) {
                 oldPiece=chessBoard.getChessBoard()[r-2][c];
@@ -93,7 +93,7 @@ public class Pawns extends Piece {
                 chessBoard.getChessBoard()[r][c]='P';
                 chessBoard.getChessBoard()[r-2][c]=oldPiece;
             }
-        } catch (Exception e) {}
+        } catch (Exception e) {naoFazNada();}
 
         this.actualPossibleMoves = list;
         return list;
