@@ -115,7 +115,7 @@ public class TheScreen implements Screen {
             startingX=Gdx.input.getGyroscopeX();
             startingY=Gdx.input.getGyroscopeY();
         }
-        //gamecam.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight())
+
         promotion = false;
         LoadLogic();
         LoadBoard();
@@ -130,7 +130,7 @@ public class TheScreen implements Screen {
         inputMultiplexer.addProcessor(barBox);
         inputMultiplexer.addProcessor(Hint);
         Gdx.input.setInputProcessor(inputMultiplexer);
-        //Gdx.input.setInputProcessor(Pieces);
+
     }
 
     public void removeAllListeners(){
@@ -146,7 +146,7 @@ public class TheScreen implements Screen {
             float ymin=200;
             float gyroX = Gdx.input.getGyroscopeX();
             float gyroY = Gdx.input.getGyroscopeY();
-           // float gyroZ = Gdx.input.getGyroscopeZ();
+
             boolean flag=false;
             if(flag);
             {
@@ -170,10 +170,10 @@ public class TheScreen implements Screen {
         board.printBoardChess();
 
 
-        //Pieces = new Stage(gameport, game.batch);
         Pieces.clear();
 
-        //board.printBoardChess();
+
+
 
         for(int i = 0; i < board.getChessBoard().length; i++){
 
@@ -188,7 +188,7 @@ public class TheScreen implements Screen {
                 switch(board.getChessBoard()[i][j]){
                     case 'a':case 'A':{
                         if(board.findKing(tempPos).playerColor){
-                            //whiteKing.flip(false,true);
+
                             TextR = new TextureRegion(whiteKing);
                         }
                         else{
@@ -261,7 +261,7 @@ public class TheScreen implements Screen {
                 if(flag != 1){
                     if(Character.isUpperCase(board.getChessBoard()[i][j])){
                         if(board.getChessBoard()[i][j] == 'A'){
-                            //board.findKing(tempPos).possibleMove(board);
+
                             if(!board.kingSafe())
                                 bt.setColor(Color.RED);
                             else
@@ -430,7 +430,7 @@ public class TheScreen implements Screen {
                             } else if (board.findQueen(index) != null) {
                                 board.findQueen(index).setNewMove(allPossibleMoves[tmp], board);
                             } else if (board.findPawn(index) != null) {
-                                //System.out.println(allPossibleMoves[tmp]);
+
                                 board.findPawn(index).setNewMove(allPossibleMoves[tmp], board);
                             } else if (board.findKnight(index) != null) {
                                 board.findKnight(index).setNewMove(allPossibleMoves[tmp], board);
@@ -590,7 +590,7 @@ public class TheScreen implements Screen {
         TextButton txt = new TextButton("a2c5", a);
         txt.setX(230);
         txt.setY(150);
-        //txt.setScale(-1, 1);
+
 
 
 
@@ -639,7 +639,7 @@ public class TheScreen implements Screen {
 
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                    //System.out.println(board.Hint(0));
+
 
 
                 hintBool = !hintBool;
@@ -725,7 +725,7 @@ public class TheScreen implements Screen {
                 switch(board.getChessBoard()[i][j]){
                     case 'a':case 'A':{
                         if(board.findKing(tempPos).playerColor){
-                            //whiteKing.flip(false,true);
+
                             TextR = new TextureRegion(whiteKing);
                         }
                         else{
@@ -809,11 +809,10 @@ public class TheScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        //game.batch.setProjectionMatrix(gamecam.combined);
+
         if(gyro)
             gyroscopeRotate();
 
-        //tempPos = -1;
 
         if(board.gameOver){
             System.out.println("Game Over!");
@@ -868,7 +867,7 @@ public class TheScreen implements Screen {
             for(int x = 1; x < 5; x++){
 
                 Image button = (Image)SelectPiece.getActors().get(x);
-                //button.setColor(Color.ORANGE);
+
                 button.setSize(100,100);
 
                 if(x == 1)
