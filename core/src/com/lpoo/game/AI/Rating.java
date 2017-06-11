@@ -1,4 +1,4 @@
-package com.lpoo.game.Logic;
+package com.lpoo.game.AI;
 
 /**
  * Created by FranciscoSilva on 10/06/17.

@@ -1,6 +1,4 @@
-package com.lpoo.game.Logic;
-
-import com.lpoo.game.Logic.Rating;
+package com.lpoo.game.AI;
 
 public class HintMove {
      static String[][] chessBoard={
@@ -87,7 +85,7 @@ public class HintMove {
     public  String alphaBeta(int depth, int beta, int alpha, String move, int player) {
         //return in the form of 1234b##########
         String list=posibleMoves();
-        if (depth==0 || list.length()==0) {return move+(Rating.rating(list.length(), depth)*(player*2-1));}
+        if (depth==0 || list.length()==0) {return move+(com.lpoo.game.AI.Rating.rating(list.length(), depth)*(player*2-1));}
         list=sortMoves(list);
         player=1-player;//either 1 or 0
         for (int i=0;i<list.length();i+=5) {
@@ -457,7 +455,7 @@ public class HintMove {
         int[] score=new int [list.length()/5];
         for (int i=0;i<list.length();i+=5) {
             makeMove(list.substring(i, i+5));
-            score[i/5]=-Rating.rating(-1, 0);
+            score[i/5]=-com.lpoo.game.AI.Rating.rating(-1, 0);
             undoMove(list.substring(i, i+5));
         }
         String newListA="", newListB=list;

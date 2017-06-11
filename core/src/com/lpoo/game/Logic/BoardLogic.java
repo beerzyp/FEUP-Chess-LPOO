@@ -69,7 +69,7 @@ public class BoardLogic {
 
         //printBoardChess();
 
-        HintMove hint = new HintMove(chessBoard, player);
+        com.lpoo.game.AI.HintMove hint = new com.lpoo.game.AI.HintMove(chessBoard, player);
 
         return hint.alphaBeta(4, 1000000, -1000000, "", 0);
     }
