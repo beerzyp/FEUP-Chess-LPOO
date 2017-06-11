@@ -100,6 +100,7 @@ public class TheScreen implements Screen {
     int player;
 
 
+
     public TheScreen(FeupChess game){
         this.game = game;
         texture = new Texture("badlogic.jpg");

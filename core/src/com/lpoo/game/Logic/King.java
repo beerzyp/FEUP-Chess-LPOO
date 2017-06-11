@@ -8,7 +8,7 @@ public class King extends Piece {
     public King(char sym, int pos, boolean playerColor) {
         super(sym, pos, playerColor);
     }
-
+    public static void naoFazNada(){};
     /**
      *
      * @param chessBoard given an instance of the gameLogic
@@ -16,6 +16,8 @@ public class King extends Piece {
      * in case of castle it returns as KingOldColumn RookOldColumn K KingNewColumn RookNewColumn C
      *
      */
+
+
     public String possibleMove(BoardLogic chessBoard){
         String list="";
         char oldPiece;
@@ -36,7 +38,7 @@ public class King extends Piece {
                         chessBoard.getChessBoard()[r-1+j/3][c-1+j%3]=oldPiece;
                         chessBoard.kingPositionC=kingTemp;
                     }
-                } catch (Exception e) {}
+                } catch (Exception e) {naoFazNada();}
             }
         }
 
