@@ -13,48 +13,6 @@ public class HintMove {
     static int kingPositionC, kingPositionL;
     static int humanAsWhite=-1;//1=human as white, 0=human as black
     static int globalDepth=4;
-    /*public static void main(String[] args) {
-        while (!"A".equals(chessBoard[kingPositionC/8][kingPositionC%8])) {kingPositionC++;}//get King's location
-        while (!"a".equals(chessBoard[kingPositionL/8][kingPositionL%8])) {kingPositionL++;}//get king's location
-        /*
-         * PIECE=WHITE/black
-         * pawn=P/p
-         * kinght (horse)=K/k
-         * bishop=B/b
-         * rook (castle)=R/r
-         * Queen=Q/q
-         * King=A/a
-         * 
-         * My strategy is to create an alpha-beta tree diagram wich returns
-         * the best outcome
-         * 
-         * (1234b represents row1,column2 moves to row3, column4 which captured
-         * b (a space represents no capture))
-         */
-        /*JFrame f=new JFrame("Chess Tutorial");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        UserInterface ui=new UserInterface();
-        f.add(ui);
-        f.setSize(500, 500);
-        f.setVisible(true);
-        System.out.println(sortMoves(posibleMoves()));
-        Object[] option={"Computer","Human"};
-        humanAsWhite=JOptionPane.showOptionDialog(null, "Who should play as white?", "ABC Options", JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
-        if (humanAsWhite==0) {
-            long startTime=System.currentTimeMillis();
-            makeMove(alphaBeta(globalDepth, 1000000, -1000000, "", 0));
-            long endTime=System.currentTimeMillis();
-            System.out.println("That took "+(endTime-startTime)+" milliseconds");
-            flipBoard();
-            f.repaint();
-        }
-        makeMove("7655 ");
-        undoMove("7655 ");
-        for (int i=0;i<8;i++) {
-            System.out.println(Arrays.toString(chessBoard[i]));
-        }
-    }*/
 
     public HintMove(char[][] board, int player){
 
@@ -79,7 +37,7 @@ public class HintMove {
             while (!"A".equals(chessBoard[kingPositionC/8][kingPositionC%8])) {kingPositionC++;}//get King's location
             while (!"a".equals(chessBoard[kingPositionL/8][kingPositionL%8])) {kingPositionL++;}//get king's location
         }
-        //chessBoard = board.clone();
+
     }
 
     public  String alphaBeta(int depth, int beta, int alpha, String move, int player) {
@@ -105,7 +63,7 @@ public class HintMove {
             }
         }
 
-        //printBoardChess();
+
         if (player==0) {return move+beta;} else {return move+alpha;}
     }
 
